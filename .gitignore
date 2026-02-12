@@ -1,0 +1,5 @@
+# Environment files
+project/.env
+
+# PDFs / local artifacts
+project/*.pdf
