@@ -5,14 +5,9 @@ import json
 import re
 from dotenv import load_dotenv
 
-# -----------------------------------------------------------------------------
-# Carregamento de configuração (variáveis de ambiente)
-# -----------------------------------------------------------------------------
-# Lê o arquivo "project/.env" (se existir) e injeta as variáveis no ambiente.
-# Ex.: HF_TOKEN=...
 load_dotenv()
 
-# Token de acesso à Hugging Face (Router API). Deve estar no .env.
+# Token de acesso (Router API).
 HF_TOKEN = os.getenv("HF_TOKEN")
 
 
@@ -28,13 +23,11 @@ def extrair_texto_pdf(caminho_pdf, max_paginas=5):
         str: texto concatenado das páginas (com quebras de linha)
     """
     texto = ""
-    # Abre o PDF e percorre as páginas.
+    # Para abrir o PDF e percorre as páginas.
     with pdfplumber.open(caminho_pdf) as pdf:
         for i, pagina in enumerate(pdf.pages):
-            # Para quando atingir o limite de páginas (controle de custo/latência e contexto).
             if i >= max_paginas:
                 break
-            # extract_text() pode retornar None dependendo da página, por isso "or ''".
             texto += (pagina.extract_text() or "") + "\n"
     return texto.strip()
 
@@ -96,11 +89,8 @@ Texto do edital:
         "Authorization": f"Bearer {HF_TOKEN}",
         "Content-Type": "application/json",
     }
-
-    # Corpo da requisição no formato de chat:
-    # - model: LLM escolhido no Router
-    # - messages: system orienta formato; user contém o prompt com o edital
-    # - temperature=0: reduz variação e ajuda a manter consistência/JSON válido
+    
+    
     body = {
         "model": "mistralai/Mistral-7B-Instruct-v0.2",
         "messages": [
@@ -124,6 +114,7 @@ Texto do edital:
     # Estrutura típica: choices[0].message.content contém o texto do modelo.
     content = result.get("choices", [{}])[0].get("message", {}).get("content", "")
 
+    
     # -----------------------------------------------------------------------------
     # Parse "robusto": tenta primeiro o caminho ideal (conteúdo é JSON puro).
     # Se vier "lixo" antes/depois, tenta extrair o primeiro bloco { ... }.
@@ -140,7 +131,7 @@ Texto do edital:
                 pass
 
     # Se tudo falhar, devolve estrutura vazia e preserva o retorno bruto em "raw"
-    # para depuração (ajuda a entender o que o modelo respondeu).
+
     return {
         "publico_alvo": "",
         "descricao": "",
@@ -152,10 +143,10 @@ Texto do edital:
 
 
 if __name__ == "__main__":
-    # Debug rápido: confirma se o token foi carregado.
-    print("Token carregado?", bool(HF_TOKEN))
+    # para confirmar se o token foi carregado.
+    print("Token carregado:", bool(HF_TOKEN))
 
-    # 1) Extrai texto do PDF (limite de páginas ajustável).
+    # 1) Extrai texto do PDF.
     texto = extrair_texto_pdf("edital.pdf", max_paginas=6)
 
     # 2) Envia para o LLM e recebe o dicionário estruturado.
