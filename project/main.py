@@ -130,7 +130,7 @@ Texto do edital:
             except Exception:
                 pass
 
-    # Se tudo falhar, devolve estrutura vazia e preserva o retorno bruto em "raw"
+    # se ele falhar, vai devolver estrutura vazia e preserva o retorno bruto em "raw" mesmo.
 
     return {
         "publico_alvo": "",

@@ -1,61 +1,72 @@
-# IAUPE-ANALYSER – Analisador de Editais com LLM
+# iaupe-analyser
 
-## Objetivo
+Integração em Python para analisar um PDF de edital de fomento e retornar um objeto indicando o público-alvo (e outros campos) usando Hugging Face Router (HF_TOKEN).
 
-Este projeto analisa automaticamente um **edital de fomento em PDF** e retorna um **objeto JSON estruturado** contendo:
+## Estrutura
 
-Fluxo implementado:
+- project/main.py: script principal. Extrai texto do PDF e chama a API.
+- project/test_hf.py: valida o token HF (whoami-v2).
+- project/.env: armazena HF_TOKEN.
+- project/edital.pdf: PDF exemplo.
+- requirements.txt: dependências.
 
-**PDF → Extração de Texto → Requisição HTTP para API (LLM) → JSON estruturado**
+## O que foi implementado
 
-## Estrutura (arquivos principais)
+- Extração de texto do PDF:
+  - Função `extrair_texto_pdf` usando `pdfplumber`, lendo até N páginas e concatenando texto.
 
-- `project/main.py`: fluxo principal (extrai texto do PDF, chama a API e faz o parse do JSON).
-- `project/test_hf.py`: teste rápido para validar se o `HF_TOKEN` está funcionando.
-- `project/.env`: arquivo local com o token (não versionar).
-- `requirements.txt`: dependências do Python.
+- Integração com API (Hugging Face Router):
+  - Endpoint: `https://router.huggingface.co/v1/chat/completions`.
+  - Autenticação via `HF_TOKEN` do `.env`.
+  - Modelo configurável via `HF_MODEL` (default: `mistralai/Mistral-7B-Instruct-v0.2`).
+  - Prompt estruturado exigindo resposta somente em JSON com campos:
+    - `publico_alvo`, `descricao`,
+    - `criterios_publico_alvo`, `criterios_proponente`,
+    - `observacoes`.
+  - Truncamento opcional do texto (`HF_MAX_PROMPT_CHARS`) para evitar exceder o contexto.
 
----
+- Tratamento da resposta:
+  - Leitura de `choices[0].message.content`.
+  - Limpeza de cercas de código (```json ... ```).
+  - Fallback com regex para extrair o primeiro bloco `{ ... }`.
+  - Fallback final: retorna estrutura vazia com campo `raw` contendo o conteúdo bruto quando não é possível parsear.
 
-## Como rodar
+## Pré-requisitos
 
-### 1) Criar arquivo `.env`
+- Python 3.10+
+- Dependências:
+  - `pdfplumber`, `requests`, `python-dotenv`
 
-Dentro da pasta `project/`, crie o arquivo `project/.env` e adicione:
-
-```env
-HF_TOKEN=seu_token_aqui
+Instalação:
 ```
-
-> O arquivo `.env` não deve ser enviado ao GitHub.
-
----
-
-### 2) Instalar dependências
-
-Na raiz do repositório:
-
-```bash
 pip install -r requirements.txt
 ```
 
----
+## Configuração
 
-### 3) Executar o projeto
+Crie o arquivo `project/.env` com:
+```
+HF_TOKEN=hf_XXXXXXXXXXXXXXXXXXXXXXXX
+```
 
-Coloque o PDF como `project/edital.pdf` (ou ajuste o nome no código) e rode:
-
-```bash
+Valide o token:
+```
 cd project
+python test_hf.py
+# Esperado: Status 200 e dados do usuário
+```
+
+## Execução
+
+Na pasta `project`:
+```
 python main.py
 ```
 
----
+Saída esperada:
+- Um JSON impresso com os campos:
+  - `publico_alvo`, `descricao`,
+  - `criterios_publico_alvo`, `criterios_proponente`,
+  - `observacoes`.
+- Se o edital for local e isso estiver descrito no PDF, o texto refletirá nos campos; se não houver menção, campos ficam vazios conforme as regras do prompt.
 
-## Tecnologias utilizadas
-
-- Python 3.x
-- `pdfplumber`
-- `requests`
-- `python-dotenv`
-- Hugging Face Router API (LLM)
