@@ -1,5 +1,4 @@
-# Environment files
-project/.env
-
-# PDFs / local artifacts
-project/*.pdf
+.env
+*.env
+venv/
+__pycache__/
