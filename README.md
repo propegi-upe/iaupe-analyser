@@ -2,6 +2,13 @@
 
 Integração em Python para analisar um PDF de edital de fomento e retornar um objeto indicando o público-alvo (e outros campos) usando Hugging Face Router (HF_TOKEN).
 
+## Qual API é usada?
+
+- **Tipo:** API HTTP REST de **Chat Completions** do **Hugging Face Router** (formato **compatível com OpenAI**).
+- **Endpoint:** `https://router.huggingface.co/v1/chat/completions`
+- **Autenticação:** `Authorization: Bearer <HF_TOKEN>`
+- **Resposta:** texto em `choices[0].message.content` (o projeto exige que venha em JSON).
+
 ## Estrutura
 
 - project/main.py: script principal. Extrai texto do PDF e chama a API.

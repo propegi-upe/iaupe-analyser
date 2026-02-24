@@ -1,0 +1,101 @@
+EDITAL Nº 23/2025-FACEPE
+TRANSFORMA PE
+O Governo de Pernambuco e a Secretaria de Ciência, Tecnologia e Inovação (SECTI-PE), por
+intermédio da Fundação de Amparo à Ciência e Tecnologia do Estado de Pernambuco
+(FACEPE), tornam público o presente Edital e convidam representantes legais de micro,
+pequenas e médias empresas pernambucanas a apresentarem propostas que solucionem
+desafios de transformação digital em seus produtos, serviços e/ou processos, executadas em
+parceria, nos termos estabelecidos neste Edital.
+Esta iniciativa faz parte do Programa Inova PE, do Governo de Pernambuco, que visa a
+integração estratégica da ciência, tecnologia e inovação, aliada ao empreendedorismo
+inovador, para impulsionar o Estado como referência em desenvolvimento humano,
+econômico e tecnológico. No âmbito do Programa Inova PE, o presente Edital está inserido
+em sua Estratégia 5 – Fomento ao Empreendedorismo Inovador.
+1 JUSTIFICATIVA
+A transformação digital representa uma revolução nas práticas empresariais e no ambiente
+produtivo, promovendo eficiência, competitividade e inovação. Ela é capaz de impulsionar
+o crescimento de empresas, aumentar sua produtividade e a qualidade de sua oferta, facilitar
+a integração em cadeias de valor mais complexas, bem como ampliar o seu acesso aos
+mercados globais. Para tanto, a integração entre empresas de base tradicional e empresas
+de base tecnológica, essencialmente startups, assim como Instituições de Ciência, Tecnologia
+e Inovação (ICTs), permite dinamizar os processos de transformação digital, a partir da
+construção conjunta e da execução de projetos de interesse comum, em que desafios
+empresariais são contemplados por soluções desenvolvidas pelas parceiras. No Estado de
+Pernambuco, especialmente no Agreste e no Sertão, muitos micro, pequenos e médios
+negócios encontram dificuldade para concretizar soluções digitais que impactem fortemente
+em seu crescimento. Nesse contexto, com enfoque em Arranjos Produtivos Locais (APLs)
+considerados estratégicos para o Estado de Pernambuco, o presente Edital vem a estimular
+a conexão desses importantes agentes do ecossistema de inovação, sejam empresas de base
+tecnológica ou ICTs, com o setor empresarial, auxiliando na transformação digital de seus
+produtos, serviços e/ou processos produtivos, impulsionando a inovação, o aumento da
+competitividade e o crescimento econômico e sustentável, refletindo positivamente no
+desenvolvimento de Pernambuco.
+2/21
+EDITAL Nº 23/2025-FACEPE
+TRANSFORMA PE
+2 OBJETIVO
+Apoiar projetos de soluções inovadoras que possibilitem a transformação digital de produtos,
+serviços e/ou processos de micro, pequenas e médias empresas pernambucanas de base
+tradicional, bem como a conexão destas com empresas de base tecnológica ou Instituições
+de Ciência, Tecnologia e Inovação (ICTs) pernambucanas que desenvolvam soluções
+voltadas à superação de seus desafios, modernizando e ampliando suas estratégias de
+negócio, vindo a impulsionar Arranjos Produtivos Locais (APLs) considerados estratégicos para
+o Estado de Pernambuco.
+3 ELEGIBILIDADE
+3.1 Instituições
+3.1.1 A Instituição Receptora/Proponente deve se enquadrar às seguintes condições:
+a) propor um desafio de transformação digital que seja relevante para seu negócio;
+b) ser estabelecida sob as leis brasileiras, ser caracterizada como micro, pequena ou
+média empresa 1, com faturamento bruto anual limitado a R$ 48 milhões, e ser sediada
+ou ter filial estabelecida no Estado de Pernambuco;
+c) não concorrer como Instituição Executora, na mesma proposta ou em qualquer outra
+submetida, o que levará à desclassificação tanto da(s) proposta(s) em que a mesma
+figure como Instituição Receptora, quanto da(s) proposta(s) em que a mesma figure
+como Instituição Executora;
+d) não ser configurada como uma empresa de base tecnológica elegível a concorrer
+como uma Instituição Executora; e
+e) garantir condições adequadas de viabilidade e segurança de contrapartida de
+recursos materiais e humanos para as necessidades de realização do projeto,
+conforme suas atribuições e a legislação vigente.
+3.1.2 A Instituição Executora deve se enquadrar às seguintes condições:
+a) entregar uma solução de transformação digital à Instituição Receptora/Proponente;
+b) ser estabelecida sob as leis brasileiras e ser sediada ou ter filial estabelecida no Estado
+de Pernambuco;
+1 Segundo faixas de receita bruta anual de até R$ 360 mil (microempresa) e entre R$ 360 mil e R$ 4,8
+milhões (pequena empresa), conforme estabelecido na Lei Complementar nº 123/2006; e entre R$ 4,8
+milhões e R$ 48 milhões (média empresa), definido pelo Decreto Federal nº 9.283/2018.
+3/21
+EDITAL Nº 23/2025-FACEPE
+TRANSFORMA PE
+c) ser caracterizada como micro ou pequena empresa 2, preferencialmente configurada
+como uma startup (cuja definição, para os fins do presente Edital, compreende uma
+empresa de base tecnológica, emergente e inovadora, voltada à introdução ou ao
+aprimoramento de um modelo de negócio em ambiente de elevada incerteza,
+preferencialmente com solução repetível e escalável);
+d) alternativamente, ser caracterizada como uma Instituição de Ciência, Tecnologia e
+Inovação com personalidade jurídica pública ou privada, sem fins lucrativos, com
+sede no Estado de Pernambuco (ICT-PE) e integrante da Rede de Ecossistemas de
+Pernambuco (REPE) 3 – adicionalmente, no caso de ITC-PE com personalidade jurídica
+privada, sem fins lucrativos, seu CNPJ deve fazer referência a pelo menos um código
+vinculado à Divisão 72 (Pesquisa e Desenvolvimento Científico) da Classificação
+Nacional de Atividades Econômicas (CNAE);
+e) não concorrer como Instituição Receptora, na mesma proposta ou em qualquer outra
+submetida, o que levará à desclassificação tanto da(s) proposta(s) em que a mesma
+figure como Instituição Receptora, quanto da(s) proposta(s) em que a mesma figure
+como Instituição Executora; e
+f) garantir condições adequadas de viabilidade e segurança de contrapartida de
+recursos materiais e humanos para as necessidades de realização do projeto.
+3.2 Equipe
+3.2.1 O(a) Coordenador(a) Geral deve se enquadrar às seguintes condições:
+a) ser responsável pela submissão da proposta ao presente Edital, o que o(a) qualifica
+como Proponente;
+b) possuir CPF ativo e regular – ou documento oficial equivalente, se estrangeiro(a);
+c) ser representante legal da Instituição Receptora/Proponente;
+d) apresentar capacidade de liderança e, como tal, representar sua equipe e ser
+responsável pela gestão financeira e técnica do projeto;
+e) assumir o compromisso de manter toda documentação que comprove aporte de
+recursos ao projeto, para necessária apresentação da Prestação de Contas
+Financeira;
+2 Segundo faixas de receita bruta anual de até R$ 360 mil (microempresa) e entre R$ 360 mil e R$ 4,8
+milhões (pequena empresa), conforme estabelecido na Lei Complementar nº 123/2006.
+3 Mais informações em <https://www.secti.pe.gov.br/repe/>.

@@ -1,0 +1,127 @@
+EDITAL Nº 14/2024-FACEPE
+7ª RODADA DE SUBMISSÃO (GESTÃO DO CONHECIMENTO EM OUVIDORIA)
+ADENDO Nº 07
+CIÊNCIA NO GOVERNO: PROGRAMA CIENTISTA ARRETADO
+O Governo de Pernambuco e a Secretaria de Ciência, Tecnologia e Inovação (SECTI-PE), por
+intermédio da Fundação de Amparo à Ciência e Tecnologia do Estado de Pernambuco
+(FACEPE), tornam público o presente adendo com informações referentes à Sétima Rodada
+de Submissão ao Edital nº 14/2024-FACEPE – CIÊNCIA NO GOVERNO: PROGRAMA CIENTISTA
+ARRETADO.
+1 JUSTIFICATIVA
+Considerando o previsto no item 5.1 do Edital nº 14/2024-FACEPE – Ciência no Governo:
+Programa Cientista Arretado, faz-se necessário estabelecer informações específicas à
+respectiva Rodada de Submissão, compreendendo: i) seu respectivo cronograma; ii) a
+caracterização do objetivo específico do desafio cujas propostas devem contemplar; iii) a
+identificação da Instituição Receptora; e iv) ao menos um contato (identificação e e-mail)
+que será responsável pela interlocução da Instituição Receptora com eventuais Proponentes.
+Para os fins da Sétima Rodada de Submissão, contempla-se a transformação do considerável
+volume de dados da Ouvidoria Geral do Estado de Pernambuco em insumos estratégicos,
+extraindo-se informações úteis ao planejamento das ações do controle interno e que
+contribuam para a eficiência das respostas às manifestações da Ouvidoria, de forma ágil e
+inteligente. Com o avanço da tecnologia e a crescente demanda por transparência, o uso
+da inteligência artificial (IA) para melhorar o atendimento ao cidadão e orientar o
+planejamento governamental está se tornando uma prática essencial em administrações
+modernas. O presente Adendo, portanto, volta-se ao desenvolvimento de solução inovadora
+que posicione a Secretaria da Controladoria-Geral do Estado (SCGE-PE) à frente dessa
+tendência, oferecendo um atendimento automatizado, de forma clara, precisa, resolutiva e
+em conformidade com a Lei Geral de Proteção de Dados (LGPD); e que, ao mesmo tempo,
+converta os dados da base de ouvidoria em informações estratégicas que impactem
+diretamente o funcionamento e a eficiência das entidades públicas. Uma vez atendido o
+desafio, a solução terá potencial para beneficiar não só os cidadãos, que terão acesso a
+respostas rápidas e relevantes por meio de um atendimento automatizado, sentindo-se mais
+valorizados e atendidos em suas necessidades; bem como as próprias atividades da SCGE-
+2/3
+EDITAL Nº 14/2024-FACEPE
+7ª RODADA DE SUBMISSÃO (GESTÃO DO CONHECIMENTO EM OUVIDORIA) – ADENDO Nº 07
+CIÊNCIA NO GOVERNO: PROGRAMA CIENTISTA ARRETADO
+PE, que utilizará dados qualificados para direcionar auditorias, monitorar a eficiência dos
+serviços públicos e promover o uso estratégico dos recursos, resultando em uma gestão
+pública mais eficiente e responsiva.
+2 ÓRGÃO, CONTATO(S) E DESAFIO
+Para os fins da Sétima Rodada de Submissão, considera-se o seguinte quadro de demandas:
+ÓRGÃO PÚBLICO DEMANDANTE
+Secretaria da Controladoria-Geral do Estado (SCGE-PE)
+CONTATO(S)
+João Alberto da Silva Amaral – Coordenador de Inovação em TI
+joao.amaral@cge.pe.gov.br | (81) 3183-0898
+DESAFIO INFORMAÇÕES COMPLEMENTARES
+As propostas devem observar os seguintes requisitos:
+i) desenvolvimento e implementação de uma plataforma
+de IA que proporcione a transformação de dados em
+insumos estratégicos (módulos de análise que processem
+as manifestações recebidas, o que apoiará a decisão
+quanto a auditorias, alocação de recursos e ações
+preventivas e corretivas no serviço público), a análise
+qualitativa das respostas (ferramenta de avaliação da
+clareza, da precisão e da resolutividade das respostas
+fornecidas, que assegure um atendimento de alta
+qualidade e satisfatório ao cidadão) e o atendimento
+inteligente direto ao cidadão (sistema automatizado que,
+baseado em dados enriquecidos pela IA, fornecerá
+Como podemos otimizar o
+respostas imediatas e relevantes às demandas dos
+uso da base de dados da
+cidadãos); ii) solução implementada inicialmente como
+SCGE, extraindo informações
+piloto, com parte das informações da base, a partir de
+úteis que fundamentem o
+critérios a serem escolhidos no desenvolvimento do projeto,
+planejamento das ações do
+para avaliação e ajustes do modelo com expansão
+controle interno e contribuam
+gradual, assegurando um impacto sustentável e
+para a eficiência das
+abrangente; iii) plataforma integrada aos sistemas
+respostas às manifestações
+existentes e infraestrutura que garanta sua continuidade
+da Ouvidoria?
+após a execução do projeto, bem como os atributos de
+proteção e transparência (estrita compatibilidade com a
+LGPD), acessibilidade e inclusão (com interação
+satisfatória a todos os cidadãos), sustentabilidade
+(redução de processos manuais e otimização de recursos)
+e eficiência (uso das informações para a tomada de
+decisões e a melhoria contínua da administração pública);
+e iv) equipe multidisciplinar que inclua cientistas de dados
+e desenvolvedores de IA (para construção de módulos de
+análise de dados e atendimento inteligente), e
+especialistas em segurança e privacidade de dados (para
+proteção de informações e garantia de conformidade
+com a LGPD).
+3/3
+EDITAL Nº 14/2024-FACEPE
+7ª RODADA DE SUBMISSÃO (GESTÃO DO CONHECIMENTO EM OUVIDORIA) – ADENDO Nº 07
+CIÊNCIA NO GOVERNO: PROGRAMA CIENTISTA ARRETADO
+3 ASPECTOS ADICIONAIS À AVALIAÇÃO DO CRITÉRIO MÉRITO/IMPACTO
+Para os fins da Sétima Rodada de Submissão, não há critérios adicionais além dos já descritos
+no item 6.1.2 do Edital nº 14/2024-FACEPE – Ciência no Governo: Programa Cientista Arretado.
+4 CRONOGRAMA
+Para os fins da Sétima Rodada de Submissão, considera-se o seguinte cronograma:
+Etapa Data
+Lançamento da 7ª Rodada de Submissão (página eletrônica da
+16/12/2024
+FACEPE e Diário Oficial do Estado)
+Disponibilização do formulário eletrônico para a 1ª Fase da 7ª
+17/12/2024
+Rodada de Submissão (Sistema AgilFAP)
+13/01/2024 (até 23h59, horário
+Limite para submissão na 1ª Fase da 7ª Rodada (Sistema AgilFAP)
+de Brasília)
+Resultado preliminar da 1ª Fase da 7ª Rodada A partir de 24/01/2025
+Prazo recursal do resultado preliminar Até 05 (cinco) dias corridos
+Resultado final da 1ª Fase da 7ª Rodada A partir de 31/01/2025
+Disponibilização do formulário eletrônico para a 2ª Fase da 7ª
+03/02/2025
+Rodada de Submissão (Sistema AgilFAP)
+03/03/2025 (até 23h59, horário
+Limite para submissão na 2ª Fase da 7ª Rodada (Sistema AgilFAP)
+de Brasília)
+Resultado preliminar da 2ª Fase da 7ª Rodada A partir de 21/03/2025
+Prazo recursal do resultado preliminar Até 05 (cinco) dias corridos
+Resultado final da 2ª Fase da 7ª Rodada A partir de 28/03/2025
+Contratação do projeto aprovado na 7ª Rodada A partir de 28/03/2025
+Recife, 16 de dezembro de 2024.
+Maria Fernanda Pimentel Avelar
+Diretora Presidente
+Helen Jamil Khoury Leonardo Ferraz Xavier
+Diretora Científica Diretor de Inovação

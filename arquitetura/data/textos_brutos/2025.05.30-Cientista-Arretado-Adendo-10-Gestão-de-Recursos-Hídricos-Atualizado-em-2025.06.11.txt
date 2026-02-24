@@ -1,0 +1,116 @@
+EDITAL Nº 14/2024-FACEPE
+10ª RODADA DE SUBMISSÃO (GESTÃO DE RECURSOS HÍDRICOS)
+ADENDO Nº 10
+CIÊNCIA NO GOVERNO: PROGRAMA CIENTISTA ARRETADO
+O Governo de Pernambuco e a Secretaria de Ciência, Tecnologia e Inovação (SECTI-PE), por
+intermédio da Fundação de Amparo à Ciência e Tecnologia do Estado de Pernambuco
+(FACEPE), tornam público o presente adendo com informações referentes à 10ª Rodada de
+Submissão ao Edital nº 14/2024-FACEPE – CIÊNCIA NO GOVERNO: PROGRAMA CIENTISTA
+ARRETADO.
+1 JUSTIFICATIVA
+Considerando o previsto no item 5.1 do Edital nº 14/2024-FACEPE – Ciência no Governo:
+Programa Cientista Arretado, faz-se necessário estabelecer informações específicas à
+respectiva Rodada de Submissão, compreendendo: i) seu respectivo cronograma; ii) a
+caracterização do objetivo específico do desafio cujas propostas devem contemplar; iii) a
+identificação da Instituição Receptora; e iv) ao menos um contato (identificação e e-mail)
+que será responsável pela interlocução da Instituição Receptora com eventuais Proponentes.
+Para os fins desta 10ª Rodada de Submissão, contempla-se o desenvolvimento de soluções
+inovadoras para a gestão de recursos hídricos no Estado de Pernambuco, historicamente
+caracterizado, no contexto nacional, pela menor disponibilidade de água por habitante,
+atualmente estimado em 1.320 m³/habitante/ano, o que representa apenas 3,5% da
+disponibilidade hídrica do país. Adicionalmente, a região semiárida abrange 89% do território
+pernambucano, apresentando chuvas escassas que ocorrem em poucos meses do ano, com
+índices pluviométricos que não ultrapassam 500 mm/ano, em contraste ao observado no
+litoral do Estado, cujos índices superam 2.000 mm/ano.
+Nesse contexto, os desafios da gestão de recurso hídricos em Pernambuco são significativos,
+dados os distintos déficits de água registrados nas diferentes regiões do Estado, com
+demandas e balanços hídricos alarmantes. O referido panorama não só desperta conflitos
+entre diferentes setores usuários, como limita a disponibilidade de águas de melhor qualidade
+para o consumo.
+Com vistas a contemplar os elementos necessários à adequada gestão de recursos hídricos,
+a Política Estadual de Recursos Hídricos (PERH), instituída pela Lei Estadual nº 12.984/2005,
+apresenta sete instrumentos que devem se integrar de forma efetiva e eficaz, a saber: i) os
+2/4
+EDITAL Nº 14/2024-FACEPE
+10ª RODADA DE SUBMISSÃO (GESTÃO DE RECURSOS HÍDRICOS) – ADENDO Nº 10
+CIÊNCIA NO GOVERNO: PROGRAMA CIENTISTA ARRETADO
+planos diretores de recursos hídricos; ii) o enquadramento dos corpos de água em classes,
+segundo os usos preponderantes da água; iii) a outorga do direito de uso de recursos hídricos;
+iv) a cobrança pelo uso de recursos hídricos; v) o sistema de informações de recursos hídricos;
+vi) a fiscalização do uso de recursos hídricos; e vi) o monitoramento dos recursos hídricos.
+Mais especificamente, este último instrumento de gestão é essencial para embasar a previsão
+de tempo e clima, uma vez que esses dados observados dão o suporte necessário para
+identificar e quantificar as mudanças que ocorrem no Estado, a partir de medições em tempo
+real, histórico e prognósticos. Há ainda ferramentas adicionais de sensoriamento remoto, a
+exemplo do RADAR e de Satélites (GEOS + Meteosat), que facilitam o monitoramento
+ambiental de saúde das plantas e evapotranspiração, dando subsídios e informações acerca
+das variabilidades no Estado, devido ao comportamento dinâmico da atmosfera. Essas
+informações auxiliam no planejamento e no uso de tecnologias para uma agricultura
+sustentável, bem como à preservação dos recursos hídricos.
+Para que esses dados sejam disponibilizados à sociedade, a Agência Pernambucana de
+Águas e Clima (APAC) desenvolveu o Sistema de Informações de Recursos Hídricos (SIRH), o
+que permite a difusão de informações hidrometeorógicas, somando-se ao desenvolvimento
+do Geoportal, uma ferramenta especializada que permite o acesso público a mapas e dados
+para fins de planejamento, pesquisa, operacional e legislativo.
+O presente Adendo, portanto, volta-se à expansão e ao aprimoramento das ferramentas de
+gestão de recursos hídricos do Estado, mediante ferramentas de TI, modelagem matemática
+e sensoriamento remoto, integrando instrumentos de gestão do PERH e os dados da previsão
+de tempo e clima. Além de atuar sobre o monitoramento e a fiscalização dos recursos
+hídricos, as soluções desenvolvidas deverão apoiar os entes do Sistema Integrado de Gestão
+de Recursos Hídricos (SIGH-PE) e disponibilizar ferramentas integradas de Inteligência Artificial
+(IA) e Business Intelligence (BI), melhorando a qualidade dos serviços prestados à população
+pernambucana.
+Como resultados do projeto apoiado, por conseguinte, espera-se o aperfeiçoamento na
+difusão dos serviços da APAC, de forma rápida e tecnológica, com possibilidade de
+acompanhamento de situação das outorgas, denúncias de fiscalização, situação das
+barragens do Estado, monitoramento dos rios, reservatórios e pluviometria, além dos serviços
+de tempo e clima. Espera-se, dessa forma, que o projeto amplie não apenas a eficiência na
+comunicação com a sociedade, mas também expanda a transparência na disponibilização
+dos dados obtidos via rede de monitoramento hidrometeorológica de Pernambuco.
+3/4
+EDITAL Nº 14/2024-FACEPE
+10ª RODADA DE SUBMISSÃO (GESTÃO DE RECURSOS HÍDRICOS) – ADENDO Nº 10
+CIÊNCIA NO GOVERNO: PROGRAMA CIENTISTA ARRETADO
+2 ÓRGÃO, CONTATO(S) E DESAFIO
+Para os fins desta 10ª Rodada de Submissão, considera-se o seguinte quadro de demandas:
+ÓRGÃO PÚBLICO DEMANDANTE
+Agência Pernambucana de Águas e Clima (APAC) – Secretaria de Recursos Hídricos e
+Saneamento do Estado de Pernambuco (SRHS-PE)
+CONTATO(S)
+Robertson Valério de Paiva Fontes Júnior – Analista de Planos de Recursos Hídricos
+robertson.fontes@apac.pe.gov.br | (81) 3183.1026
+DESAFIO INFORMAÇÕES COMPLEMENTARES
+As propostas devem observar os seguintes requisitos:
+i) construção de aplicações de Tecnologia da Informação
+(TI) para gerenciamento e desenvolvimento da Gestão
+Integrada de Recursos Hídricos para os entes do Sistema
+Integrado de Gestão de Recursos Hídricos (SIGRH-PE); ii)
+desenvolvimento e adaptação de ferramentas para
+Como podemos desenvolver fiscalização dos recursos hídricos, utilizando tecnologias de
+soluções inovadoras para a sensoriamento remoto e geoprocessamento para ações
+gestão de recursos hídricos, de campo; iii) desenvolvimento de soluções tecnológicas
+mediante ferramentas de TI, com suporte de inteligência artificial para atendimento aos
+modelagem matemática e usuários de recursos hídricos do Estado, aumentando a
+sensoriamento remoto, interatividade e a disponibilidade de dados; iv) aplicação
+integrando instrumentos de de ferramentas integradas de IA e BI para medidas mais
+gestão do PERH e os dados eficazes, melhorando a qualidade dos serviços prestados à
+da previsão de tempo e população; v) capacitação de servidores e integrantes do
+clima? SIGRH-PE, a partir das tecnologias desenvolvidas; vi)
+disponibilização da tecnologia para funcionamento em
+dispositivos móveis (Android e Apple iOS); e vii) criação e
+aplicação de Internet das Coisas (IoT) à gestão de recursos
+hídricos, incluindo sensores e dispositivos conectados que
+possam revolucionar o monitoramento e o controle do uso
+dos recursos hídricos.
+3 ASPECTOS ADICIONAIS À AVALIAÇÃO DO CRITÉRIO MÉRITO/IMPACTO
+Para os fins desta 10ª Rodada de Submissão, não há critérios adicionais além dos já descritos
+no item 6.1.2 do Edital nº 14/2024-FACEPE – Ciência no Governo: Programa Cientista Arretado.
+4 CRONOGRAMA
+Para os fins desta 10ª Rodada de Submissão, considera-se o seguinte cronograma:
+Etapa Data
+Lançamento da 10ª Rodada de Submissão (página eletrônica da
+30/05/2025
+FACEPE e Diário Oficial do Estado)
+Disponibilização do formulário eletrônico para a 1ª Fase da 10ª
+02/06/2025
+Rodada de Submissão (Sistema AgilFAP)

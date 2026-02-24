@@ -1,0 +1,130 @@
+EDITAL Nº 14/2024-FACEPE
+8ª RODADA DE SUBMISSÃO (OTIMIZAÇÃO DE PLATAFORMA CORPORATIVA)
+ADENDO Nº 08
+CIÊNCIA NO GOVERNO: PROGRAMA CIENTISTA ARRETADO
+O Governo de Pernambuco e a Secretaria de Ciência, Tecnologia e Inovação (SECTI-PE), por
+intermédio da Fundação de Amparo à Ciência e Tecnologia do Estado de Pernambuco
+(FACEPE), tornam público o presente adendo com informações referentes à Oitava Rodada
+de Submissão ao Edital nº 14/2024-FACEPE – CIÊNCIA NO GOVERNO: PROGRAMA CIENTISTA
+ARRETADO.
+1 JUSTIFICATIVA
+Considerando o previsto no item 5.1 do Edital nº 14/2024-FACEPE – Ciência no Governo:
+Programa Cientista Arretado, faz-se necessário estabelecer informações específicas à
+respectiva Rodada de Submissão, compreendendo: i) seu respectivo cronograma; ii) a
+caracterização do objetivo específico do desafio cujas propostas devem contemplar; iii) a
+identificação da Instituição Receptora; e iv) ao menos um contato (identificação e e-mail)
+que será responsável pela interlocução da Instituição Receptora com eventuais Proponentes.
+Para os fins da Oitava Rodada de Submissão, contempla-se o desenvolvimento de métodos
+que promovam o compartilhamento de recursos computacionais em escala corporativa,
+otimizando a usabilidade e a arquitetura da plataforma BigDataPE 1, bem como garantindo
+a conformidade com regulamentações como o Decreto Estadual nº 50.474/2021. Atualmente,
+dados e informações são valiosos ativos para qualquer empreendimento, algo que não é
+diferente para o setor público, cuja importância se reflete em várias áreas, o que inclui a
+tomada de decisão baseada em evidências; o aperfeiçoamento de políticas e dos serviços
+públicos; a transparência e a prestação de contas; a prevenção de fraudes e irregularidades;
+a antecipação de problemas e a criação de soluções preventivas; bem como a integração
+entre áreas e a melhoria da comunicação. Não apenas no Estado de Pernambuco, alguns
+obstáculos relacionados a dados têm se mostrado presentes, como o crescimento de seu
+volume e da dificuldade de tratamento; a falta de padronização das demandas de
+compartilhamento de dados, assim como da oferta de dados por parte dos órgãos públicos;
+e a crescente demanda por acesso seguro e eficiente a dados corporativos, aliada ao
+1 Mais informações em
+<https://www.wiki.pe.gov.br/mediawiki/index.php/Plataforma_de_Compartilhamento_e_An%C3%A1lise
+_de_Dados>.
+2/3
+EDITAL Nº 14/2024-FACEPE
+8ª RODADA DE SUBMISSÃO (OTIMIZAÇÃO DE PLATAFORMA CORPORATIVA) – ADENDO Nº 08
+CIÊNCIA NO GOVERNO: PROGRAMA CIENTISTA ARRETADO
+avanço das tecnologias de inteligência artificial (IA). Esse cenário suscitou o desenvolvimento
+da plataforma corporativa BigDataPE, pela Agência Estadual de Tecnologia da Informação
+do Estado de Pernambuco (ATI). Mesmo diante desse avanço, algumas dificuldades e novas
+demandas têm se evidenciado, o que inclui a diversidade de níveis de maturidade por parte
+dos órgãos provisores; a dificuldade em extrair, transformar, analisar e visualizar os dados de
+origem de sistemas legados; e a demanda por recursos computacionais para tratar o grande
+volume de dados e disponibilizá-los no BigDataPE ou em outros ambientes/soluções para uso
+de IA, inclusive para análise dos dados. Nesse sentido, o presente Adendo volta-se à gestão
+segura e eficiente de dados e informações corporativas, de maneira a criar um ecossistema
+que aproveite técnicas avançadas de IA para aprimorar a análise de dados e assegurar a
+privacidade e a integridade dessas informações.
+2 ÓRGÃO, CONTATO(S) E DESAFIO
+Para os fins da Oitava Rodada de Submissão, considera-se o seguinte quadro de demandas:
+ÓRGÃO PÚBLICO DEMANDANTE
+Agência de Tecnologia da Informação do Estado de Pernambuco (ATI) – Secretaria de
+Administração (SAD-PE)
+CONTATO(S)
+Flávia Danzi d’Amorim – Diretora de Tecnologias para Informações Corporativas em TI
+flavia.danzi@ati.pe.gov.br | (81) 9.8491.0561
+DESAFIO INFORMAÇÕES COMPLEMENTARES
+As propostas devem observar os seguintes requisitos:
+i) análise e melhoria da usabilidade, da arquitetura e de
+recursos computacionais da Plataforma Corporativa de
+Compartilhamento e Análise de Dados (BigDataPE), em
+conformidade com o Decreto Estadual nº 50.474/2021 de
+compartilhamento de dados; ii) análise da arquitetura de
+dados já existente e proposição de alternativas, a exemplo de
+Como projetar e
+data mesh, modelo de arquitetura de operação
+implementar uma
+descentralizada, diferentemente de data lake, e ambos não
+arquitetura de dados
+necessariamente exclusivos; iii) dimensionamento e criação de
+eficiente e sustentável,
+infraestrutura computacional para atender à crescente
+de maneira corporativa,
+demanda de acesso a dados e informações, considerando
+que atenda à crescente
+infraestrutura computacional já existente, sistemas legados e
+demanda por dados e
+com/sem evolução tecnológica, miscelâneas tecnológicas,
+informações do Estado?
+sistemas gerenciadores e de arquivos etc.; iv) documentação
+e racionalização dos ambientes de dados hospedados no
+datacenter da ATI, criados por diversos órgãos; v) definição de
+processo para dimensionamento e definição de responsáveis
+pelos dados e suas atribuições/papéis para inserção em futuras
+normas (a exemplo de política de governança de dados ou
+similar); vi) respeito a boas práticas de gestão de dados do
+3/3
+EDITAL Nº 14/2024-FACEPE
+8ª RODADA DE SUBMISSÃO (OTIMIZAÇÃO DE PLATAFORMA CORPORATIVA) – ADENDO Nº 08
+CIÊNCIA NO GOVERNO: PROGRAMA CIENTISTA ARRETADO
+framework DAMA do Data Management Body of Knowledge
+(DMBOK); vii) utilização de melhores técnicas de recuperação
+de dados em IA, como Embeddings, Prompt chaining, Retrieval-
+Augmented Generation (RAG) e GraphRAG, e Fine-tuning; e
+viii) interação com outros projetos apoiados no âmbito do
+Programa Cientista Arretado, particularmente voltados a
+soluções que envolvam plataformas de dados.
+3 ASPECTOS ADICIONAIS À AVALIAÇÃO DO CRITÉRIO MÉRITO/IMPACTO
+Para os fins da Oitava Rodada de Submissão, não há critérios adicionais além dos já descritos
+no item 6.1.2 do Edital nº 14/2024-FACEPE – Ciência no Governo: Programa Cientista Arretado.
+4 CRONOGRAMA
+Para os fins da Oitava Rodada de Submissão, considera-se o seguinte cronograma:
+Etapa Data
+Lançamento da 8ª Rodada de Submissão (página eletrônica da
+16/12/2024
+FACEPE e Diário Oficial do Estado)
+Disponibilização do formulário eletrônico para a 1ª Fase da 8ª
+17/12/2024
+Rodada de Submissão (Sistema AgilFAP)
+13/01/2024 (até 23h59, horário
+Limite para submissão na 1ª Fase da 8ª Rodada (Sistema AgilFAP)
+de Brasília)
+Resultado preliminar da 1ª Fase da 8ª Rodada A partir de 24/01/2025
+Prazo recursal do resultado preliminar Até 05 (cinco) dias corridos
+Resultado final da 1ª Fase da 8ª Rodada A partir de 31/01/2025
+Disponibilização do formulário eletrônico para a 2ª Fase da 8ª
+03/02/2025
+Rodada de Submissão (Sistema AgilFAP)
+03/03/2025 (até 23h59, horário
+Limite para submissão na 2ª Fase da 8ª Rodada (Sistema AgilFAP)
+de Brasília)
+Resultado preliminar da 2ª Fase da 8ª Rodada A partir de 21/03/2025
+Prazo recursal do resultado preliminar Até 05 (cinco) dias corridos
+Resultado final da 2ª Fase da 8ª Rodada A partir de 28/03/2025
+Contratação do projeto aprovado na 8ª Rodada A partir de 28/03/2025
+Recife, 16 de dezembro de 2024.
+Maria Fernanda Pimentel Avelar
+Diretora Presidente
+Helen Jamil Khoury Leonardo Ferraz Xavier
+Diretora Científica Diretor de Inovação

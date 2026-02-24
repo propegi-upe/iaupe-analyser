@@ -1,0 +1,91 @@
+Edital FACEPE 23/2024 TECNOVA III PERNAMBUCO
+FAQ - Perguntas e Respostas Frequentes
+1. Quem pode submeter propostas ao Edital TECNOVA III?
+Empresas pernambucanas, com sede e administração no estado, que se enquadrem como
+Microempresas, Empresas de Pequeno Porte e Empresas de Médio Porte, desde que
+tenham receita bruta anual de até R$ 16 milhões e potencial para desenvolver produtos
+(bens ou serviços) e/ou processos inovadores que apresentam significativo risco
+tecnológico e estejam alinhados às 5 (cinco) áreas prioritárias do Edital (Gestão do
+Semiárido, Saúde, Governança etc.). A empresa proponente deverá também ser a
+executora do projeto.
+2. Empresas unipessoais (Ltda. Unipessoal) podem participar?
+Sim, Sociedades Limitadas Unipessoais são consideradas empresas e podem submeter
+propostas.
+3. Empresas Inova Simples podem participar?
+Sim, Empresas Inova Simples são consideradas empresas, nos termos da Lei
+Complementar nº 167/2019 e podem submeter propostas.
+4. Empresários Individuais ou MEIs podem participar?
+Não, a participação de Empresários Individuais (E.I) ou Microempreendedores Individuais
+(MEIs) não é permitida neste Edital.
+5. Caso uma empresa possua um CNPJ de MEI ou E.I anterior à data limite de
+Registro na Junta Comercial permita, qual seja, 31/10/2023, e queira fazer a mudança
+de natureza jurídica para se enquadrar na elegibilidade quanto ao porte da empresa
+após essa data, é permitido?
+Não, neste caso não será aceita a referida mudança após a data limite de 31/10/2023.
+6. Empresas com capital estrangeiro podem participar?
+Sim, Empresas sob controle ou com maioria de capital estrangeiro podem participar, desde
+que a atividade econômica exercida esteja especificada no Decreto nº 2.233/1997 e suas
+alterações.
+7. Uma empresa pode submeter mais de uma proposta, mesmo em caso de
+participação em Associação?
+Não. Cada empresa, individualmente ou em associação com outras, pode participar de
+apenas uma proposta. Se uma empresa figurar em mais de uma proposta, todas serão
+eliminadas.
+A associação de empresas configura-se como uma co-execução do desenvolvimento do
+projeto, tendo que, inclusive, ser submetido as documentações obrigatórias referentes à
+cada uma das empresas associadas (Contratos Sociais, Balanços Patrimoniais, DREs etc).
+Esta associação e co-execução deverão estar bem descritas no projeto, com as
+participações de cada uma das empresas associadas bem definidas e as cartas de
+anuência pelos co-executores serão exigidas no ato da contratação pela FACEPE.
+No caso de empresas ou instituições parceiras, as devidas participações das mesmas no
+desenvolvimento do projeto também deverão estar bem descritas e estabelecidas no
+projeto, porém não se irá configurar a co-execução. Da mesma forma, as cartas de
+anuência pelas instituições parceiras serão exigidas no ato da contratação pela FACEPE.
+8. Quem submete a proposta no sistema Agilfap?
+Quem submete a proposta no sistema Agilfap é o representante legal da empresa
+proponente, que será responsável pela assinatura do Termo de Outorga quando da
+contratação e será denominado Coordenador Geral do projeto para fins da FACEPE.
+9. Como é feita a submissão do projeto?
+Através do acesso ao sistema Agilfap, pelo representante legal da empresa, por meio do
+link: https://agil.facepe.br/. A empresa proponente/beneficiária, bem como o seu
+representante legal, deverá estar cadastrada no sistema Agilfap. Em caso da Empresa
+proponente não configurar na lista de Instituições Executoras, deverá ser solicitado o
+cadastro da mesma através do email agil@facepe.br.
+O passo a passo para submissão da proposta está descrito em modelo de formulário de
+submissão publicado no link:
+https://www.facepe.br/wp-content/uploads/2024/09/fac-smile-23_2024.pdf
+10. Quem é o (a) coordenador(a) Técnico(a) do Projeto?
+O(a) coordenador(a) técnico(a) do projeto deve ter competência e experiência técnica
+relacionada ao tema da proposta e vínculo com a beneficiária/empresa proponente –
+participação como sócio(a) ou empregado(a) com vínculo trabalhista, de acordo com as
+regras da CLT.
+11. Quem é a Equipe Executora do Projeto?
+São todos os demais profissionais que detêm a maioria das competências críticas para o
+sucesso do projeto e deverão ter vínculo com a(s) beneficiária(s) – participação como
+sócios(as) ou empregados(as) com vínculo trabalhista, de acordo com as regras da CLT).
+Atenção: serão exigidas cartas de anuência, do coordenador técnico e dos demais
+membros da equipe técnica que forem citados, para fins de contratação da proposta
+aprovada.
+12. Quais os tipos de inovação que o Edital apoia?
+O Edital visa apoiar o desenvolvimento de produtos (bens ou serviços) e/ou processos
+inovadores que sejam:
+Novos: Soluções que não existiam no mercado.
+Significativamente aprimorados: Melhorias substanciais em produtos ou processos já
+existentes, com impacto relevante no mercado.
+É importante que o resultado da proposta, ao final do projeto, esteja em condições de
+ingressar em alguma etapa de certificação, produção e/ou comercialização. Propostas com
+resultados aquém dessas possibilidades não serão aceitas.
+13. Quais são as áreas prioritárias para os projetos?
+O Edital define cinco áreas temáticas prioritárias:
+1 - Gestão do Semiárido (desertificação, eficiência e qualidade no uso de água potável e
+agrícola, produção rural, agricultura familiar e agricultura intensiva), clima e variabilidade
+climática territorial (dados, gestão e modelos de previsão).
+2 - Saúde (gestão e controle das doenças negligenciadas, emergentes e crônicas, e
+relações ambiente-saúde e agricultura-saúde).
+3 - Governos inteligentes, economia criativa e desenvolvimento econômico e social inclusivo
+e ambientalmente sustentável.
+4 - Conservação de recursos naturais e da biodiversidade, gestão de externalidades
+(degradação, poluição etc.) e energias renováveis.
+5 - Manufaturas avançadas, economia 4.0, internet das coisas, robótica, sensores e
+biossensores, inteligência artificial e big data.
+14. Quais são os recursos financeiros disponibilizados e como posso utilizá-los?

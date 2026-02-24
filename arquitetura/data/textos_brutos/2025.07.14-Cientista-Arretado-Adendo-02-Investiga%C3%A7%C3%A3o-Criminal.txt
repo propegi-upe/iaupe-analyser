@@ -1,0 +1,131 @@
+EDITAL Nº 40/2024-FACEPE – ADENDO Nº 02
+13ª RODADA DE SUBMISSÕES (INVESTIGAÇÃO CRIMINAL)
+CIÊNCIA NO GOVERNO: PROGRAMA CIENTISTA ARRETADO
+O Governo de Pernambuco e a Secretaria de Ciência, Tecnologia e Inovação (SECTI-PE), por
+intermédio da Fundação de Amparo à Ciência e Tecnologia do Estado de Pernambuco
+(FACEPE), tornam público o presente adendo com informações referentes à 13ª Rodada de
+Submissões ao Programa Cientista Arretado.
+1 JUSTIFICATIVA
+Considerando o previsto no item 5.1 do Edital nº 40/2024-FACEPE – Ciência no Governo:
+Programa Cientista Arretado, faz-se necessário estabelecer informações específicas à
+respectiva Rodada de Submissão, compreendendo: i) seu respectivo cronograma; ii) a
+caracterização do objetivo específico do desafio cujas propostas devem contemplar; iii) a
+identificação da Instituição Receptora; e iv) ao menos um contato (identificação e e-mail)
+que será responsável pela interlocução da Instituição Receptora com eventuais Proponentes.
+Para os fins da presente Rodada de Submissões, contempla-se o desenvolvimento de soluções
+inovadoras que automatizem a identificação de padrões criminais recorrentes, conectando
+boletins de ocorrência aparentemente isolados, o que agilizará a instauração de inquéritos,
+otimizará recursos e ampliará a resolutividade de investigações criminais pela Polícia Civil de
+Pernambuco (PCPE). Ressalta-se que, quanto à infraestrutura, a PCPE está concluindo a
+aquisição de dois servidores hiperconvergentes, um com Unidade de Processamento Gráfico
+(GPU) e outro sem, os quais serão capazes de rodar algoritmos de inteligência artificial (IA)
+necessários à execução do projeto.
+O uso de recursos tecnológicos e cientificamente embasados permite, de maneira rápida e
+eficaz, identificar padrões sutis, mas recorrentes, das atuações criminosas. Embora adaptável
+aos mecanismos tradicionais de investigação, a criminalidade deixa vestígios relacionados ao
+local do crime, à faixa de horário, ao modo de atuação, às características de suspeitos, aos
+veículos utilizados e suas placas, aos números telefônicos, às contas bancárias e chaves Pix
+utilizadas etc. Se observados isoladamente, esses elementos parecem dispersos, mas a análise
+conjunta permite revelar conexões valiosas entre crimes, suspeitos e redes criminosas.
+Atualmente, o esforço manual e a ausência de um sistema que automatize a correlação
+dessas ocorrências acabam por retardar a identificação de crimes em série e dificultar a
+conexão entre investigações aparentemente isoladas, o que impacta diretamente a
+2/4
+EDITAL Nº 40/2024-FACEPE – ADENDO Nº 02
+13ª RODADA DE SUBMISSÕES (INVESTIGAÇÃO CRIMINAL)
+CIÊNCIA NO GOVERNO: PROGRAMA CIENTISTA ARRETADO
+resolução de casos e a prevenção de novos delitos. Para enfrentar esse desafio, o presente
+Adendo destina-se a apoiar um projeto que desenvolva e implemente agentes de
+inteligência artificial (IA) nos sistemas Infopol e SPP (Sistema de Procedimentos Policiais).
+Mais especificamente, um agente de IA deverá ser responsável pela mineração de padrões
+criminais registrados nos Boletins de Ocorrência (BOs), detectando reincidências, modos de
+operação e conexões entre suspeitos. Por sua vez, o segundo agente deverá avaliar
+automaticamente a viabilidade de instauração de inquérito e estruturar diligências conforme
+investigações anteriores, garantindo maior eficiência ao processo. Adicionalmente, para
+otimizar a investigação e ampliar a taxa de resolução de crimes, o sistema deverá alertar
+delegacias e seccionais, via e-mail e WhatsApp, informando que o padrão recém registrado
+possui vínculo com outra ocorrência, o que irá contribuir para a identificação e a
+desarticulação de redes criminosas com agilidade e precisão.
+Como resultados do projeto apoiado, esperam-se a redução do tempo de investigação, por
+meio do rastreamento automático de padrões e da identificação de crimes reincidentes e
+em série, bem como o aumento da resolutividade dos casos, com decisões investigativas
+baseadas em dados extraídos de grandes volumes de boletins de ocorrência. Espera-se ainda
+a padronização e a agilidade na elaboração de peças investigativas, com geração
+automática e editável de minutas de diligência e relatórios conclusivos, além da otimização
+da alocação de recursos policiais, priorizando casos com maior relevância investigativa e
+reduzindo o retrabalho manual. A integração entre delegados, escrivães e agentes também
+é ensejada, com interfaces adaptadas às suas funções e atualizações em tempo real.
+A iniciativa, portanto, representará um salto tecnológico para a Polícia Civil, trazendo
+eficiência, precisão e maior capacidade de resposta às investigações criminais. Com alto
+potencial de replicabilidade, o projeto poderá servir como modelo para outras forças policiais
+do país, promovendo o intercâmbio de informações entre Unidades da Federação. A
+automação dos processos também permitirá que o tempo atualmente dedicado a tarefas
+repetitivas seja redirecionado para ações estratégicas em campo, fortalecendo a atuação
+da Polícia Civil e garantindo uma resposta mais rápida e eficaz contra a criminalidade.
+2 ÓRGÃO, CONTATO(S) E DESAFIO
+Para os fins desta Rodada, considera-se o seguinte quadro de demandas:
+ÓRGÃO PÚBLICO DEMANDANTE
+Polícia Civil do Estado de Pernambuco (PCPE) – Secretaria de Defesa Social (SDS-PE)
+3/4
+EDITAL Nº 40/2024-FACEPE – ADENDO Nº 02
+13ª RODADA DE SUBMISSÕES (INVESTIGAÇÃO CRIMINAL)
+CIÊNCIA NO GOVERNO: PROGRAMA CIENTISTA ARRETADO
+CONTATO(S)
+Edvaldo dos Santos Veiga Júnior – Delegado de Polícia
+edvaldosantos.veiga@policiacivil.pe.gov.br | (81) 3183-5333
+DESAFIO INFORMAÇÕES COMPLEMENTARES
+As propostas devem observar os seguintes requisitos:
+i) desenvolvimento e integração de agentes de IA nos
+sistemas Infopol e SPP, para aprimoramento da investigação
+criminal, respeitando a arquitetura e os protocolos existentes –
+ao menos dois agentes de IA, um para mineração de padrões
+criminais em BOs e outro para avaliação automatizada da
+viabilidade de instauração de inquéritos e estruturação de
+diligências; ii) utilização de aprendizagem de máquina e
+processamento de linguagem natural para identificação de
+padrões criminais, automatização de processos investigativos
+e otimização da alocação de recursos policiais, mediante
+agentes de IA que atuarão na análise de BOs e na
+Como podemos utilizar
+estruturação de inquéritos ; iii) capacidade de correlação
+agentes de inteligência
+automática de BOs com base em elementos como local do
+artificial para identificar
+crime, horário, modo de atuação, características de suspeitos,
+automaticamente padrões
+vestimentas, veículos utilizados e suas placas, números
+criminais recorrentes e
+telefônicos, contas bancárias e chaves Pix; iv) geração de
+agilizar a instauração de
+alertas automáticos em tempo real, via e-mail e WhatsApp,
+inquéritos, conectando
+direcionados a delegacias e seccionais responsáveis; v)
+Boletins de Ocorrência
+análise de viabilidade do BO para instauração de inquérito,
+aparentemente isolados,
+com base em padrões extraídos de investigações já
+otimizando recursos e
+concluídas; vi) elaboração automatizada de minutas de
+aumentando a
+diligência e relatórios conclusivos de investigação, com
+resolutividade de
+possibilidade de edição; vii) disponibilização de interfaces
+investigações da Polícia
+específicas para delegados, escrivães e agentes, com
+Civil do Estado de
+funcionalidades adaptadas ao perfil e à etapa da
+Pernambuco?
+investigação; viii) entrega de sistema de feedback interativo
+para validação ou rejeição dos padrões identificados, bem
+como aperfeiçoamento contínuo dos modelos de IA; ix)
+utilização de mecanismos de auditoria, rastreabilidade
+conforme as normas institucionais e a Lei Geral de Proteção
+de Dados Pessoais (LGPD); x) capacidade de integração com
+bases externas já utilizadas pela PCPE, enriquecendo
+automaticamente os dados de vítimas, testemunhas, autores,
+veículos, endereços e vínculos processuais; e xi) possibilidade
+de aprendizado contínuo dos modelos de IA, com base nos
+dados processados e nas interações dos usuários.
+3 ASPECTOS ADICIONAIS À AVALIAÇÃO DO CRITÉRIO MÉRITO/IMPACTO
+Para os fins desta Rodada, não há critérios adicionais além dos já descritos no item 6.1.2 do
+Edital nº 40/2024-FACEPE – Ciência no Governo: Programa Cientista Arretado.

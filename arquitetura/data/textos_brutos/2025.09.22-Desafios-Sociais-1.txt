@@ -1,0 +1,106 @@
+EDITAL Nº 33/2025-FACEPE
+INOVAÇÃO ABERTA PARA DESAFIOS SOCIAIS
+O Governo de Pernambuco e a Secretaria de Ciência, Tecnologia e Inovação (SECTI-PE), por
+intermédio da Fundação de Amparo à Ciência e Tecnologia do Estado de Pernambuco
+(FACEPE), tornam público o presente Edital e convidam representantes legais de micro e
+pequenas empresas pernambucanas a apresentarem propostas de soluções inovadoras
+desenvolvidas de forma colaborativa junto a Instituições de Ciência, Tecnologia e Inovação
+de Pernambuco (ICTs-PE) e voltadas a desafios sociais declarados por cooperativas,
+associações, demais organizações do terceiro setor e órgãos públicos de esfera municipal,
+nos termos aqui estabelecidos.
+Esta iniciativa faz parte do Programa Inova PE, do Governo de Pernambuco, que visa a
+integração estratégica da ciência, tecnologia e inovação, aliada ao empreendedorismo
+inovador, para impulsionar o Estado como referência em desenvolvimento humano,
+econômico e tecnológico. No âmbito do Programa Inova PE, o presente Edital está inserido
+em sua Estratégia 5 – Fomento ao Empreendedorismo Inovador.
+1 JUSTIFICATIVA
+A inovação social é um conceito inicialmente difundido pelo Stanford Social Innovation
+Review (SSIR), em 2003, que ganha cada vez mais relevância como vetor de transformação
+em um mundo cujas demandas e necessidades da população estão em constante evolução.
+Esse tipo de inovação identifica um desafio social e busca agir na raiz desse problema,
+eliminando sua causa e não apenas seus impactos negativos. Nesse contexto, novos modelos
+de negócio que valorizam o equilíbrio entre o econômico, o social e o ambiental não são
+apenas promissores, mas essenciais, e emergem através de startups sociais que atuam como
+protagonistas na geração de soluções inovadoras e escaláveis, alinhadas ao enfrentamento
+de problemas complexos e multidimensionais, em temáticas com impacto direto no bem-
+estar da sociedade, como saúde, economia circular, inclusão social e digital, e
+sustentabilidade ambiental. Além disso, ao se promover uma agenda focada nos desafios
+sociais, há um importante modelo organizacional e estratégico que é o da inovação aberta,
+mediante o compartilhamento de recursos, riscos e expertises, assim como a agilidade,
+aumentando significativamente as chances de desenvolver soluções tecnológicas eficazes e
+sustentáveis. Assim, a inovação aberta não apenas amplia o alcance e o impacto dos
+projetos sociais, mas também fortalece as redes de colaboração entre os diferentes atores
+que integram o ecossistema de inovação, a exemplo das startups sociais, que poderão se
+2/23
+EDITAL Nº 33/2025-FACEPE
+INOVAÇÃO ABERTA PARA DESAFIOS SOCIAIS
+articular em consórcios setoriais junto a ICTs, cooperativas, associações, demais organizações
+do terceiro setor, bem como o setor público.
+2 OBJETIVO
+Apoiar micro e pequenas empresas pernambucanas em projetos inovadores executados de
+forma colaborativa junto a Instituições de Ciência, Tecnologia e Inovação de Pernambuco
+(ICTs-PE), para desenvolvimento de novos produtos, serviços e/ou processos, considerando
+iniciativas de inovação aberta e a integração de tecnologias e conhecimentos, e
+contemplando desafios sociais declarados por cooperativas, associações, demais
+organizações do terceiro setor e órgãos públicos de esfera municipal, no Estado de
+Pernambuco.
+3 ELEGIBILIDADE
+3.1 Instituições
+3.1.1 A Instituição Executora deve se enquadrar às seguintes condições:
+a) propor um projeto de desenvolvimento de solução inovadora realizado em parceria
+com Instituição(ões) de Ciência, Tecnologia e Inovação de Pernambuco (ICTs-PE),
+para desenvolvimento de novo(s) produto(s), serviço(s) e/ou processo(s),
+considerando iniciativas de inovação aberta e a integração de tecnologias e
+conhecimentos, e contemplando desafios sociais declarados por cooperativas,
+associações, demais organizações do terceiro setor ou órgãos públicos de esfera
+municipal, no Estado de Pernambuco;
+b) ser estabelecida sob as leis brasileiras e ser caracterizada como micro ou pequena
+empresa 1, preferencialmente uma startup (cuja definição, para os fins do presente
+Edital, compreende uma empresa de base tecnológica, emergente e inovadora,
+voltada à introdução ou ao aprimoramento de um modelo de negócio em ambiente
+de elevada incerteza, preferencialmente com solução repetível e escalável);
+c) ser sediada ou ter filial estabelecida no Estado de Pernambuco;
+d) concorrer com apenas 01 (uma) proposta submetida; e
+e) garantir condições de plena viabilidade e segurança de contrapartida de recursos
+materiais e humanos para as necessidades de realização do projeto.
+3.1.2 O projeto deverá contar com ao menos 3 (três) Instituições Parceiras, observadas as
+seguintes condições:
+1 Segundo faixas de receita bruta anual de até R$ 360 mil (microempresa) e entre R$ 360 mil e R$ 4,8
+milhões (pequena empresa), conforme estabelecido na Lei Complementar nº 123/2006.
+3/23
+EDITAL Nº 33/2025-FACEPE
+INOVAÇÃO ABERTA PARA DESAFIOS SOCIAIS
+a) necessariamente, ao menos 1 (uma) Instituição Parceira deve ser caracterizada como
+uma Instituição de Ciência, Tecnologia e Inovação de Pernambuco (ICT-PE) com
+personalidade jurídica pública ou privada, sem fins lucrativos, com sede no Estado e
+integrante da Rede de Ecossistemas de Pernambuco (REPE) 2 – adicionalmente, no
+caso de ITC-PE com personalidade jurídica privada, sem fins lucrativos, seu CNPJ deve
+fazer referência a pelo menos um código vinculado à Divisão 72 (Pesquisa e
+Desenvolvimento Científico) da Classificação Nacional de Atividades Econômicas
+(CNAE);
+b) necessariamente, ao menos 1 (uma) outra Instituição Parceira deve ser caracterizada
+como cooperativa, associação ou organização do terceiro setor estabelecida sob as
+leis brasileiras e sediada ou com filial no Estado de Pernambuco;
+c) necessariamente, ao menos 1 (uma) outra Instituição Parceira deve ser caracterizada
+como órgão público de esfera municipal, da administração direta ou indireta,
+constituído em território pernambucano;
+d) as Instituições Parceiras devem participar da elaboração da proposta e do
+desenvolvimento do projeto, considerando processos de inovação aberta e a
+integração de tecnologias e conhecimentos – até o momento da contratação do
+projeto, o desafio a ser contemplado deverá ser cadastrado na plataforma
+Desafios.PE (https://desafios.pe.gov.br/); e
+e) as Instituições Parceiras devem garantir condições adequadas de viabilidade e
+segurança para as necessidades de realização do projeto, inclusive dados e
+informações, conforme suas atribuições e a legislação vigente.
+3.2 Equipe
+3.2.1 O/a Coordenador/a Geral deve se enquadrar às seguintes condições:
+a) ser responsável pela submissão da proposta ao presente Edital, o que o/a qualifica
+como Proponente;
+b) concorrer com apenas 01 (uma) proposta submetida;
+c) ser o/a representante legal da Instituição Executora e possuir CPF ativo e regular – no
+caso de estrangeiro/a, apresentar documento oficial equivalente;
+d) apresentar capacidade de liderança e, como tal, representar sua equipe e ser
+responsável pela gestão financeira e técnica do projeto;
+e) assumir o compromisso de manter toda documentação que comprove aporte de
+recursos ao projeto, para exigida apresentação da Prestação de Contas Financeira;
+2 Mais informações em <https://www.secti.pe.gov.br/repe/>.
