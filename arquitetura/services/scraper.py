@@ -15,6 +15,7 @@ def coletar_links_pdfs_facepe(url_lista: str) -> list[str]:
 
     for a in soup.find_all("a", href=True):
         href = a["href"]
+        ##print(f"Link encontrado: {href}")  
         if ".pdf" in href.lower():
             url_pdf = urljoin(url_lista, href)
             if url_pdf not in vistos:
