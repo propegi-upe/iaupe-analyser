@@ -1,0 +1,116 @@
+EDITAL Nº 14/2024-FACEPE
+6ª RODADA DE SUBMISSÃO (INVESTIGAÇÃO FINANCEIRA)
+ADENDO Nº 06
+CIÊNCIA NO GOVERNO: PROGRAMA CIENTISTA ARRETADO
+O Governo de Pernambuco e a Secretaria de Ciência, Tecnologia e Inovação (SECTI-PE), por
+intermédio da Fundação de Amparo à Ciência e Tecnologia do Estado de Pernambuco
+(FACEPE), tornam público o presente adendo com informações referentes à Sexta Rodada
+de Submissão ao Edital nº 14/2024-FACEPE – CIÊNCIA NO GOVERNO: PROGRAMA CIENTISTA
+ARRETADO.
+1 JUSTIFICATIVA
+Considerando o previsto no item 5.1 do Edital nº 14/2024-FACEPE – Ciência no Governo:
+Programa Cientista Arretado, faz-se necessário estabelecer informações específicas à
+respectiva Rodada de Submissão, compreendendo: i) seu respectivo cronograma; ii) a
+caracterização do objetivo específico do desafio cujas propostas devem contemplar; iii) a
+identificação da Instituição Receptora; e iv) ao menos um contato (identificação e e-mail)
+que será responsável pela interlocução da Instituição Receptora com eventuais Proponentes.
+Para os fins da Sexta Rodada de Submissão, contempla-se o desafio da automação de
+processos de detecção de padrões de lavagem de dinheiro, essencial à identificação de
+redes e vínculos financeiros, bem como à desestruturação e à descapitalização de
+organizações criminosas (ORCRIMs). Para os esforços de investigação financeira, a
+automação pode reduzir significativamente o tempo para a conclusão de análise de dados
+bancários, aumentando as chances de sequestro de ativos que ainda estejam circulando em
+contas temporárias ou “laranjas”, o que atinge diretamente a estrutura financeira das
+ORCRIMs, dificultando sua operação e sua continuidade. Espera-se, portanto, que o projeto
+apoiado seja capaz de automatizar a análise de 11 (onze) tipologias mais frequentes de
+lavagem de dinheiro, dentre as definidas pela Carta Circular nº 4.001/2020 do Banco Central
+do Brasil (BCB). Nessa direção, o presente Adendo volta-se ao desenvolvimento de um sistema
+automatizado que utilize inteligência artificial (IA) para a análise de dados bancários, visando
+acelerar o processo de identificação de padrões de lavagem de dinheiro e,
+consequentemente, aumentar a eficácia no sequestro de ativos contra as ORCRIMs.
+2/3
+EDITAL Nº 14/2024-FACEPE
+6ª RODADA DE SUBMISSÃO (INVESTIGAÇÃO FINANCEIRA) – ADENDO Nº 06
+CIÊNCIA NO GOVERNO: PROGRAMA CIENTISTA ARRETADO
+2 ÓRGÃO, CONTATO(S) E DESAFIO
+Para os fins da Sexta Rodada de Submissão, considera-se o seguinte quadro de demandas:
+ÓRGÃO PÚBLICO DEMANDANTE
+Secretaria de Defesa Social (SDS-PE)
+CONTATO(S)
+Edvaldo dos Santos Veiga Júnior – Delegado de Polícia
+edvaldosantos.veiga@policiacivil.pe.gov.br | (81) 3183-5333
+DESAFIO INFORMAÇÕES COMPLEMENTARES
+As propostas devem observar os seguintes requisitos:
+i) o desenvolvimento do sistema deverá utilizar tecnologias
+de machine learning e inteligência artificial para análise de
+padrões de movimentação financeira, com base nas
+tipologias de lavagem de dinheiro definidas na Carta
+Circular nº 4.001/2020-BCB e acompanhamento da
+Diretoria de Inteligência da Polícia Civil de Pernambuco
+(DINTEL), a qual possui volume de dados suficiente ao
+treinamento, em fluxo contínuo – os dados serão rotulados
+pelo Laboratório de Combate à Lavagem de Dinheiro e
+Como podemos automatizar
+tratados previamente pela DINTEL, para a devida
+a análise de dados bancários
+anonimização; ii) o sistema deverá utilizar algoritmos para
+para acelerar o processo de
+a célere análise de grandes volumes de dados bancários,
+investigação financeira,
+identificando padrões e anomalias que possam indicar 11
+identificando padrões de
+(onze) tipologias de lavagem de dinheiro, dentre as
+lavagem de dinheiro e
+estabelecidas no art. 1º da Carta Circular nº 4.001/2020-
+aumentando as chances de
+BCB, referentes às listadas nos incisos I (alíneas “c”, “d”, “e”,
+sequestro de ativos das
+“h” e “n”) e IV (alíneas “a”, “b”, “c”, “n”, “s” e “ad”); iii) o
+ORCRIMs??
+sistema deverá ser testado com dados históricos para
+validação de eficácia e ajustes necessários; iv) ferramentas
+de visualização deverão ser desenvolvidas para facilitar a
+interpretação dos dados, a tomada de decisões e a
+geração de relatórios; v) toda solução digital deverá se
+adequar à assimilação pelo Estado, nos requisitos previstos
+pela DINTEL e pela Agencia Estadual de Tecnologia da
+Informação (ATI); e vi) a solução deverá prever a
+confecção de manuais de usuário e treinamento das
+equipes de investigação para o uso do novo sistema.
+3 ASPECTOS ADICIONAIS À AVALIAÇÃO DO CRITÉRIO MÉRITO/IMPACTO
+Para os fins da Sexta Rodada de Submissão, não há critérios adicionais além dos já descritos
+no item 6.1.2 do Edital nº 14/2024-FACEPE – Ciência no Governo: Programa Cientista Arretado.
+3/3
+EDITAL Nº 14/2024-FACEPE
+6ª RODADA DE SUBMISSÃO (INVESTIGAÇÃO FINANCEIRA) – ADENDO Nº 06
+CIÊNCIA NO GOVERNO: PROGRAMA CIENTISTA ARRETADO
+4 CRONOGRAMA
+Para os fins da Sexta Rodada de Submissão, considera-se o seguinte cronograma:
+Etapa Data
+Lançamento da 6ª Rodada de Submissão (página eletrônica da
+28/12/2024
+FACEPE e Diário Oficial do Estado)
+Disponibilização do formulário eletrônico para a 1ª Fase da 6ª
+02/12/2024
+Rodada de Submissão (Sistema AgilFAP)
+30/12/2024 (até 23h59, horário
+Limite para submissão na 1ª Fase da 6ª Rodada (Sistema AgilFAP)
+de Brasília)
+Resultado preliminar da 1ª Fase da 6ª Rodada A partir de 10/01/2025
+Prazo recursal do resultado preliminar Até 05 (cinco) dias corridos
+Resultado final da 1ª Fase da 6ª Rodada A partir de 20/01/2025
+Disponibilização do formulário eletrônico para a 2ª Fase da 6ª
+20/01/2025
+Rodada de Submissão (Sistema AgilFAP)
+24/02/2025 (até 23h59, horário
+Limite para submissão na 2ª Fase da 6ª Rodada (Sistema AgilFAP)
+de Brasília)
+Resultado preliminar da 2ª Fase da 6ª Rodada A partir de 14/03/2025
+Prazo recursal do resultado preliminar Até 05 (cinco) dias corridos
+Resultado final da 2ª Fase da 6ª Rodada A partir de 21/03/2025
+Contratação do projeto aprovado na 6ª Rodada A partir de 21/03/2025
+Recife, 28 de novembro de 2024.
+Maria Fernanda Pimentel Avelar
+Diretora Presidente
+Helen Jamil Khoury Leonardo Ferraz Xavier
+Diretora Científica Diretor de Inovação

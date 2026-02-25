@@ -1,0 +1,115 @@
+EDITAL Nº 40/2024-FACEPE – ADENDO Nº 07
+18ª RODADA DE SUBMISSÕES (REGULAÇÃO DE SERVIÇOS PÚBLICOS)
+CIÊNCIA NO GOVERNO: PROGRAMA CIENTISTA ARRETADO
+O Governo de Pernambuco e a Secretaria de Ciência, Tecnologia e Inovação (SECTI-PE), por
+intermédio da Fundação de Amparo à Ciência e Tecnologia do Estado de Pernambuco
+(FACEPE), tornam público o presente adendo com informações referentes à 17ª Rodada de
+Submissões ao Programa Cientista Arretado.
+1 JUSTIFICATIVA
+Considerando o previsto no item 5.1 do Edital nº 40/2024-FACEPE – Ciência no Governo:
+Programa Cientista Arretado, faz-se necessário estabelecer informações específicas à
+respectiva Rodada de Submissão, compreendendo: i) seu respectivo cronograma; ii) a
+caracterização do objetivo específico do desafio cujas propostas devem contemplar; iii) a
+identificação da Instituição Receptora; e iv) ao menos um contato (identificação e e-mail)
+que será responsável pela interlocução da Instituição Receptora com eventuais Proponentes.
+Para os fins da presente Rodada de Submissões, contempla-se a modernização da regulação
+dos serviços públicos no Estado de Pernambuco, mediante o desenvolvimento de um sistema
+integrado e inovador de informações que possibilite o acompanhamento efetivo do
+cumprimento de objetos regulatórios e contratuais relativos à prestação de serviços públicos
+de extrema relevância para a população, desde saneamento básico (água, esgoto, resíduos
+sólidos e drenagem), gás canalizado, energia elétrica, transportes, rodovias e atividades não
+exclusivas do Estado, que se configuram como serviços delegados que são regulados e
+fiscalizados pela Agência de Regulação do Estado de Pernambuco (ARPE).
+As atividades regulatórias e fiscalizatórias de cada serviço público regulado são complexas e
+envolvem desde o monitoramento de indicadores, a realização de fiscalizações diretas (in
+loco) e indiretas (remotas), o controle de prazos processuais (inclusive com prazos distintos
+para atendimento de determinações legais), até a gestão da base de ativos (inclusive o
+georreferenciamento de unidades e equipamentos que compõem a base de cada
+concessionária regulada). Nesse sentido, para apoiar a tomada de decisões estratégicas,
+baseada em dados confiáveis e atualizadas, é fundamental a existência de um sistema fluido
+e integrado que reúna uma base robusta de dados regulatórios, vindo também a
+proporcionar agilidade na conclusão de cada etapa processual, incluindo a análise, a
+elaboração de documentos técnicos, as fiscalizações e as decisões administrativas.
+2/4
+EDITAL Nº 40/2024-FACEPE – ADENDO Nº 07
+18ª RODADA DE SUBMISSÕES (REGULAÇÃO DE SERVIÇOS PÚBLICOS)
+CIÊNCIA NO GOVERNO: PROGRAMA CIENTISTA ARRETADO
+Para assegurar que a prestação de serviços públicos, especialmente aqueles delegados à
+iniciativa privada, seja eficiente, de qualidade e acessível, protegendo tanto os interesses da
+população quanto a saúde e o desenvolvimento dos setores econômicos regulados, é
+imprescindível a utilização de ferramentas de tecnologia da informação. A celeridade e a
+exatidão no desempenho das atividades da ARPE representam o aprimoramento da
+regulamentação técnica e independente, vindo a fortalecer a governança e a segurança
+jurídica, bem como a atração de investimentos, o alinhamento com as políticas públicas e a
+garantia da qualidade e da eficiência dos serviços à sociedade. Além disso, vem a
+aperfeiçoar o controle social e a transparência ativa, permitindo que a sociedade
+acompanhe as ações e as decisões do poder público.
+Nesse contexto, o presente Adendo visa o desenvolvimento e a implantação de um sistema
+que otimize e propicie maior qualidade para a regulação e a fiscalização operacional e
+econômica dos serviços públicos em todos os municípios do estado de Pernambuco,
+possibilitando: i) o melhor gerenciamento das informações, com possibilidade de geração
+instantânea de dashboards sobre fiscalizações e informações dos indicadores; ii) a
+automatização de processos, incluindo a geração de relatórios de fiscalização e de
+acompanhamento, notas técnicas, aplicações de sanções, análises de pedido de
+reconsiderações, acompanhamento dos indicadores operacionais, dentre outros; iii) o
+fortalecimento da transparência ativa, dispondo de um aplicativo associado ao sistema e
+centrado no cidadão, contendo informações relevantes como indicadores operacionais,
+calendário de abastecimento, obras em andamento, evolução da universalização do
+saneamento e comunicação de eventos; iv) o aperfeiçoamento no controle de ativos e
+contratos; e v) o controle centralizado de informações, de forma a estabelecer uma
+comunicação consolidada de eventos que impactam o cotidiano da população, como a
+falta de água ou energia, vazamentos de gás ou acidentes em rodovias.
+2 ÓRGÃO, CONTATO(S) E DESAFIO
+Para os fins desta Rodada, considera-se o seguinte quadro de demandas:
+ÓRGÃO PÚBLICO DEMANDANTE
+Agência de Regulação do Estado de Pernambuco (ARPE) / Gabinete da Governadoria
+CONTATO
+Lara Pinheiro de Macedo Montarroyos – Diretora Administrativo-Financeira da ARPE
+lara.pinheiro@arpe.pe.gov.br | (81) 3182-9763
+3/4
+EDITAL Nº 40/2024-FACEPE – ADENDO Nº 07
+18ª RODADA DE SUBMISSÕES (REGULAÇÃO DE SERVIÇOS PÚBLICOS)
+CIÊNCIA NO GOVERNO: PROGRAMA CIENTISTA ARRETADO
+DESAFIO INFORMAÇÕES COMPLEMENTARES
+As propostas devem observar os seguintes requisitos:
+i) capacidade para coletar dados de diversas fontes (bases
+existentes, planilhas, APIs de sistemas externos – a exemplo de
+GOV.BR, SEI, OUVE-PE, e-Fisco e Google Maps, com possibilidade
+de filtragem de informações contratuais no Diário Oficial) e
+suporte para importação e exportação de dados em diferentes
+formatos (CSV, XLSX, XML e JSON); ii) validação de dados na
+entrada para garantir qualidade e consistência; iii)
+desenvolvimento de módulo para cadastro e configuração de
+indicadores (fórmulas, unidades de medida, metas e limites de
+tolerância) para cada setor, com o detalhamento de séries
+temporais, a visualização de tendências e projeções, e a
+associação de indicadores a áreas específicas, serviços,
+Como podemos contratos ou concessionárias; iv) apresentação de painéis
+desenvolver uma (dashboards) personalizáveis para visualização rápida de
+plataforma tecnológica gráficos e tabelas, com possíveis filtragem e detalhamento (drill-
+inovadora e unificada down); v) geração de relatórios de análise e auditoria
+para modernizar a customizáveis, em diferentes formatos (PDF, XLSX e HTML); vi)
+regulação dos serviços automatização de processos como a geração de relatórios e
+públicos em notas técnicas, com o registro/inserção de foto
+Pernambuco? georreferenciadas (inclusive offline), o controle de prazos e status
+processual, o controle de pagamento de taxas e penalidades, o
+registro de ocorrências (interdição de vias, alterações no
+calendário de abastecimento etc.) e o acionamento de alertas;
+vii) controle do inventário de bens móveis e imóveis que
+compõem a base de ativos de concessionárias reguladas; viii)
+autenticação de usuários com diferentes níveis de permissão e
+possibilidade de auditoria de ações dentro do sistema; ix)
+capacidade para suportar adequadamente o crescimento do
+volume de dados, do número de usuários e da complexidade
+dos indicadores processados; x) treinamento do pessoal
+envolvido e utilização de interface intuitiva para diferentes perfis
+de usuários, com adoção de padrões de WCAG.
+3 ASPECTOS ADICIONAIS À AVALIAÇÃO DO CRITÉRIO MÉRITO/IMPACTO
+Para os fins desta Rodada, não há critérios adicionais além dos já descritos no item 6.1.2 do
+Edital nº 40/2024-FACEPE – Ciência no Governo: Programa Cientista Arretado.
+4 CRONOGRAMA
+Para os fins desta Rodada, considera-se o seguinte cronograma:
+Etapa Data
+Lançamento da 18ª Rodada (página eletrônica da FACEPE e Diário
+22/09/2025
+Oficial do Estado)

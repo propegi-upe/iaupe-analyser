@@ -1,0 +1,130 @@
+EDITAL Nº 14/2024-FACEPE
+11ª RODADA DE SUBMISSÃO (SUSTENTABILIDADE HÍDRICA: SUPRESSÃO DA
+EVAPORAÇÃO EM RESERVATÓRIOS DO SEMIÁRIDO)
+ADENDO Nº 11
+CIÊNCIA NO GOVERNO: PROGRAMA CIENTISTA ARRETADO
+O Governo de Pernambuco e a Secretaria de Ciência, Tecnologia e Inovação (SECTI-PE), por
+intermédio da Fundação de Amparo à Ciência e Tecnologia do Estado de Pernambuco
+(FACEPE), tornam público o presente adendo com informações referentes à 11ª Rodada de
+Submissão ao Edital nº 14/2024-FACEPE – CIÊNCIA NO GOVERNO: PROGRAMA CIENTISTA
+ARRETADO, considerando que o referido Edital prevê o atendimento a 10 (dez) Rodadas de
+Submissão e o Resultado Final da 5ª Rodada não relacionou qualquer proposta aprovada.
+1 JUSTIFICATIVA
+Considerando o previsto no item 5.1 do Edital nº 14/2024-FACEPE – Ciência no Governo:
+Programa Cientista Arretado, faz-se necessário estabelecer informações específicas à
+respectiva Rodada de Submissão, compreendendo: i) seu respectivo cronograma; ii) a
+caracterização do objetivo específico do desafio cujas propostas devem contemplar; iii) a
+identificação da Instituição Receptora; e iv) ao menos um contato (identificação e e-mail)
+que será responsável pela interlocução da Instituição Receptora com eventuais Proponentes.
+Para os fins desta 11ª Rodada de Submissão, contempla-se o desenvolvimento de soluções
+inovadoras que integrem tecnologias voltadas à supressão de perdas hídricas significativas
+por evaporação, nos reservatórios pernambucanos, particularmente na região semiárida.
+Historicamente, o Estado tem registrado a menor disponibilidade per capita de água do país,
+atualmente estimado em 1.320 m³/habitante/ano, o que representa apenas 3,5% da
+disponibilidade hídrica nacional. Tal realidade se reflete em um balanço hídrico desfavorável,
+com insuficiente disponibilidade de água frente à crescente demanda, o que desperta
+conflitos entre diferentes setores usuários e limita a disponibilidade de águas de melhor
+qualidade para o consumo. A situação é ainda mais desafiadora no semiárido
+pernambucano, caracterizado por baixa pluviosidade, padrões irregulares de precipitação e
+elevadas taxas de evaporação.
+As perdas significativas de água por evaporação em reservatórios sazonais representam um
+sério obstáculo à segurança hídrica. Esses reservatórios, essenciais para o abastecimento
+humano e às atividades produtivas, frequentemente sofrem reduções substanciais em sua
+capacidade, devido à intensa evaporação na interface ar-água. Esse fenômeno é agravado
+2/4
+EDITAL Nº 14/2024-FACEPE
+11ª RODADA DE SUBMISSÃO (SUSTENTABILIDADE HÍDRICA: SUPRESSÃO DA
+EVAPORAÇÃO EM RESERVATÓRIOS DO SEMIÁRIDO) – ADENDO Nº 11
+CIÊNCIA NO GOVERNO: PROGRAMA CIENTISTA ARRETADO
+pelas condições climáticas extremas da região, cuja disponibilidade de água já se configura
+como escassa, intensificando os desafios para garantir o acesso sustentável e eficiente aos
+recursos hídricos.
+Como solução eficiente para reduzir essas perdas, a supressão da evaporação utiliza
+coberturas físicas, químicas ou biológicas que diminuam a interação entre a superfície da
+água e a atmosfera. Entretanto, a aplicação prática dessas soluções no semiárido ainda é
+limitada, exigindo estudos adicionais e adaptação tecnológica para garantir eficiência,
+custo-benefício e sustentabilidade. Nesse contexto, e alinhado aos princípios dos Objetivos de
+Desenvolvimento Sustentável (ODS) da ONU, em especial o ODS 6 – Água Potável e
+Saneamento, que busca assegurar a disponibilidade e a gestão sustentável da água, torna-
+se essencial o desenvolvimento de soluções inovadoras para mitigar as perdas por
+evaporação nos reservatórios do semiárido pernambucano.
+Essas soluções devem integrar tecnologias adaptadas às condições regionais, como
+coberturas flutuantes, sistemas avançados de monitoramento, o uso de técnicas
+experimentais, ensaios não destrutivos e modelagem e simulação avançadas para
+otimização do gerenciamento hídrico, e a aplicação de Inteligência Artificial (IA) para análise
+preditiva e automação de processos. O objetivo é fortalecer a resiliência das comunidades
+frente à escassez hídrica, promovendo o uso sustentável e eficiente dos recursos disponíveis,
+com aplicação de múltiplas tecnologias inovadoras, conforme características de cada
+reservatório.
+O presente Adendo, portanto, destina-se ao apoio a projeto que apresente tecnologias
+viáveis, sustentáveis e replicáveis, alinhadas às demandas específicas do semiárido e aos
+desafios impostos pelas mudanças climáticas, contribuindo para a segurança hídrica e o
+desenvolvimento regional. Como resultados do projeto apoiado, por conseguinte, espera-se
+alcançar a redução significativa da perda de água por evaporação em reservatórios,
+especialmente no semiárido, o que fortalecerá o compromisso com a preservação da
+sustentabilidade hídrica e ambiental, com benefícios diretos à população de Pernambuco.
+2 ÓRGÃO, CONTATO(S) E DESAFIO
+Para os fins desta 11ª Rodada de Submissão, considera-se o seguinte quadro de demandas:
+ÓRGÃO PÚBLICO DEMANDANTE
+Companhia Pernambucana de Saneamento (COMPESA) – Secretaria de Recursos Hídricos
+e Saneamento do Estado de Pernambuco (SRHS-PE)
+3/4
+EDITAL Nº 14/2024-FACEPE
+11ª RODADA DE SUBMISSÃO (SUSTENTABILIDADE HÍDRICA: SUPRESSÃO DA
+EVAPORAÇÃO EM RESERVATÓRIOS DO SEMIÁRIDO) – ADENDO Nº 11
+CIÊNCIA NO GOVERNO: PROGRAMA CIENTISTA ARRETADO
+CONTATO(S)
+Andrei Dorta Dias Nunes – Gerente de Inovação e Inteligência Operacional
+andreidorta@compesa.com.br | (81) 3412.9655 ou (81) 9.9488.5505
+DESAFIO INFORMAÇÕES COMPLEMENTARES
+As propostas devem observar os seguintes requisitos:
+i) integração de tecnologias adaptadas às condições
+regionais, como coberturas flutuantes, sistemas avançados
+de monitoramento, uso de técnicas experimentais, ensaios
+não destrutivos e modelagem e simulação avançadas
+para otimização do gerenciamento hídrico, e a aplicação
+de Inteligência Artificial (IA) para análise preditiva e
+automação de processos; ii) apresentação de tecnologias
+Como podemos desenvolver
+viáveis, sustentáveis e replicáveis, alinhadas às demandas
+modelos preditivos e de
+específicas do semiárido e aos desafios impostos pelas
+monitoramento dinâmico,
+mudanças climáticas, contribuído para a segurança
+baseados em inteligência
+hídrica e o desenvolvimento regional, com a utilização de
+artificial, com produção de
+novas tecnologias disruptivas que sejam competitivas,
+tecnologia disruptiva para
+frente às opções já existentes no mercado, a exemplo de
+reduzir as perdas
+esferas de polímeros, mantas plásticas etc.; e iii) utilização
+significativas de água por
+de indicadores de desempenho que incluam o percentual
+evaporação em reservatórios
+de redução da evaporação (mede a eficácia da solução
+sazonais, promovendo
+implementada na diminuição da evaporação,
+melhores condições de
+comparando os volumes de água antes e depois da
+segurança hídrica?
+intervenção), a eficiência operacional (avalia a relação
+entre o custo de implementação/manutenção da solução
+e o volume de água preservado) e o impacto ambiental
+(verifica possíveis efeitos colaterais da solução no
+ecossistema local, garantindo que a informação seja
+sustentável); e iv) desenvolvimento de APIs com dados da
+APAC e demais plataformas pertinentes à evaporação,
+para dar robustez ao treinamento dos modelos preditivos.
+3 ASPECTOS ADICIONAIS À AVALIAÇÃO DO CRITÉRIO MÉRITO/IMPACTO
+Para os fins desta 11ª Rodada de Submissão, não há critérios adicionais além dos já descritos
+no item 6.1.2 do Edital nº 14/2024-FACEPE – Ciência no Governo: Programa Cientista Arretado.
+4 CRONOGRAMA
+Para os fins desta 11ª Rodada de Submissão, considera-se o seguinte cronograma:
+Etapa Data
+Lançamento da 11ª Rodada de Submissão (página eletrônica da
+02/06/2025
+FACEPE e Diário Oficial do Estado)
+Disponibilização do formulário eletrônico para a 1ª Fase da 11ª
+02/06/2025
+Rodada de Submissão (Sistema AgilFAP)

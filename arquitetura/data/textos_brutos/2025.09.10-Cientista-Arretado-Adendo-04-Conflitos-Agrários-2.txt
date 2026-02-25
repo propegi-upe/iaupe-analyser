@@ -1,0 +1,110 @@
+EDITAL Nº 40/2024-FACEPE – ADENDO Nº 04
+15ª RODADA DE SUBMISSÕES (MONITORAMENTO DE CONFLITOS AGRÁRIOS)
+CIÊNCIA NO GOVERNO: PROGRAMA CIENTISTA ARRETADO
+O Governo de Pernambuco e a Secretaria de Ciência, Tecnologia e Inovação (SECTI-PE), por
+intermédio da Fundação de Amparo à Ciência e Tecnologia do Estado de Pernambuco
+(FACEPE), tornam público o presente adendo com informações referentes à 15ª Rodada de
+Submissões ao Programa Cientista Arretado.
+1 JUSTIFICATIVA
+Considerando o previsto no item 5.1 do Edital nº 40/2024-FACEPE – Ciência no Governo:
+Programa Cientista Arretado, faz-se necessário estabelecer informações específicas à
+respectiva Rodada de Submissão, compreendendo: i) seu respectivo cronograma; ii) a
+caracterização do objetivo específico do desafio cujas propostas devem contemplar; iii) a
+identificação da Instituição Receptora; e iv) ao menos um contato (identificação e e-mail)
+que será responsável pela interlocução da Instituição Receptora com eventuais Proponentes.
+Para os fins da presente Rodada de Submissões, contempla-se o monitoramento dos conflitos
+agrários no Estado, os quais configuram-se como reflexo de uma longa e complexa história
+de desigualdade na distribuição de terras e de tensões sociais entre grandes proprietários de
+terra, trabalhadores rurais e povos originários, características também observadas em outras
+partes do país. Em Pernambuco, cabe à Secretaria de Justiça, Direitos Humanos e Prevenção
+à Violência (SJDH-PE), através da Secretaria Executiva de Direitos Humanos (SEDH) e com
+auxílio da Comissão Estadual de Acompanhamento dos Conflitos Agrários de Pernambuco
+(CEACA) 1, atuar na perspectiva de proteção, mediação, acompanhamento e tentativa de
+solução dos conflitos agrários relacionados ao acesso à terra, que se estendem por todo o
+Estado.
+No cenário atual, contudo, a escassez de dados e informações acerca dos conflitos agrários
+existentes em Pernambuco dificulta uma atuação mais diligente e assertiva por parte do
+poder público. Informações do Instituto de Terras e Reforma Agrária do Estado de
+Pernambuco (ITERPE) registram mais de 140 conflitos agrários ativos em aproximadamente 60
+municípios do Estado, o que aponta para uma problemática estrutural que exige não só
+respostas resolutivas, mas também de cunho preventivo. Esse contexto demanda um
+entendimento a partir de um cenário holístico, não apenas como uma questão de segurança
+1 Instituída pelo Decreto Estadual nº 52.339/2022.
+2/4
+EDITAL Nº 40/2024-FACEPE – ADENDO Nº 04
+15ª RODADA DE SUBMISSÕES (MONITORAMENTO DE CONFLITOS AGRÁRIOS)
+CIÊNCIA NO GOVERNO: PROGRAMA CIENTISTA ARRETADO
+pública ou de mediação de disputas, mas como parte de uma estratégia essencial à
+construção de uma sociedade mais equitativa e justa na garantia de direitos das populações
+mais socioeconomicamente fragilizadas.
+Pauta-se, portanto, a necessidade de mapeamento e estruturação em um banco de dados
+dos pontos de conflitos agrários coletivos identificados em Pernambuco, para que seja
+possível melhor definir objetivos e pontos de atuação das políticas públicas. Para além dos
+dados fornecidos pelo ITERPE, outras referências relevantes encontram-se dispersas em bases
+de diversas outras organizações e movimentos sociais, como o Tribunal de Justiça do Estado
+de Pernambuco (TJPE), o Ministério Público de Pernambuco (MPPE), o Instituto Nacional de
+Colonização e Reforma Agrária (INCRA) o Movimento dos Trabalhadores Rurais Sem Terra
+(MST), a Comissão Pastoral da Terra (CPT), a Federação dos Trabalhadores Rurais Agricultores
+e Agricultoras Familiares do Estado de Pernambuco (FETAPE), dentro outros. Nesse sentido, a
+criação de um banco de dados da própria CEACA será fundamental à provisão de
+informações para ações de prevenção e monitoramento.
+Mais especificamente, as demandas incluem o levantamento de fontes dos conflitos
+coletivos, o mapeamento georreferenciado e a análise de padrões espaciais, bem como a
+integração de dados socioeconômicos e ambientais. Além disso, é necessário que os conflitos
+registrados sejam classificados segundo categorias predefinidas, preocupando-se com a
+definição do modelo de dados e a parametrização de informações, assim como o
+tratamento e a validação dos dados. Também é demandado o desenvolvimento de um
+painel intuitivo para visualização de dados, com perfis diferenciados de acesso (consulta e
+edição) e integração do painel com o banco de dados, para atualização em tempo real.
+Busca-se, nesse sentido, não apenas identificar e mapear os pontos de conflitos agrários no
+território pernambucano, mas também estruturar e consolidar um banco de dados integrado
+ao desenvolvimento de um painel de visualização interativo, para análise e monitoramento
+dos conflitos identificados. Com essa iniciativa, então, espera-se proporcionar a consolidação
+de informações relevantes em um único sistema, incluindo dados territoriais, socioeconômicos
+e ambientais, além da implementação de mecanismos que garantam a precisão e a
+atualização de dados em tempo real, refletindo a dinâmica dos conflitos.
+Nessa direção, os resultados esperados são multifacetados e abrangem diversos aspectos,
+desde a melhoria da gestão pública até o fortalecimento dos direitos das comunidades
+envolvidas. Vislumbra-se, portanto, aprimorar a gestão de conflitos agrários em Pernambuco,
+3/4
+EDITAL Nº 40/2024-FACEPE – ADENDO Nº 04
+15ª RODADA DE SUBMISSÕES (MONITORAMENTO DE CONFLITOS AGRÁRIOS)
+CIÊNCIA NO GOVERNO: PROGRAMA CIENTISTA ARRETADO
+promovendo a justiça social, o desenvolvimento sustentável e a garantia dos direitos das
+comunidades, a partir da formação de uma base de dados qualificada.
+2 ÓRGÃO, CONTATO(S) E DESAFIO
+Para os fins desta Rodada, considera-se o seguinte quadro de demandas:
+ÓRGÃO PÚBLICO DEMANDANTE
+Secretaria de Justiça, Direitos Humanos e Prevenção à Violência (SJDH-PE)
+CONTATO(S)
+Gláucia Kamila Andrade Ribeiro da Silva – Secretária Executiva de Direitos Humanos e
+Coordenadora da Comissão Estadual de Acompanhamento dos Conflitos Agrários
+Coletivos de Pernambuco (CEACA/PE)
+glaucia.silva@sjdh.pe.gov.br | (81) 3182-7641
+DESAFIO INFORMAÇÕES COMPLEMENTARES
+As propostas devem observar os seguintes requisitos:
+i) envolvimento de especialistas em georreferenciamento e sistemas de
+informação, experientes em análise de dados socioeconômicos e
+ambientais; ii) produção de subsídios técnicos à Comissão Estadual de
+Acompanhamento aos Conflitos Agrários (CEACA); iii) participação em
+reuniões articuladas pela SJDH ou pela CEACA, com órgãos
+Como podemos governamentais e movimentos sociais para coleta de dados; iv) acesso
+desenvolver uma a dados de fontes públicas relevantes, com articulação via SJDH-PE ou
+ferramenta CEACA; v) desenvolvimento de banco de dados robusto e seguro para
+inovadora de armazenar e gerenciar informações georreferenciadas; vi) definição de
+mapeamento um modelo de dados padronizado para garantir a consistência e a
+georreferenciado interoperabilidade das informações; vii) implementação de protocolos
+e monitoramento de tratamento e validação de dados para garantir a qualidade das
+de conflitos informações; viii) integração de dados sobre demografia, renda,
+agrários de acesso a serviços básicos, uso da terra, recursos naturais e impactos
+Pernambuco? ambientais; ix) desenvolvimento de um painel de visualização interativo
+e intuitivo para facilitar a análise e o monitoramento dos conflitos
+agrários, com perfis de acesso diferenciados para consulta e edição de
+dados; x) integração do painel com o banco de dados para
+atualização em tempo real; e xi) garantia de proteção dos dados
+pessoais coletados e utilizados no projeto.
+3 ASPECTOS ADICIONAIS À AVALIAÇÃO DO CRITÉRIO MÉRITO/IMPACTO
+Para os fins desta Rodada, não há critérios adicionais além dos já descritos no item 6.1.2 do
+Edital nº 40/2024-FACEPE – Ciência no Governo: Programa Cientista Arretado.
+4 CRONOGRAMA
+Para os fins desta Rodada, considera-se o seguinte cronograma:
