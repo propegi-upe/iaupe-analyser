@@ -1,24 +1,45 @@
 import os
 import json
-import requests
 import re
 from dotenv import load_dotenv
+from google import genai
 
-load_dotenv()
-HF_TOKEN = os.getenv("HF_TOKEN")
+# Modelo já confirmado no seu ambiente
+MODEL = "gemini-2.5-flash"
+
+
+def _get_api_key() -> str | None:
+    load_dotenv(override=True)
+    return (os.getenv("GEMINI_API_KEY") or os.getenv("GAMINI_API_KEY") or "").strip() or None
+
+
+def _call_gemini(client: genai.Client, model: str, prompt: str) -> str:
+    # Tenta forçar JSON quando suportado; se não, cai pro modo normal
+    try:
+        resp = client.models.generate_content(
+            model=model,
+            contents=prompt,
+            config={"response_mime_type": "application/json"},
+        )
+    except TypeError:
+        resp = client.models.generate_content(model=model, contents=prompt)
+    return (getattr(resp, "text", None) or "").strip()
 
 
 def analisar_texto(texto: str, url_pdf: str):
+    api_key = _get_api_key()
+    if not api_key:
+        return {"erro": "Defina GEMINI_API_KEY no .env ou no ambiente"}
 
-    url = "https://router.huggingface.co/v1/chat/completions"
+    client = genai.Client(api_key=api_key)
 
     prompt = f"""
 Você é um analista de editais.
 
-Retorne JSON no formato:
+Responda SOMENTE com JSON válido no formato:
 
 {{
-  "url_pdf": "",
+  "url_pdf": "{url_pdf}",
   "publico_alvo": "",
   "descricao": "",
   "criterios_publico_alvo": [],
@@ -26,44 +47,33 @@ Retorne JSON no formato:
   "observacoes": []
 }}
 
-Responda apenas JSON válido.
-
 Edital:
 {texto}
 """.strip()
 
-    headers = {
-        "Authorization": f"Bearer {HF_TOKEN}",
-        "Content-Type": "application/json",
-    }
-
-    body = {
-        "model": "mistralai/Mistral-7B-Instruct-v0.2",
-        "messages": [
-            {"role": "system", "content": "Responda apenas JSON válido."},
-            {"role": "user", "content": prompt},
-        ],
-        "temperature": 0,
-        "max_tokens": 1200,
-    }
-
-    resp = requests.post(url, headers=headers, json=body)
-
-    if not resp.ok:
-        return {"erro": resp.text}
-
-    result = resp.json()
-    content = result.get("choices", [{}])[0].get("message", {}).get("content", "")
+    try:
+        content = _call_gemini(client, MODEL, prompt)
+    except Exception as e:
+        msg = str(e)
+        if "API_KEY_INVALID" in msg or "API key not valid" in msg:
+            return {"erro": "API key inválida. Gere uma nova no Google AI Studio e atualize o .env", "raw": msg}
+        if "models/" in msg and "not found" in msg.lower():
+            # fallback simples e conhecido
+            try:
+                content = _call_gemini(client, "gemini-flash-latest", prompt)
+            except Exception as e2:
+                return {"erro": "Modelo Gemini indisponível", "raw": str(e2)}
+        else:
+            return {"erro": "Falha ao chamar Gemini", "raw": msg}
 
     try:
         return json.loads(content)
-    except:
+    except Exception:
         m = re.search(r"\{.*\}", content, re.DOTALL)
         if m:
             try:
                 return json.loads(m.group(0))
-            except:
+            except Exception:
                 pass
-
-    return {"erro": "JSON inválido", "raw": content}
+        return {"erro": "JSON inválido", "raw": content}
 

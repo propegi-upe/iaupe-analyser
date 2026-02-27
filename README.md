@@ -191,23 +191,25 @@ pip install -r requirements.txt
 Criar arquivo `.env` na raiz do projeto:
 
 ```env
-OPENAI_API_KEY=sua_chave_aqui
+GEMINI_API_KEY=sua_chave_aqui
+# (fallback aceito pelo código, se você usar esse nome)
+# GAMINI_API_KEY=sua_chave_aqui
 ```
 
 ⚠️ O `.env` não deve ser enviado ao GitHub.
+
+Teste rápido da chave:
+```bash
+python test_gemini.py
+```
+
+Se aparecer `API_KEY_INVALID` / `API key not valid`, a chave do `.env` está inválida (revogada/errada) e precisa ser recriada no Google AI Studio.
 
 ---
 
 ## ▶️ Como Executar
 
 Com o ambiente virtual ativado:
-
-```bash
-cd pipeline
-python main.py
-```
-
-Ou diretamente da raiz:
 
 ```bash
 python pipeline\main.py
@@ -217,49 +219,16 @@ python pipeline\main.py
 
 ## 🎛 Controle de Execução
 
-No `main.py`:
+Por padrão o pipeline processa **todos** os PDFs. Para limitar, use a variável de ambiente `PIPELINE_LIMIT`.
 
-```python
-LIMIT = 3
+PowerShell (Windows):
+```powershell
+$env:PIPELINE_LIMIT="5"
+python .\pipeline\main.py
 ```
 
-Altere esse valor para controlar quantos PDFs serão processados por execução.
-
-## Pré-requisitos
-
-- Python 3.10+
-- Dependências:
-  - `pdfplumber`, `requests`, `python-dotenv`
-
-Instalação:
+Para processar todos:
+```powershell
+$env:PIPELINE_LIMIT="all"
+python .\pipeline\main.py
 ```
-pip install -r requirements.txt
-```
-
-## Configuração
-
-Crie o arquivo `project/.env` com:
-```
-HF_TOKEN=hf_XXXXXXXXXXXXXXXXXXXXXXXX
-```
-
-Valide o token:
-```
-cd project
-python test_hf.py
-# Esperado: Status 200 e dados do usuário
-```
-
-## Execução
-
-Na pasta `project`:
-```
-python main.py
-```
-
-Saída esperada:
-- Um JSON impresso com os campos:
-  - `publico_alvo`, `descricao`,
-  - `criterios_publico_alvo`, `criterios_proponente`,
-  - `observacoes`.
-- Se o edital for local e isso estiver descrito no PDF, o texto refletirá nos campos; se não houver menção, campos ficam vazios conforme as regras do prompt.
