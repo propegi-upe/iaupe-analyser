@@ -3,7 +3,7 @@ import requests
 from io import BytesIO
 
 
-def extrair_texto_pdf_url(url_pdf: str, max_paginas=1) -> str:
+def extract_text_from_pdf_url(url_pdf: str, max_pages=1) -> str:
     """
     Baixa um PDF via URL e extrai texto das primeiras páginas.
 
@@ -32,7 +32,7 @@ def extrair_texto_pdf_url(url_pdf: str, max_paginas=1) -> str:
     with pdfplumber.open(BytesIO(resp.content)) as pdf:
         # Itera páginas e interrompe ao atingir max_paginas.
         for i, pagina in enumerate(pdf.pages):
-            if i >= max_paginas:
+            if i >= max_pages:
                 break
             # extract_text() pode retornar None dependendo do conteúdo da página.
             texto += (pagina.extract_text() or "") + "\n"

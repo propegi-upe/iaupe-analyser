@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 
 
-def coletar_links_pdfs_facepe(url_lista: str) -> list[str]:
+def collect_facepe_pdf_links(url_lista: str) -> list[str]:
     """
     Abre a página de listagem de editais da FACEPE e coleta links diretos de PDFs.
 

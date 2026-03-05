@@ -3,14 +3,14 @@ import os
 import sys
 from pathlib import Path
 from pymongo import MongoClient
-from pipeline.services.scraper import coletar_links_pdfs_facepe
-
-load_dotenv(override=True)
-
 
 # Garante que a raiz do meu projeto esteja no PYTHONPATH (para importar "pipeline")
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(PROJECT_ROOT))
+
+from pipeline.services.scraper import collect_facepe_pdf_links
+
+load_dotenv(override=True)
 
 
 URL_FACEPE = "https://www.facepe.br/editais/todos/?c=aberto"
@@ -26,7 +26,7 @@ def main():
     client = MongoClient(uri)
     coll = client[db_name][coll_name]
 
-    links = coletar_links_pdfs_facepe(URL_FACEPE)
+    links = collect_facepe_pdf_links(URL_FACEPE)
     total_links = len(links)
 
     found = coll.count_documents({"url_pdf": {"$in": links}})

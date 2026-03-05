@@ -38,12 +38,12 @@ def _coll() -> Collection:
     return _collection
 
 
-def ja_existe(url_pdf: str) -> bool:
+def already_exists(url_pdf: str) -> bool:
     doc = _coll().find_one({"url_pdf": url_pdf}, {"_id": 1, "status": 1})
     return bool(doc) and doc.get("status") == "ok"
 
 
-def salvar(url_pdf: str, resultado: dict, texto_preview: Optional[str] = None) -> str:
+def save(url_pdf: str, resultado: dict, texto_preview: Optional[str] = None) -> str:
     now = datetime.now(timezone.utc)
 
     doc_set = {

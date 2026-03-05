@@ -26,7 +26,7 @@ def _call_gemini(client: genai.Client, model: str, prompt: str) -> str:
     return (getattr(resp, "text", None) or "").strip()
 
 
-def analisar_texto(texto: str, url_pdf: str):
+def analyze_text(text: str, pdf_url: str):
     api_key = _get_api_key()
     if not api_key:
         return {"erro": "Defina GEMINI_API_KEY no .env ou no ambiente"}
@@ -39,7 +39,7 @@ Você é um analista de editais.
 Responda SOMENTE com JSON válido no formato:
 
 {{
-  "url_pdf": "{url_pdf}",
+  "url_pdf": "{pdf_url}",
   "publico_alvo": "",
   "descricao": "",
   "criterios_publico_alvo": [],
@@ -48,7 +48,7 @@ Responda SOMENTE com JSON válido no formato:
 }}
 
 Edital:
-{texto}
+{text}
 """.strip()
 
     try:
