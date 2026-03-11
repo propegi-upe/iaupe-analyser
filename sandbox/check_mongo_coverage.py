@@ -3,6 +3,7 @@ import os
 import sys
 from pathlib import Path
 from pymongo import MongoClient
+import certifi
 
 # Garante que a raiz do meu projeto esteja no PYTHONPATH (para importar "pipeline")
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
@@ -23,7 +24,7 @@ def main():
     if not uri:
         raise RuntimeError("MONGODB_URI não definido no .env")
 
-    client = MongoClient(uri)
+    client = MongoClient(uri, tlsCAFile=certifi.where())
     coll = client[db_name][coll_name]
 
     links = collect_facepe_pdf_links(URL_FACEPE)
