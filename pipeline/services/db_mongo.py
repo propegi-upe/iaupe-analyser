@@ -2,6 +2,8 @@ import os
 from datetime import datetime, timezone
 from typing import Optional
 
+import certifi
+
 from dotenv import load_dotenv
 from pymongo import MongoClient, ASCENDING
 from pymongo.collection import Collection
@@ -29,7 +31,7 @@ def _coll() -> Collection:
     db_name = (os.getenv("MONGODB_DB") or "iaupe-analyser").strip()
     coll_name = (os.getenv("MONGODB_COLLECTION") or "editais").strip()
 
-    _client = MongoClient(uri)
+    _client = MongoClient(uri, tlsCAFile=certifi.where())
     _collection = _client[db_name][coll_name]
 
     # evita analisar/salvar o mesmo PDF várias vezes
