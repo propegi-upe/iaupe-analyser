@@ -7,12 +7,34 @@ import certifi
 from dotenv import load_dotenv
 from pymongo import MongoClient, ASCENDING
 from pymongo.collection import Collection
-from pymongo.errors import DuplicateKeyError
+from pymongo.errors import DuplicateKeyError, PyMongoError
 
 load_dotenv(override=True)
 
 _client: Optional[MongoClient] = None
 _collection: Optional[Collection] = None
+_mongo_disabled = False
+_mongo_disable_reason: Optional[str] = None
+
+
+def _disable_mongo(reason: str) -> None:
+    global _mongo_disabled, _mongo_disable_reason
+
+    if _mongo_disabled:
+        return
+
+    _mongo_disabled = True
+    _mongo_disable_reason = reason
+    print(f"[MongoDB] Persistencia desabilitada: {reason}")
+
+
+def _mongo_is_requested() -> bool:
+    raw_value = (os.getenv("MONGODB_ENABLED") or "auto").strip().lower()
+    if raw_value in {"0", "false", "no", "off", "disabled"}:
+        return False
+
+    uri = (os.getenv("MONGODB_URI") or "").strip()
+    return bool(uri)
 
 
 def _coll() -> Collection:
@@ -24,24 +46,45 @@ def _coll() -> Collection:
     if _collection is not None:
         return _collection
 
-    uri = (os.getenv("MONGODB_URI") or "").strip()
-    if not uri:
-        raise RuntimeError("Defina MONGODB_URI no .env")
+    if _mongo_disabled or not _mongo_is_requested():
+        raise RuntimeError(_mongo_disable_reason or "MongoDB desabilitado ou nao configurado")
 
+    uri = (os.getenv("MONGODB_URI") or "").strip()
     db_name = (os.getenv("MONGODB_DB") or "iaupe-analyser").strip()
     coll_name = (os.getenv("MONGODB_COLLECTION") or "editais").strip()
+    server_selection_timeout_ms = int(
+        (os.getenv("MONGODB_SERVER_SELECTION_TIMEOUT_MS") or "5000").strip()
+    )
+    connect_timeout_ms = int((os.getenv("MONGODB_CONNECT_TIMEOUT_MS") or "5000").strip())
+    socket_timeout_ms = int((os.getenv("MONGODB_SOCKET_TIMEOUT_MS") or "5000").strip())
 
-    _client = MongoClient(uri, tlsCAFile=certifi.where())
-    _collection = _client[db_name][coll_name]
+    try:
+        _client = MongoClient(
+            uri,
+            tlsCAFile=certifi.where(),
+            serverSelectionTimeoutMS=server_selection_timeout_ms,
+            connectTimeoutMS=connect_timeout_ms,
+            socketTimeoutMS=socket_timeout_ms,
+        )
+        _collection = _client[db_name][coll_name]
 
-    # evita analisar/salvar o mesmo PDF várias vezes
-    _collection.create_index([("url_pdf", ASCENDING)], unique=True)
+        # evita analisar/salvar o mesmo PDF varias vezes
+        _collection.create_index([("url_pdf", ASCENDING)], unique=True)
+    except PyMongoError as exc:
+        _client = None
+        _collection = None
+        _disable_mongo(str(exc))
+        raise RuntimeError(_mongo_disable_reason or "Falha ao conectar no MongoDB") from exc
 
     return _collection
 
 
 def already_exists(url_pdf: str) -> bool:
-    doc = _coll().find_one({"url_pdf": url_pdf}, {"_id": 1, "status": 1})
+    try:
+        doc = _coll().find_one({"url_pdf": url_pdf}, {"_id": 1, "status": 1})
+    except RuntimeError:
+        return False
+
     return bool(doc) and doc.get("status") == "ok"
 
 
@@ -63,3 +106,8 @@ def save(url_pdf: str, resultado: dict, texto_preview: Optional[str] = None) -> 
     except DuplicateKeyError:
         _coll().update_one({"url_pdf": url_pdf}, {"$set": doc_set})
         return "updated"
+    except RuntimeError:
+        return "disabled"
+    except PyMongoError as exc:
+        _disable_mongo(str(exc))
+        return "disabled"

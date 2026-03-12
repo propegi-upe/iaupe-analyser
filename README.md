@@ -11,6 +11,7 @@ O sistema:
 - Envia o conteúdo para um modelo de linguagem (LLM)
 - Retorna um JSON estruturado com informações relevantes
 - (Opcional) Persiste resultados no **MongoDB** para cache e retomada
+- Se o MongoDB estiver indisponível, o pipeline continua sem cache/persistência e registra um aviso no terminal
 
 O projeto foi organizado seguindo uma **Arquitetura Modular em Pipeline**, separando responsabilidades para facilitar manutenção, substituição de componentes e evolução futura.
 
@@ -220,6 +221,9 @@ GEMINI_API_KEY=sua_chave_aqui
 MONGODB_URI=mongodb://localhost:27017
 MONGODB_DB=iaupe-analyser
 MONGODB_COLLECTION=editais
+
+# Para rodar sem MongoDB, mesmo com URI definida
+# MONGODB_ENABLED=0
 ```
 
 ⚠️ O `.env` **não deve** ser enviado ao GitHub.
@@ -231,6 +235,13 @@ MONGODB_COLLECTION=editais
 Com o ambiente virtual ativado:
 
 ```powershell
+python .\pipeline\main.py
+```
+
+Se quiser forçar a execução sem MongoDB:
+
+```powershell
+$env:MONGODB_ENABLED="0"
 python .\pipeline\main.py
 ```
 

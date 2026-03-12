@@ -50,7 +50,8 @@ def run_pipeline():
         if not texto:
             print("Texto vazio.\n")
             status = save(link, {"erro": "Texto vazio"}, texto_preview="")
-            print(f"💾 MongoDB: {status}")
+            if status != "disabled":
+                print(f"💾 MongoDB: {status}")
             i < len(links) and time.sleep(60)
             continue
 
@@ -63,7 +64,8 @@ def run_pipeline():
 
         status = save(link, resultado, texto_preview=texto)
 
-        print(f"💾 MongoDB: {status}")
+        if status != "disabled":
+            print(f"💾 MongoDB: {status}")
         print(json.dumps(resultado, ensure_ascii=False, indent=2))
         print("\n" + "-" * 60 + "\n")
 
