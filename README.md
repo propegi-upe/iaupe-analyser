@@ -1,277 +1,203 @@
-# IAUPE Analyzer – Pipeline de Análise Automatizada de Editais (FACEPE)
+# IAUPE Analyzer - Pipeline de Editais Multi-Fonte
 
-## 📌 Visão Geral
+## Visao geral
 
-O **IAUPE Analyzer** é um sistema em **pipeline modular** para coleta e análise automatizada de editais publicados no site da FACEPE.
+O IAUPE Analyzer e um pipeline Python para:
 
-O sistema:
+1. Coletar links de editais.
+2. Extrair texto dos documentos.
+3. Analisar o conteudo com IA (Gemini).
+4. Salvar resultados estruturados no MongoDB.
 
-- Coleta automaticamente os links de PDFs de editais
-- Extrai texto dos documentos (em memória)
-- Envia o conteúdo para um modelo de linguagem (LLM)
-- Retorna um JSON estruturado com informações relevantes
-- (Opcional) Persiste resultados no **MongoDB** para cache e retomada
-- Se o MongoDB estiver indisponível, o pipeline continua sem cache/persistência e registra um aviso no terminal
+O projeto foi evoluido para arquitetura multi-fonte, com alta coesao e baixo acoplamento.
+O pipeline principal e unico, e cada fonte tem seu proprio modulo de scraping.
 
-O projeto foi organizado seguindo uma **Arquitetura Modular em Pipeline**, separando responsabilidades para facilitar manutenção, substituição de componentes e evolução futura.
+## O que foi adicionado
 
----
+- Suporte a multiplas fontes via parametro `--source` e variavel `PIPELINE_SOURCE`.
+- Separacao da camada de scraping por fonte em `pipeline/sources/`.
+- Collections separadas no MongoDB por fonte.
+- Persistencia dinamica por collection em `db_mongo.py`.
+- Script de cobertura no MongoDB por fonte em `sandbox/check_mongo_coverage.py`.
 
-## 🏗 Arquitetura do Projeto
+## Fontes suportadas
+
+| Fonte  | Chave (`--source`) | Collection Mongo   | Status |
+|-------|---------------------|--------------------|--------|
+| FACEPE | `facepe`            | `editais_facepe`   | Implementado |
+| CNPq   | `cnpq`              | `editais_cnpq`     | Implementado |
+| FINEP  | `finep`             | `editais_finep`    | Placeholder |
+| CAPES  | `capes`             | `editais_capes`    | Placeholder |
+
+## Estrutura do projeto
 
 ```text
 iaupe-analyser/
-│
-├── .venv/                  # Ambiente virtual Python
-├── pipeline/               # Núcleo principal do sistema
-│   ├── services/           # Camada de serviços
-│   │   ├── scraper.py      # Coleta links de PDFs
-│   │   ├── extractor.py    # Extrai texto dos PDFs
-│   │   ├── analyzer.py     # Envia texto ao LLM e retorna JSON
-│   │   └── db_mongo.py     # Persistência/caching no MongoDB
-│   └── main.py             # Orquestra o pipeline
-│
-├── sandbox/                # Scripts de apoio/testes (ex.: checagem de cobertura no Mongo)
+├── pipeline/
+│   ├── main.py
+│   ├── services/
+│   │   ├── analyzer.py
+│   │   ├── db_mongo.py
+│   │   └── extractor.py
+│   └── sources/
+│       ├── scraper_facepe.py
+│       ├── scraper_cnpq.py
+│       ├── scraper_finep.py
+│       └── scraper_capes.py
+├── sandbox/
 │   └── check_mongo_coverage.py
-│
-├── requirements.txt        # Dependências do projeto
-├── .env                    # Chaves de API (não versionado)
+├── requirements.txt
+├── .env
 └── README.md
 ```
 
----
+## Arquitetura
 
-## 🧠 Tipo de Arquitetura
-
-**Arquitetura Modular em Pipeline (Data Processing Pipeline)**
-
-Fluxo do sistema:
+Fluxo principal:
 
 ```text
-FACEPE (HTML)
-↓
-Scraper
-↓
-Lista de URLs de PDFs
-↓
-[Opcional] Cache/Persistência (MongoDB)
-- se url_pdf já existe com status=ok, pode pular
-- se status=erro, o item pode ser reprocessado em outra execução
-↓
-Extractor (processamento em memória)
-↓
-Texto extraído
-↓
-Analyzer (LLM)
-↓
-JSON estruturado
-↓
-[Opcional] Salvar/Atualizar no MongoDB (url_pdf único)
-↓
-Exibido no terminal
+Fonte selecionada (--source)
+-> collect_links (modulo da fonte)
+-> extractor (texto do edital)
+-> analyzer (JSON estruturado)
+-> save no MongoDB (collection da fonte)
 ```
 
-Cada módulo possui responsabilidade única (Single Responsibility / SOLID).
+Separacao de responsabilidades:
 
----
+- `pipeline/main.py`: orquestracao e controle de execucao.
+- `pipeline/sources/*.py`: scraping por fonte (HTML especifico).
+- `pipeline/services/extractor.py`: download e extracao de texto.
+- `pipeline/services/analyzer.py`: prompt e analise com Gemini.
+- `pipeline/services/db_mongo.py`: cache e persistencia.
 
-## ⚙️ Componentes do Sistema
-
-### 1️⃣ Scraper (`scraper.py`)
-
-Responsável por:
-
-- Acessar a página de editais da FACEPE
-- Identificar botões/links de download
-- Coletar links diretos de PDFs
-- Retornar lista de URLs
-
-> Não baixa o PDF e não analisa conteúdo.
-
----
-
-### 2️⃣ Extractor (`extractor.py`)
-
-Responsável por:
-
-- Receber a URL de um PDF
-- Fazer download via HTTP
-- Processar o PDF em memória (`BytesIO`)
-- Extrair texto (via `pdfplumber`)
-- Retornar o texto extraído
-
-**Importante:**
-- O PDF **não é salvo** no disco
-- O processamento é feito inteiramente em memória
-
----
-
-### 3️⃣ Analyzer (`analyzer.py`)
-
-Responsável por:
-
-- Receber o texto extraído
-- Construir prompt estruturado
-- Enviar requisição para o provedor de LLM
-- Garantir retorno em JSON (ou registrar erro)
-- Retornar estrutura padronizada
-
-Exemplo de saída:
-
-```json
-{
-  "url_pdf": "",
-  "publico_alvo": "",
-  "descricao": "",
-  "criterios_publico_alvo": [],
-  "criterios_proponente": [],
-  "observacoes": []
-}
-```
-
-A camada de análise pode ser substituída (OpenAI, HuggingFace, Gemini, etc.) sem alterar o restante do pipeline.
-
----
-
-### 4️⃣ Persistência/caching (`db_mongo.py`)
-
-Responsável por:
-
-- Salvar o resultado no MongoDB com `url_pdf` como chave única
-- Manter um `status` por documento:
-  - `ok`: analisado com sucesso
-  - `erro`: falhou (ex.: API indisponível/quota, texto vazio, etc.)
-- Permitir **retomada** do pipeline:
-  - itens com `status=ok` podem ser pulados
-  - itens com `status=erro` podem ser reprocessados
-
----
-
-### 5️⃣ Orquestrador (`main.py`)
-
-Responsável por:
-
-- Orquestrar o pipeline completo
-- Definir o `LIMIT` de processamento (`PIPELINE_LIMIT`)
-- Executar as etapas na ordem correta
-- Exibir os resultados no terminal
-- Fazer retry simples em cenários de rate-limit (quando aplicável)
-
----
-
-## ✅ Script de checagem de cobertura (MongoDB)
-
-O script `sandbox/check_mongo_coverage.py` ajuda a validar o progresso:
-
-- Quantos PDFs existem no site (scraper)
-- Quantos já estão no Mongo
-- Quantos estão com `status=ok`, `status=erro`
-- Quantos ainda faltam
-
-Uso:
-
-```powershell
-cd .\sandbox\
-python .\check_mongo_coverage.py
-```
-
----
-
-## 📦 Pré-requisitos
+## Requisitos
 
 - Python 3.10+
-- Ambiente virtual configurado
-- Chave de API válida do provedor de LLM (ex.: Gemini)
-- (Opcional) MongoDB (local ou Atlas) para persistir resultados
+- Ambiente virtual
+- Dependencias em `requirements.txt`
+- Chave Gemini valida
+- MongoDB opcional (local ou Atlas)
 
----
+## Instalacao
 
-## 🔧 Instalação
-
-### 1️⃣ Criar ambiente virtual
+1. Criar ambiente virtual:
 
 ```powershell
 python -m venv .venv
 ```
 
-### 2️⃣ Ativar ambiente virtual (Windows / PowerShell)
+2. Ativar ambiente virtual (PowerShell):
 
 ```powershell
 .\.venv\Scripts\Activate.ps1
 ```
 
-### 3️⃣ Instalar dependências
+3. Instalar dependencias:
 
 ```powershell
 pip install -r requirements.txt
 ```
 
----
+## Configuracao (.env)
 
-## 🔐 Configuração
-
-Criar arquivo `.env` na raiz do projeto:
+Exemplo:
 
 ```env
 GEMINI_API_KEY=sua_chave_aqui
-# (fallback aceito pelo código, se você usar esse nome)
-# GAMINI_API_KEY=sua_chave_aqui
 
-# (Opcional) Persistência no MongoDB
-MONGODB_URI=mongodb://localhost:27017
+MONGODB_URI=mongodb+srv://...
 MONGODB_DB=iaupe-analyser
-MONGODB_COLLECTION=editais
 
-# Para rodar sem MongoDB, mesmo com URI definida
-# MONGODB_ENABLED=0
+PIPELINE_SOURCE=facepe
+PIPELINE_LIMIT=all
+
+SLEEP_ALREADY_EXISTS=5
+SLEEP_NEW_PROCESS=60
+SLEEP_EMPTY_TEXT=5
+MAX_RETRIES_GEMINI=3
+
+MONGODB_SERVER_SELECTION_TIMEOUT_MS=30000
+MONGODB_CONNECT_TIMEOUT_MS=30000
+MONGODB_SOCKET_TIMEOUT_MS=30000
 ```
 
-⚠️ O `.env` **não deve** ser enviado ao GitHub.
+Observacoes:
 
----
+- No pipeline principal, a collection vem da fonte selecionada.
+- `MONGODB_COLLECTION` e apenas fallback interno quando nenhuma collection e informada na chamada.
+- Para desativar persistencia mesmo com URI definida, use `MONGODB_ENABLED=0`.
 
-## ▶️ Como Executar
+## Como executar
 
-Com o ambiente virtual ativado:
+Na raiz do projeto:
 
 ```powershell
-python .\pipeline\main.py
+python .\pipeline\main.py --source facepe
 ```
 
-Se quiser forçar a execução sem MongoDB:
+Ou dentro da pasta `pipeline`:
 
 ```powershell
-$env:MONGODB_ENABLED="0"
-python .\pipeline\main.py
+python .\main.py --source facepe
 ```
 
----
-
-## 🎛 Controle de Execução (LIMIT)
-
-Por padrão o pipeline processa **todos** os PDFs coletados. Para limitar, use a variável de ambiente `PIPELINE_LIMIT`.
-
-PowerShell (Windows):
+Exemplos:
 
 ```powershell
-$env:PIPELINE_LIMIT="5"
-python .\pipeline\main.py
+python .\main.py --source cnpq
+python .\main.py --source facepe --limit 10
+python .\main.py --source finep
+python .\main.py --source capes
 ```
 
-Para processar todos:
+Sem `--source`, o padrao e `facepe`.
+
+## Collections por fonte
+
+- `facepe` -> `editais_facepe`
+- `cnpq` -> `editais_cnpq`
+- `finep` -> `editais_finep`
+- `capes` -> `editais_capes`
+
+## Script de cobertura no MongoDB
+
+Arquivo: `sandbox/check_mongo_coverage.py`
+
+Funcao:
+
+- Coleta links da fonte selecionada.
+- Consulta a collection da mesma fonte.
+- Mostra total, `ok`, `erro` e faltantes.
+
+Uso:
 
 ```powershell
-$env:PIPELINE_LIMIT="all"
-python .\pipeline\main.py
+python .\sandbox\check_mongo_coverage.py --source facepe
+python .\sandbox\check_mongo_coverage.py --source cnpq
 ```
 
----
+## Tratamento de erros
 
-## ⚠️ Observações sobre quota/rate limit do LLM
+- Retry de IA para `429` (respeitando tempo sugerido).
+- Retry de IA para `503` (espera progressiva).
+- Falha no Mongo nao derruba o pipeline.
+- Upsert por `url_pdf` com status (`ok` ou `erro`).
 
-Dependendo do plano do provedor de LLM, é possível receber erros como:
+## Como adicionar nova fonte
 
-- `429 RESOURCE_EXHAUSTED`: limite de quota/rate limit
-- `503 UNAVAILABLE`: modelo indisponível (alta demanda)
+1. Criar arquivo em `pipeline/sources/`, por exemplo `scraper_nova_fonte.py`.
+2. Definir:
+- `SOURCE_KEY`
+- `SOURCE_LABEL`
+- `BASE_URL`
+- `MONGO_COLLECTION`
+- `collect_links(url_lista: str) -> list[str]`
+3. Registrar a nova fonte no `SOURCE_REGISTRY` de `pipeline/main.py`.
+4. Registrar a nova fonte no `SOURCE_REGISTRY` de `sandbox/check_mongo_coverage.py`.
 
-Nesses casos, o pipeline pode registrar `status=erro` e os itens poderão ser **reprocessados** em outra execução.
+## Boas praticas
+
+- Nao versionar `.env`.
+- Nao expor credenciais em prints, README ou commits.
+- Rotacionar chaves caso alguma tenha sido exposta.

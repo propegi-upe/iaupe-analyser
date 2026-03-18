@@ -11,7 +11,7 @@ from pymongo.errors import DuplicateKeyError, PyMongoError
 load_dotenv(override=True)
 
 _client: Optional[MongoClient] = None
-_collection: Optional[Collection] = None
+_collections: dict[str, Collection] = {}
 _mongo_disabled = False
 _mongo_disable_reason: Optional[str] = None
 
@@ -36,22 +36,27 @@ def _mongo_is_requested() -> bool:
     return bool(uri)
 
 
-def _coll() -> Collection:
+def _resolve_collection_name(collection_name: Optional[str]) -> str:
+    resolved = (collection_name or os.getenv("MONGODB_COLLECTION") or "editais").strip()
+    return resolved or "editais"
+
+
+def _coll(collection_name: Optional[str] = None) -> Collection:
     """
     Retorna a collection do MongoDB (com cache) e garante índice único por `url_pdf`.
     """
-    global _client, _collection
+    global _client, _collections
 
-    if _collection is not None:
-        return _collection
+    coll_name = _resolve_collection_name(collection_name)
+
+    if coll_name in _collections:
+        return _collections[coll_name]
 
     if _mongo_disabled or not _mongo_is_requested():
         raise RuntimeError(_mongo_disable_reason or "MongoDB desabilitado ou nao configurado")
 
     uri = (os.getenv("MONGODB_URI") or "").strip()
     db_name = (os.getenv("MONGODB_DB") or "iaupe-analyser").strip()
-    coll_name = (os.getenv("MONGODB_COLLECTION") or "editais").strip()
-
     server_selection_timeout_ms = int(
         (os.getenv("MONGODB_SERVER_SELECTION_TIMEOUT_MS") or "30000").strip()
     )
@@ -63,30 +68,32 @@ def _coll() -> Collection:
     )
 
     try:
-        _client = MongoClient(
-            uri,
-            tlsCAFile=certifi.where(),
-            serverSelectionTimeoutMS=server_selection_timeout_ms,
-            connectTimeoutMS=connect_timeout_ms,
-            socketTimeoutMS=socket_timeout_ms,
-            retryWrites=True,
-        )
-        _collection = _client[db_name][coll_name]
+        if _client is None:
+            _client = MongoClient(
+                uri,
+                tlsCAFile=certifi.where(),
+                serverSelectionTimeoutMS=server_selection_timeout_ms,
+                connectTimeoutMS=connect_timeout_ms,
+                socketTimeoutMS=socket_timeout_ms,
+                retryWrites=True,
+            )
 
-        _collection.create_index([("url_pdf", ASCENDING)], unique=True)
+        collection = _client[db_name][coll_name]
+        collection.create_index([("url_pdf", ASCENDING)], unique=True)
+        _collections[coll_name] = collection
 
     except PyMongoError as exc:
         _client = None
-        _collection = None
+        _collections = {}
         _disable_mongo(str(exc))
         raise RuntimeError(_mongo_disable_reason or "Falha ao conectar no MongoDB") from exc
 
-    return _collection
+    return _collections[coll_name]
 
 
-def already_exists(url_pdf: str) -> bool:
+def already_exists(url_pdf: str, collection_name: Optional[str] = None) -> bool:
     try:
-        doc = _coll().find_one({"url_pdf": url_pdf}, {"_id": 1, "status": 1})
+        doc = _coll(collection_name).find_one({"url_pdf": url_pdf}, {"_id": 1, "status": 1})
     except (RuntimeError, PyMongoError) as exc:
         print(f"[MongoDB] Falha ao consultar already_exists: {exc}")
         return False
@@ -94,7 +101,12 @@ def already_exists(url_pdf: str) -> bool:
     return bool(doc) and doc.get("status") == "ok"
 
 
-def save(url_pdf: str, resultado: dict, texto_preview: Optional[str] = None) -> str:
+def save(
+    url_pdf: str,
+    resultado: dict,
+    texto_preview: Optional[str] = None,
+    collection_name: Optional[str] = None,
+) -> str:
     now = datetime.now(timezone.utc)
 
     doc_set = {
@@ -108,12 +120,14 @@ def save(url_pdf: str, resultado: dict, texto_preview: Optional[str] = None) -> 
         doc_set["texto_preview"] = texto_preview[:2000]
 
     try:
-        _coll().insert_one({**doc_set, "created_at": now})
+        collection = _coll(collection_name)
+        collection.insert_one({**doc_set, "created_at": now})
         return "inserted"
 
     except DuplicateKeyError:
         try:
-            _coll().update_one({"url_pdf": url_pdf}, {"$set": doc_set})
+            collection = _coll(collection_name)
+            collection.update_one({"url_pdf": url_pdf}, {"$set": doc_set})
             return "updated"
         except (RuntimeError, PyMongoError) as exc:
             print(f"[MongoDB] Falha ao atualizar documento duplicado: {exc}")

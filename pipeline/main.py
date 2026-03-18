@@ -1,17 +1,75 @@
+import argparse
 import json
 import os
 import re
 import time
 
-from services.scraper import collect_facepe_pdf_links
+from sources import scraper_capes, scraper_cnpq, scraper_facepe, scraper_finep
 from services.extractor import extract_text_from_pdf_url
 from services.analyzer import analyze_text
 from services.db_mongo import already_exists, save
 
-URL_FACEPE = "https://www.facepe.br/editais/todos/?c=aberto"
+SOURCE_REGISTRY = {
+    scraper_facepe.SOURCE_KEY: {
+        "label": scraper_facepe.SOURCE_LABEL,
+        "base_url": scraper_facepe.BASE_URL,
+        "mongo_collection": scraper_facepe.MONGO_COLLECTION,
+        "collect_links": scraper_facepe.collect_links,
+    },
+    scraper_cnpq.SOURCE_KEY: {
+        "label": scraper_cnpq.SOURCE_LABEL,
+        "base_url": scraper_cnpq.BASE_URL,
+        "mongo_collection": scraper_cnpq.MONGO_COLLECTION,
+        "collect_links": scraper_cnpq.collect_links,
+    },
+    scraper_finep.SOURCE_KEY: {
+        "label": scraper_finep.SOURCE_LABEL,
+        "base_url": scraper_finep.BASE_URL,
+        "mongo_collection": scraper_finep.MONGO_COLLECTION,
+        "collect_links": scraper_finep.collect_links,
+    },
+    scraper_capes.SOURCE_KEY: {
+        "label": scraper_capes.SOURCE_LABEL,
+        "base_url": scraper_capes.BASE_URL,
+        "mongo_collection": scraper_capes.MONGO_COLLECTION,
+        "collect_links": scraper_capes.collect_links,
+    },
+}
 
-raw_limit = (os.getenv("PIPELINE_LIMIT") or "all").strip().lower()
-LIMIT = None if raw_limit in ("all", "0", "none", "") else int(raw_limit)
+DEFAULT_SOURCE = (os.getenv("PIPELINE_SOURCE") or "facepe").strip().lower()
+
+
+def _parse_limit(raw_value: str | None) -> int | None:
+    raw_limit = (raw_value or "all").strip().lower()
+    return None if raw_limit in ("all", "0", "none", "") else int(raw_limit)
+
+
+def _get_source_config(source_key: str | None) -> tuple[str, dict]:
+    selected_key = (source_key or DEFAULT_SOURCE).strip().lower()
+    source = SOURCE_REGISTRY.get(selected_key)
+    if source is None:
+        disponiveis = ", ".join(sorted(SOURCE_REGISTRY))
+        raise ValueError(f"Fonte invalida: {selected_key!r}. Opcoes: {disponiveis}")
+    return selected_key, source
+
+
+def _build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(
+        description="Pipeline de analise de editais com fontes plugaveis"
+    )
+    parser.add_argument(
+        "--source",
+        default=DEFAULT_SOURCE,
+        help=f"Fonte alvo ({', '.join(sorted(SOURCE_REGISTRY))})",
+    )
+    parser.add_argument(
+        "--limit",
+        default=os.getenv("PIPELINE_LIMIT") or "all",
+        help="Limite de PDFs (all, 0, none ou numero inteiro)",
+    )
+    return parser
+
+LIMIT = _parse_limit(os.getenv("PIPELINE_LIMIT"))
 
 SLEEP_ALREADY_EXISTS = int((os.getenv("SLEEP_ALREADY_EXISTS") or "5").strip())
 SLEEP_NEW_PROCESS = int((os.getenv("SLEEP_NEW_PROCESS") or "60").strip())
@@ -69,17 +127,24 @@ def retry_analyze_text(texto: str, link: str) -> dict:
     return {"erro": "Falha inesperada no retry do Gemini", "raw": ""}
 
 
-def run_pipeline():
-    links = collect_facepe_pdf_links(URL_FACEPE)
+def run_pipeline(source_key: str | None = None, limit: int | None = LIMIT):
+    source_id, source = _get_source_config(source_key)
+
+    links = source["collect_links"](source["base_url"])
     if not links:
-        print("Nenhum PDF encontrado.")
+        print(f"Nenhum PDF encontrado para a fonte {source['label']}.")
         return
 
-    links = links if LIMIT is None else links[:LIMIT]
+    links = links if limit is None else links[:limit]
+
+    print(
+        f"Fonte: {source['label']} ({source_id}) | "
+        f"Collection Mongo: {source['mongo_collection']}"
+    )
     print(f"{len(links)} PDFs para processar.\n")
 
     for i, link in enumerate(links, start=1):
-        if already_exists(link):
+        if already_exists(link, collection_name=source["mongo_collection"]):
             print(f"[{i}/{len(links)}] ✅ Já salvo no MongoDB (status=ok): {link}")
             if i < len(links):
                 time.sleep(SLEEP_ALREADY_EXISTS)
@@ -90,7 +155,12 @@ def run_pipeline():
 
         if not texto:
             print("Texto vazio.\n")
-            status = save(link, {"erro": "Texto vazio"}, texto_preview="")
+            status = save(
+                link,
+                {"erro": "Texto vazio"},
+                texto_preview="",
+                collection_name=source["mongo_collection"],
+            )
             if status != "disabled":
                 print(f"💾 MongoDB: {status}")
             if i < len(links):
@@ -99,7 +169,12 @@ def run_pipeline():
 
         resultado = retry_analyze_text(texto, link)
 
-        status = save(link, resultado, texto_preview=texto)
+        status = save(
+            link,
+            resultado,
+            texto_preview=texto,
+            collection_name=source["mongo_collection"],
+        )
 
         if status != "disabled":
             print(f"💾 MongoDB: {status}")
@@ -112,4 +187,10 @@ def run_pipeline():
 
 
 if __name__ == "__main__":
-    run_pipeline()
+    parser = _build_parser()
+    args = parser.parse_args()
+
+    try:
+        run_pipeline(source_key=args.source, limit=_parse_limit(args.limit))
+    except ValueError as exc:
+        print(exc)
