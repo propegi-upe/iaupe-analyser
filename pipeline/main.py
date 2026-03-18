@@ -10,8 +10,8 @@ from services.db_mongo import already_exists, save
 
 URL_FACEPE = "https://www.facepe.br/editais/todos/?c=aberto"
 
-_raw_limit = (os.getenv("PIPELINE_LIMIT") or "all").strip().lower()
-LIMIT = None if _raw_limit in ("all", "0", "none", "") else int(_raw_limit)
+raw_limit = (os.getenv("PIPELINE_LIMIT") or "all").strip().lower()
+LIMIT = None if raw_limit in ("all", "0", "none", "") else int(raw_limit)
 
 SLEEP_ALREADY_EXISTS = int((os.getenv("SLEEP_ALREADY_EXISTS") or "5").strip())
 SLEEP_NEW_PROCESS = int((os.getenv("SLEEP_NEW_PROCESS") or "60").strip())
@@ -20,7 +20,7 @@ SLEEP_EMPTY_TEXT = int((os.getenv("SLEEP_EMPTY_TEXT") or "5").strip())
 MAX_RETRIES_GEMINI = int((os.getenv("MAX_RETRIES_GEMINI") or "3").strip())
 
 
-def _sleep_retry_429(raw: str) -> bool:
+def sleep_retry_429(raw: str) -> bool:
     """
     Se a mensagem do Gemini indicar 'Please retry in XXs', aguarda esse tempo e retorna True.
     Caso não consiga extrair o tempo, retorna False.
@@ -35,7 +35,7 @@ def _sleep_retry_429(raw: str) -> bool:
     return True
 
 
-def _retry_analyze_text(texto: str, link: str) -> dict:
+def retry_analyze_text(texto: str, link: str) -> dict:
     """
     Tenta analisar o texto com retry para erros temporários do Gemini:
     - 429: respeita o tempo sugerido
@@ -50,7 +50,7 @@ def _retry_analyze_text(texto: str, link: str) -> dict:
         raw = (resultado.get("raw") or "").lower()
 
         if "429" in raw:
-            if tentativa < MAX_RETRIES_GEMINI and _sleep_retry_429(raw):
+            if tentativa < MAX_RETRIES_GEMINI and sleep_retry_429(raw):
                 continue
             return resultado
 
@@ -97,7 +97,7 @@ def run_pipeline():
                 time.sleep(SLEEP_EMPTY_TEXT)
             continue
 
-        resultado = _retry_analyze_text(texto, link)
+        resultado = retry_analyze_text(texto, link)
 
         status = save(link, resultado, texto_preview=texto)
 

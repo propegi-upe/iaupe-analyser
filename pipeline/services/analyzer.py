@@ -4,8 +4,31 @@ import re
 from dotenv import load_dotenv
 from google import genai
 
-# Modelo já confirmado no seu ambiente
 MODEL = "gemini-2.5-flash"
+
+AREAS_INTERESSE = [
+    "Projetos de Pesquisa, Desenvolvimento e Inovação (PD&I)",
+    "Extensão Tecnológica (prestação de serviços, assistência tecnológica)",
+    "Empreendedorismo (apoio a startups, spin-offs)",
+    "Incubação de Empresas",
+    "Aceleração de Negócios",
+    "Serviços Tecnológicos",
+    "Propriedade Intelectual (patentes, licenciamento, transferência de tecnologia)",
+    "Captação de Recursos para PD&I/Inovação",
+]
+
+SEGMENTOS = [
+    "Saúde",
+    "Educação",
+    "Indústria",
+    "Comércio",
+    "Serviços",
+    "Agropecuária",
+    "Tecnologia da informação(TI)",
+    "Construção civil",
+    "Transporte e Logística",
+    "Administração pública",
+]
 
 
 def _get_api_key() -> str | None:
@@ -14,7 +37,6 @@ def _get_api_key() -> str | None:
 
 
 def _call_gemini(client: genai.Client, model: str, prompt: str) -> str:
-    # Tenta forçar JSON quando suportado; se não, cai pro modo normal
     try:
         resp = client.models.generate_content(
             model=model,
@@ -36,7 +58,32 @@ def analyze_text(text: str, pdf_url: str):
     prompt = f"""
 Você é um analista de editais.
 
-Responda SOMENTE com JSON válido no formato:
+Sua tarefa é ler o conteúdo do edital e responder SOMENTE com JSON válido.
+
+Regras importantes:
+
+1. Não invente informações.
+2. Preencha os campos textuais com base no edital.
+3. Os campos "areas_interesse", "segmentos" e "cronograma" devem ser arrays.
+4. Nos campos "areas_interesse" e "segmentos", use SOMENTE valores exatamente iguais aos permitidos abaixo.
+5. Um edital deve possuir OBRIGATORIAMENTE pelo menos uma "area_interesse".
+6. Um edital deve possuir OBRIGATORIAMENTE pelo menos um "segmento".
+7. A classificação de "areas_interesse" e "segmentos" deve ser baseada em evidência EXPLÍCITA no edital (ex: público-alvo, objetivo, área de atuação, aplicação do projeto).
+8. NÃO faça inferências amplas ou suposições. Seja conservador e preciso.
+9. Caso o edital seja genérico, escolha a categoria MAIS SEGURA e MAIS DIRETA com base no foco principal do edital.
+10. NÃO deixe "areas_interesse" ou "segmentos" vazios em hipótese alguma.
+11. O campo "cronograma" deve conter os principais marcos, etapas, datas, prazos, resultados, recursos, contratação e demais eventos temporais do edital.
+12. Cada item de "cronograma" deve ser uma string clara e objetiva.
+13. Se não houver informações de cronograma no edital, retorne "cronograma": [].
+14. Não retorne nenhum texto fora do JSON.
+
+ÁREAS DE INTERESSE PERMITIDAS:
+{json.dumps(AREAS_INTERESSE, ensure_ascii=False, indent=2)}
+
+SEGMENTOS PERMITIDOS:
+{json.dumps(SEGMENTOS, ensure_ascii=False, indent=2)}
+
+Responda no formato:
 
 {{
   "url_pdf": "{pdf_url}",
@@ -44,7 +91,10 @@ Responda SOMENTE com JSON válido no formato:
   "descricao": "",
   "criterios_publico_alvo": [],
   "criterios_proponente": [],
-  "observacoes": []
+  "observacoes": [],
+  "areas_interesse": [],
+  "segmentos": [],
+  "cronograma": []
 }}
 
 Edital:
@@ -56,9 +106,11 @@ Edital:
     except Exception as e:
         msg = str(e)
         if "API_KEY_INVALID" in msg or "API key not valid" in msg:
-            return {"erro": "API key inválida. Gere uma nova no Google AI Studio e atualize o .env", "raw": msg}
+            return {
+                "erro": "API key inválida. Gere uma nova no Google AI Studio e atualize o .env",
+                "raw": msg,
+            }
         if "models/" in msg and "not found" in msg.lower():
-            # fallback simples e conhecido
             try:
                 content = _call_gemini(client, "gemini-flash-latest", prompt)
             except Exception as e2:
@@ -67,13 +119,48 @@ Edital:
             return {"erro": "Falha ao chamar Gemini", "raw": msg}
 
     try:
-        return json.loads(content)
+        data = json.loads(content)
     except Exception:
         m = re.search(r"\{.*\}", content, re.DOTALL)
         if m:
             try:
-                return json.loads(m.group(0))
+                data = json.loads(m.group(0))
             except Exception:
-                pass
-        return {"erro": "JSON inválido", "raw": content}
+                return {"erro": "JSON inválido", "raw": content}
+        else:
+            return {"erro": "JSON inválido", "raw": content}
 
+# Vamos garantir que todos os campos existam, mesmo se o Gemini esquecer.
+    data.setdefault("url_pdf", pdf_url)
+    data.setdefault("publico_alvo", "")
+    data.setdefault("descricao", "")
+    data.setdefault("criterios_publico_alvo", [])
+    data.setdefault("criterios_proponente", [])
+    data.setdefault("observacoes", [])
+    data.setdefault("areas_interesse", [])
+    data.setdefault("segmentos", [])
+    data.setdefault("cronograma", [])
+    
+    
+# Eu posso deixar os resultados da IA mais limpos.
+
+    data["areas_interesse"] = list(dict.fromkeys(
+        item for item in data.get("areas_interesse", [])
+        if item in AREAS_INTERESSE
+    ))
+
+    data["segmentos"] = list(dict.fromkeys(
+        item for item in data.get("segmentos", [])
+        if item in SEGMENTOS
+    ))
+
+    if not isinstance(data.get("cronograma"), list):
+        data["cronograma"] = []
+
+    data["cronograma"] = list(dict.fromkeys(
+        str(item).strip()
+        for item in data.get("cronograma", [])
+        if str(item).strip()
+    ))
+
+    return data
