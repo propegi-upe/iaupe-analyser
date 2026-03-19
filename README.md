@@ -22,12 +22,12 @@ O pipeline principal e unico, e cada fonte tem seu proprio modulo de scraping.
 
 ## Fontes suportadas
 
-| Fonte  | Chave (`--source`) | Collection Mongo   | Status |
-|-------|---------------------|--------------------|--------|
-| FACEPE | `facepe`            | `editais_facepe`   | Implementado |
-| CNPq   | `cnpq`              | `editais_cnpq`     | Implementado |
-| FINEP  | `finep`             | `editais_finep`    | Placeholder |
-| CAPES  | `capes`             | `editais_capes`    | Placeholder |
+| Fonte  | Chave (`--source`) | Collection Mongo   | 
+|-------|---------------------|--------------------|
+| FACEPE | `facepe`            | `editais_facepe`   |
+| CNPq   | `cnpq`              | `editais_cnpq`     |
+| FINEP  | `finep`             | `editais_finep`    |
+| CAPES  | `capes`             | `editais_capes`    | 
 
 ## Estrutura do projeto
 
