@@ -25,10 +25,10 @@ def collect_links(url_lista: str = BASE_URL) -> list[str]:
     links: list[str] = []
     vistos: set[str] = set()
 
-    # Estrutura vista nas imagens
+    # estrutura do site
     anchors = soup.select("div.links-normas.pull-left a.btn[href]")
 
-    # Fallback defensivo caso o HTML mude levemente
+    # preciso fazer um fallback defensivo caso o HTML mude levemente
     if not anchors:
         anchors = soup.select("a.btn[href]")
 
@@ -40,7 +40,7 @@ def collect_links(url_lista: str = BASE_URL) -> list[str]:
         full_href = urljoin(url_lista, href)
         host = (urlparse(full_href).netloc or "").lower()
 
-        # Evita pegar links de share/social
+        # evita pegar links de share/social
         if "resultado.cnpq.br" not in host and "efomento.cnpq.br" not in host:
             continue
 

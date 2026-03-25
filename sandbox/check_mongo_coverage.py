@@ -102,18 +102,10 @@ def main():
     print(" - status=ok:", ok)
     print(" - status=erro:", erro)
     print("Faltando:", total_links - found)
-
-    if found < total_links:
-        existing = set(
-            doc["url_pdf"]
-            for doc in coll.find({"url_pdf": {"$in": links}}, {"_id": 0, "url_pdf": 1})
-        )
-
-        missing = [u for u in links if u not in existing]
-        print("\nExemplos de links faltando (ate 50):")
-        for u in missing[:50]:
-            print("-", u)
-
+    
+    print("\nLinks coletados (em ordem):")
+    for i, u in enumerate(links, start=1):
+        print(f"[{i}/{total_links}] {u}")
 
 if __name__ == "__main__":
     try:

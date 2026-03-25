@@ -21,7 +21,7 @@ def collect_links(url_lista: str = BASE_URL) -> list[str]:
     links: list[str] = []
     vistos: set[str] = set()
 
-    # 1) Coleta links dos eventos na listagem (somente primeira pagina)
+    # coleta os meus links dos eventos na listagem, mas somente a primeira pagina
     eventos: list[str] = []
     vistos_eventos: set[str] = set()
 
@@ -39,7 +39,7 @@ def collect_links(url_lista: str = BASE_URL) -> list[str]:
             vistos_eventos.add(url_evento)
             eventos.append(url_evento)
 
-    # 2) Entra em cada evento e coleta PDFs da tabela de documentos
+    # entra em cada evento e coleta PDFs da tabela de documentos
     for url_evento in eventos:
         try:
             resp_evento = requests.get(
