@@ -31,12 +31,12 @@ SEGMENTOS = [
 ]
 
 
-def _get_api_key() -> str | None:
+def get_api_key() -> str | None:
     load_dotenv(override=True)
     return (os.getenv("GEMINI_API_KEY") or os.getenv("GAMINI_API_KEY") or "").strip() or None
 
 
-def _call_gemini(client: genai.Client, model: str, prompt: str) -> str:
+def call_gemini(client: genai.Client, model: str, prompt: str) -> str:
     try:
         resp = client.models.generate_content(
             model=model,
@@ -49,7 +49,7 @@ def _call_gemini(client: genai.Client, model: str, prompt: str) -> str:
 
 
 def analyze_text(text: str, pdf_url: str):
-    api_key = _get_api_key()
+    api_key = get_api_key()
     if not api_key:
         return {"erro": "Defina GEMINI_API_KEY no .env ou no ambiente"}
 
@@ -102,7 +102,7 @@ Edital:
 """.strip()
 
     try:
-        content = _call_gemini(client, MODEL, prompt)
+        content = call_gemini(client, MODEL, prompt)
     except Exception as e:
         msg = str(e)
         if "API_KEY_INVALID" in msg or "API key not valid" in msg:
@@ -112,7 +112,7 @@ Edital:
             }
         if "models/" in msg and "not found" in msg.lower():
             try:
-                content = _call_gemini(client, "gemini-flash-latest", prompt)
+                content = call_gemini(client, "gemini-flash-latest", prompt)
             except Exception as e2:
                 return {"erro": "Modelo Gemini indisponível", "raw": str(e2)}
         else:

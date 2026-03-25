@@ -16,7 +16,7 @@ _mongo_disabled = False
 _mongo_disable_reason: Optional[str] = None
 
 
-def _disable_mongo(reason: str) -> None:
+def disable_mongo(reason: str) -> None:
     global _mongo_disabled, _mongo_disable_reason
 
     if _mongo_disabled:
@@ -27,7 +27,7 @@ def _disable_mongo(reason: str) -> None:
     print(f"[MongoDB] Persistencia desabilitada: {reason}")
 
 
-def _mongo_is_requested() -> bool:
+def mongo_is_requested() -> bool:
     raw_value = (os.getenv("MONGODB_ENABLED") or "auto").strip().lower()
     if raw_value in {"0", "false", "no", "off", "disabled"}:
         return False
@@ -36,23 +36,23 @@ def _mongo_is_requested() -> bool:
     return bool(uri)
 
 
-def _resolve_collection_name(collection_name: Optional[str]) -> str:
+def resolve_collection_name(collection_name: Optional[str]) -> str:
     resolved = (collection_name or os.getenv("MONGODB_COLLECTION") or "editais").strip()
     return resolved or "editais"
 
 
-def _coll(collection_name: Optional[str] = None) -> Collection:
+def coll(collection_name: Optional[str] = None) -> Collection:
     """
     Retorna a collection do MongoDB (com cache) e garante índice único por `url_pdf`.
     """
     global _client, _collections
 
-    coll_name = _resolve_collection_name(collection_name)
+    coll_name = resolve_collection_name(collection_name)
 
     if coll_name in _collections:
         return _collections[coll_name]
 
-    if _mongo_disabled or not _mongo_is_requested():
+    if _mongo_disabled or not mongo_is_requested():
         raise RuntimeError(_mongo_disable_reason or "MongoDB desabilitado ou nao configurado")
 
     uri = (os.getenv("MONGODB_URI") or "").strip()
@@ -85,7 +85,7 @@ def _coll(collection_name: Optional[str] = None) -> Collection:
     except PyMongoError as exc:
         _client = None
         _collections = {}
-        _disable_mongo(str(exc))
+        disable_mongo(str(exc))
         raise RuntimeError(_mongo_disable_reason or "Falha ao conectar no MongoDB") from exc
 
     return _collections[coll_name]
@@ -93,7 +93,7 @@ def _coll(collection_name: Optional[str] = None) -> Collection:
 
 def already_exists(url_pdf: str, collection_name: Optional[str] = None) -> bool:
     try:
-        doc = _coll(collection_name).find_one({"url_pdf": url_pdf}, {"_id": 1, "status": 1})
+        doc = coll(collection_name).find_one({"url_pdf": url_pdf}, {"_id": 1, "status": 1})
     except (RuntimeError, PyMongoError) as exc:
         print(f"[MongoDB] Falha ao consultar already_exists: {exc}")
         return False
@@ -120,13 +120,13 @@ def save(
         doc_set["texto_preview"] = texto_preview[:2000]
 
     try:
-        collection = _coll(collection_name)
+        collection = coll(collection_name)
         collection.insert_one({**doc_set, "created_at": now})
         return "inserted"
 
     except DuplicateKeyError:
         try:
-            collection = _coll(collection_name)
+            collection = coll(collection_name)
             collection.update_one({"url_pdf": url_pdf}, {"$set": doc_set})
             return "updated"
         except (RuntimeError, PyMongoError) as exc:
@@ -137,5 +137,5 @@ def save(
         return "disabled"
 
     except PyMongoError as exc:
-        _disable_mongo(str(exc))
+        disable_mongo(str(exc))
         return "disabled"

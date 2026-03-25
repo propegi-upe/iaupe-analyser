@@ -45,7 +45,7 @@ SOURCE_REGISTRY = {
 DEFAULT_SOURCE = (os.getenv("PIPELINE_SOURCE") or "facepe").strip().lower()
 
 
-def _get_source_config(source_key: str) -> tuple[str, dict]:
+def get_source_config(source_key: str) -> tuple[str, dict]:
     selected_key = (source_key or DEFAULT_SOURCE).strip().lower()
     source = SOURCE_REGISTRY.get(selected_key)
     if source is None:
@@ -54,7 +54,7 @@ def _get_source_config(source_key: str) -> tuple[str, dict]:
     return selected_key, source
 
 
-def _build_parser() -> argparse.ArgumentParser:
+def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description="Checagem de cobertura no MongoDB por fonte"
     )
@@ -67,10 +67,10 @@ def _build_parser() -> argparse.ArgumentParser:
 
 
 def main():
-    parser = _build_parser()
+    parser = build_parser()
     args = parser.parse_args()
 
-    source_id, source = _get_source_config(args.source)
+    source_id, source = get_source_config(args.source)
 
     uri = os.getenv("MONGODB_URI")
     db_name = os.getenv("MONGODB_DB", "iaupe-analyser")

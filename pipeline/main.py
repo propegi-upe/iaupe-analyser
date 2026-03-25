@@ -39,12 +39,12 @@ SOURCE_REGISTRY = {
 DEFAULT_SOURCE = (os.getenv("PIPELINE_SOURCE") or "facepe").strip().lower()
 
 
-def _parse_limit(raw_value: str | None) -> int | None:
+def parse_limit(raw_value: str | None) -> int | None:
     raw_limit = (raw_value or "all").strip().lower()
     return None if raw_limit in ("all", "0", "none", "") else int(raw_limit)
 
 
-def _get_source_config(source_key: str | None) -> tuple[str, dict]:
+def get_source_config(source_key: str | None) -> tuple[str, dict]:
     selected_key = (source_key or DEFAULT_SOURCE).strip().lower()
     source = SOURCE_REGISTRY.get(selected_key)
     if source is None:
@@ -53,7 +53,7 @@ def _get_source_config(source_key: str | None) -> tuple[str, dict]:
     return selected_key, source
 
 
-def _build_parser() -> argparse.ArgumentParser:
+def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description="Pipeline de analise de editais com fontes plugaveis"
     )
@@ -69,7 +69,7 @@ def _build_parser() -> argparse.ArgumentParser:
     )
     return parser
 
-LIMIT = _parse_limit(os.getenv("PIPELINE_LIMIT"))
+LIMIT = parse_limit(os.getenv("PIPELINE_LIMIT"))
 
 SLEEP_ALREADY_EXISTS = int((os.getenv("SLEEP_ALREADY_EXISTS") or "5").strip())
 SLEEP_NEW_PROCESS = int((os.getenv("SLEEP_NEW_PROCESS") or "60").strip())
@@ -128,7 +128,7 @@ def retry_analyze_text(texto: str, link: str) -> dict:
 
 
 def run_pipeline(source_key: str | None = None, limit: int | None = LIMIT):
-    source_id, source = _get_source_config(source_key)
+    source_id, source = get_source_config(source_key)
 
     links = source["collect_links"](source["base_url"])
     if not links:
@@ -187,10 +187,10 @@ def run_pipeline(source_key: str | None = None, limit: int | None = LIMIT):
 
 
 if __name__ == "__main__":
-    parser = _build_parser()
+    parser = build_parser()
     args = parser.parse_args()
 
     try:
-        run_pipeline(source_key=args.source, limit=_parse_limit(args.limit))
+        run_pipeline(source_key=args.source, limit=parse_limit(args.limit))
     except ValueError as exc:
         print(exc)
