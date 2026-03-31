@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-
+# tudo que for enviar deve virar um objeto Email validado pelo visto.
 @dataclass(frozen=True)
 class Email:
     to: str
@@ -12,6 +12,11 @@ class Email:
 
     @staticmethod
     def create(data: dict) -> "Email":
+        # factory que transforma um dict em Email e valida as regras minimas.
+        # regras:
+        # - to e obrigatorio
+        # - subject e obrigatorio
+        # - precisa ter pelo menos text ou html
         to = (data.get("to") or "").strip()
         subject = (data.get("subject") or "").strip()
         text = data.get("text")
