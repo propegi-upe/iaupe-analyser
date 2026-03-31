@@ -4,7 +4,6 @@ from urllib.parse import urljoin, urlparse
 
 SOURCE_KEY = "capes"
 SOURCE_LABEL = "CAPES"
-
 BASE_URL = "https://www.gov.br/capes/pt-br/assuntos/editais-e-resultados-capes"
 MONGO_COLLECTION = "editais_capes"
 
