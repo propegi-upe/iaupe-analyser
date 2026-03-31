@@ -130,7 +130,6 @@ Edital:
         else:
             return {"erro": "JSON inválido", "raw": content}
 
-# Vamos garantir que todos os campos existam, mesmo se o Gemini esquecer.
     data.setdefault("url_pdf", pdf_url)
     data.setdefault("publico_alvo", "")
     data.setdefault("descricao", "")
@@ -140,9 +139,6 @@ Edital:
     data.setdefault("areas_interesse", [])
     data.setdefault("segmentos", [])
     data.setdefault("cronograma", [])
-    
-    
-# Eu posso deixar os resultados da IA mais limpos.
 
     data["areas_interesse"] = list(dict.fromkeys(
         item for item in data.get("areas_interesse", [])

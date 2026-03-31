@@ -10,20 +10,20 @@ from pymongo.errors import DuplicateKeyError, PyMongoError
 
 load_dotenv(override=True)
 
-_client: Optional[MongoClient] = None
-_collections: dict[str, Collection] = {}
-_mongo_disabled = False
-_mongo_disable_reason: Optional[str] = None
+client_cache: Optional[MongoClient] = None
+collection_cache: dict[str, Collection] = {}
+mongo_disabled = False
+mongo_disable_reason: Optional[str] = None
 
 
 def disable_mongo(reason: str) -> None:
-    global _mongo_disabled, _mongo_disable_reason
+    global mongo_disabled, mongo_disable_reason
 
-    if _mongo_disabled:
+    if mongo_disabled:
         return
 
-    _mongo_disabled = True
-    _mongo_disable_reason = reason
+    mongo_disabled = True
+    mongo_disable_reason = reason
     print(f"[MongoDB] Persistencia desabilitada: {reason}")
 
 
@@ -43,17 +43,17 @@ def resolve_collection_name(collection_name: Optional[str]) -> str:
 
 def coll(collection_name: Optional[str] = None) -> Collection:
     """
-    Retorna a collection do MongoDB (com cache) e garante índice único por `url_pdf`.
+    Retorna a collection do MongoDB (com cache) e garante indice unico por url_pdf.
     """
-    global _client, _collections
+    global client_cache, collection_cache
 
     coll_name = resolve_collection_name(collection_name)
 
-    if coll_name in _collections:
-        return _collections[coll_name]
+    if coll_name in collection_cache:
+        return collection_cache[coll_name]
 
-    if _mongo_disabled or not mongo_is_requested():
-        raise RuntimeError(_mongo_disable_reason or "MongoDB desabilitado ou nao configurado")
+    if mongo_disabled or not mongo_is_requested():
+        raise RuntimeError(mongo_disable_reason or "MongoDB desabilitado ou nao configurado")
 
     uri = (os.getenv("MONGODB_URI") or "").strip()
     db_name = (os.getenv("MONGODB_DB") or "iaupe-analyser").strip()
@@ -68,8 +68,8 @@ def coll(collection_name: Optional[str] = None) -> Collection:
     )
 
     try:
-        if _client is None:
-            _client = MongoClient(
+        if client_cache is None:
+            client_cache = MongoClient(
                 uri,
                 tlsCAFile=certifi.where(),
                 serverSelectionTimeoutMS=server_selection_timeout_ms,
@@ -78,17 +78,17 @@ def coll(collection_name: Optional[str] = None) -> Collection:
                 retryWrites=True,
             )
 
-        collection = _client[db_name][coll_name]
+        collection = client_cache[db_name][coll_name]
         collection.create_index([("url_pdf", ASCENDING)], unique=True)
-        _collections[coll_name] = collection
+        collection_cache[coll_name] = collection
 
     except PyMongoError as exc:
-        _client = None
-        _collections = {}
+        client_cache = None
+        collection_cache = {}
         disable_mongo(str(exc))
-        raise RuntimeError(_mongo_disable_reason or "Falha ao conectar no MongoDB") from exc
+        raise RuntimeError(mongo_disable_reason or "Falha ao conectar no MongoDB") from exc
 
-    return _collections[coll_name]
+    return collection_cache[coll_name]
 
 
 def already_exists(url_pdf: str, collection_name: Optional[str] = None) -> bool:

@@ -17,7 +17,7 @@ O pipeline principal e unico, e cada fonte tem seu proprio modulo de scraping.
 - Suporte a multiplas fontes via parametro `--source` e variavel `PIPELINE_SOURCE`.
 - Separacao da camada de scraping por fonte em `pipeline/sources/`.
 - Collections separadas no MongoDB por fonte.
-- Persistencia dinamica por collection em `db_mongo.py`.
+- Persistencia dinamica por collection em `db/mongo.py`.
 - Script de cobertura no MongoDB por fonte em `sandbox/check_mongo_coverage.py`.
 
 ## Fontes suportadas
@@ -35,10 +35,16 @@ O pipeline principal e unico, e cada fonte tem seu proprio modulo de scraping.
 iaupe-analyser/
 ├── pipeline/
 │   ├── main.py
-│   ├── services/
+│   ├── pdf_pipeline/
 │   │   ├── analyzer.py
-│   │   ├── db_mongo.py
 │   │   └── extractor.py
+│   ├── db/
+│   │   └── mongo.py
+│   ├── emails/
+│   │   ├── email.py
+│   │   ├── emails_service.py
+│   │   ├── gmail_smtp_email_service.py
+│   │   └── send_email_use_case.py
 │   └── sources/
 │       ├── scraper_facepe.py
 │       ├── scraper_cnpq.py
@@ -67,9 +73,10 @@ Separacao de responsabilidades:
 
 - `pipeline/main.py`: orquestracao e controle de execucao.
 - `pipeline/sources/*.py`: scraping por fonte (HTML especifico).
-- `pipeline/services/extractor.py`: download e extracao de texto.
-- `pipeline/services/analyzer.py`: prompt e analise com Gemini.
-- `pipeline/services/db_mongo.py`: cache e persistencia.
+- `pipeline/pdf_pipeline/extractor.py`: download e extracao de texto.
+- `pipeline/pdf_pipeline/analyzer.py`: prompt e analise com Gemini.
+- `pipeline/db/mongo.py`: cache e persistencia no MongoDB.
+- `pipeline/emails/*`: entidade, contrato, servico SMTP e use case de email.
 
 ## Requisitos
 

@@ -5,9 +5,9 @@ import re
 import time
 
 from sources import scraper_capes, scraper_cnpq, scraper_facepe, scraper_finep
-from services.extractor import extract_text_from_pdf_url
-from services.analyzer import analyze_text
-from services.db_mongo import already_exists, save
+from pdf_pipeline.extractor import extract_text_from_pdf_url
+from pdf_pipeline.analyzer import analyze_text
+from db.mongo import already_exists, save
 
 SOURCE_REGISTRY = {
     scraper_facepe.SOURCE_KEY: {
