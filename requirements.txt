@@ -3,6 +3,6 @@ requests
 beautifulsoup4
 python-dotenv
 lxml
-pymongo
+pymongo[srv]
 google-genai
 certifi

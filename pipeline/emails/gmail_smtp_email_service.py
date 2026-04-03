@@ -32,7 +32,7 @@ class GmailSmtpEmailService:
         if not self.user:
             raise ValueError("Defina SMTP_USER no .env")
         if not self.password:
-            raise ValueError("Defina SMTP_PASS no .env (senha de app do Gmail)")
+            raise ValueError("Defina SMTP_PASS no .env")
 
     def send(self, email: Email) -> None:
         # escolhe corpo do email:

@@ -51,7 +51,9 @@ iaupe-analyser/
 │       ├── scraper_finep.py
 │       └── scraper_capes.py
 ├── sandbox/
-│   └── check_mongo_coverage.py
+│   ├── check_mongo_coverage.py
+│   ├── test_email_mailtrap.py
+│   └── test_email_edital_flow.py
 ├── requirements.txt
 ├── .env
 └── README.md
@@ -127,6 +129,16 @@ MAX_RETRIES_GEMINI=3
 MONGODB_SERVER_SELECTION_TIMEOUT_MS=30000
 MONGODB_CONNECT_TIMEOUT_MS=30000
 MONGODB_SOCKET_TIMEOUT_MS=30000
+
+# smtp (para testes com mailtrap ou qualquer servidor smtp)
+SMTP_HOST=sandbox.smtp.mailtrap.io
+SMTP_PORT=2525
+SMTP_USER=seu_usuario_mailtrap
+SMTP_PASS=sua_senha_mailtrap
+DEFAULT_EMAIL_FROM=from@example.com
+
+# opcional: destinatario padrao de testes
+TEST_EMAIL_TO=to@example.com
 ```
 
 Observacoes:
@@ -159,6 +171,45 @@ python .\main.py --source capes
 ```
 
 Sem `--source`, o padrao e `facepe`.
+
+## Testes de email (Mailtrap)
+
+Esta secao serve para validar o modulo de emails em ambiente de testes (sem enviar para usuarios reais).
+O Mailtrap funciona como um "sandbox" que captura os emails enviados via SMTP e mostra em uma inbox de testes.
+
+### 1) Teste simples de envio SMTP
+
+Arquivo: `sandbox/test_email_mailtrap.py`
+
+Para que serve:
+- valida que o SMTP esta configurado e que o envio basico funciona.
+
+Como rodar (na raiz do projeto):
+
+```powershell
+python .\sandbox\test_email_mailtrap.py
+```
+
+O que esperar:
+- o script imprime uma mensagem de sucesso.
+- o email aparece na inbox do Mailtrap.
+
+### 2) Teste de fluxo completo (edital -> analise -> email)
+
+Arquivo: `sandbox/test_email_edital_flow.py`
+
+Para que serve:
+- coleta um edital real (via scraper), extrai texto do PDF, analisa com Gemini e envia um relatorio padronizado por email.
+
+Como rodar (na raiz do projeto):
+
+```powershell
+python .\sandbox\test_email_edital_flow.py --source capes --max-pages 2 --to to@example.com
+```
+
+Alternativas:
+- trocar fonte: `--source facepe` / `--source cnpq` / `--source finep`
+- informar um PDF direto: `--pdf-url https://...pdf`
 
 ## Collections por fonte
 
