@@ -52,8 +52,10 @@ iaupe-analyser/
 │       └── scraper_capes.py
 ├── sandbox/
 │   ├── check_mongo_coverage.py
+│   ├── notify_deadlines_exact.py
 │   ├── test_email_mailtrap.py
-│   └── test_email_edital_flow.py
+│   ├── test_email_edital_flow.py
+│   └── test_deadline_notifications_simulation.py
 ├── requirements.txt
 ├── .env
 └── README.md
@@ -234,6 +236,57 @@ Uso:
 python .\sandbox\check_mongo_coverage.py --source facepe
 python .\sandbox\check_mongo_coverage.py --source cnpq
 ```
+
+## Notificacao de prazo de submissao (marco exato)
+
+Arquivo: `sandbox/notify_deadlines_exact.py`
+
+Funcao:
+
+- Busca editais com `status=ok` e `data_limit_submissao` no Mongo.
+- Calcula dias restantes e notifica somente no dia exato dos marcos (padrao: `30`, `15`, `7`).
+- Permite simular a data de referencia com `--today` para facilitar validacao.
+
+Uso (dry-run):
+
+```powershell
+python .\sandbox\notify_deadlines_exact.py --source cnpq --today 2026-04-04 --days 30 15 7
+```
+
+Uso (enviando email):
+
+```powershell
+python .\sandbox\notify_deadlines_exact.py --source cnpq --today 2026-04-04 --days 30 15 7 --to to@example.com --send
+```
+
+Observacao:
+
+- Sem `--send`, o script apenas imprime o relatorio no terminal (nao envia email).
+
+### 3) Teste de simulacao em dias consecutivos (3/2/1)
+
+Arquivo: `sandbox/test_deadline_notifications_simulation.py`
+
+Para que serve:
+- valida o comportamento de notificacao em dias consecutivos, sem depender de editais reais do Mongo.
+- reproduz facilmente o cenario de teste: hoje faltam 3 dias, amanha 2, depois 1.
+
+Uso (dry-run):
+
+```powershell
+python .\sandbox\test_deadline_notifications_simulation.py --start-date 2026-04-04 --deadline 2026-04-07 --days 3 2 1
+```
+
+Uso (enviando email):
+
+```powershell
+python .\sandbox\test_deadline_notifications_simulation.py --start-date 2026-04-04 --deadline 2026-04-07 --days 3 2 1 --to to@example.com --sleep-seconds 3 --send
+```
+
+Observacoes:
+
+- O script usa retry/backoff para contornar limite de taxa do Mailtrap em envios sequenciais.
+- Se quiser reduzir risco de bloqueio no plano gratuito, aumente `--sleep-seconds`.
 
 ## Tratamento de erros
 

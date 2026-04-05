@@ -75,7 +75,9 @@ Regras importantes:
 11. O campo "cronograma" deve conter os principais marcos, etapas, datas, prazos, resultados, recursos, contratação e demais eventos temporais do edital.
 12. Cada item de "cronograma" deve ser uma string clara e objetiva.
 13. Se não houver informações de cronograma no edital, retorne "cronograma": [].
-14. Não retorne nenhum texto fora do JSON.
+14. O campo "data_limit_submissao" deve vir no formato YYYY-MM-DD com a data limite de submissão do edital.
+15. Se não houver data limite de submissão explícita, retorne "data_limit_submissao": "".
+16. Não retorne nenhum texto fora do JSON.
 
 ÁREAS DE INTERESSE PERMITIDAS:
 {json.dumps(AREAS_INTERESSE, ensure_ascii=False, indent=2)}
@@ -94,7 +96,8 @@ Responda no formato:
   "observacoes": [],
   "areas_interesse": [],
   "segmentos": [],
-  "cronograma": []
+    "cronograma": [],
+    "data_limit_submissao": ""
 }}
 
 Edital:
@@ -139,6 +142,7 @@ Edital:
     data.setdefault("areas_interesse", [])
     data.setdefault("segmentos", [])
     data.setdefault("cronograma", [])
+    data.setdefault("data_limit_submissao", "")
 
     data["areas_interesse"] = list(dict.fromkeys(
         item for item in data.get("areas_interesse", [])
@@ -158,5 +162,7 @@ Edital:
         for item in data.get("cronograma", [])
         if str(item).strip()
     ))
+
+    data["data_limit_submissao"] = str(data.get("data_limit_submissao") or "").strip()
 
     return data

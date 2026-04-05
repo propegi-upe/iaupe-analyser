@@ -106,6 +106,7 @@ def save(
     resultado: dict,
     texto_preview: Optional[str] = None,
     collection_name: Optional[str] = None,
+    data_limit_submissao: Optional[datetime] = None,
 ) -> str:
     now = datetime.now(timezone.utc)
 
@@ -113,6 +114,7 @@ def save(
         "url_pdf": url_pdf,
         "resultado": resultado,
         "status": "ok" if "erro" not in (resultado or {}) else "erro",
+        "data_limit_submissao": data_limit_submissao,
         "updated_at": now,
     }
 

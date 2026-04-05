@@ -3,6 +3,7 @@ import json
 import os
 import re
 import time
+from datetime import datetime, timezone
 
 from sources import scraper_capes, scraper_cnpq, scraper_facepe, scraper_finep
 from pdf_pipeline.extractor import extract_text_from_pdf_url
@@ -127,6 +128,27 @@ def retry_analyze_text(texto: str, link: str) -> dict:
     return {"erro": "Falha inesperada no retry do Gemini", "raw": ""}
 
 
+def parse_data_limit_submissao(raw_value: str | None) -> datetime | None:
+    raw = (raw_value or "").strip()
+    if not raw:
+        return None
+
+    # formato esperado da IA: yyyy-mm-dd
+    try:
+        parsed = datetime.fromisoformat(raw)
+    except ValueError:
+        # fallback defensivo para dd/mm/yyyy
+        try:
+            parsed = datetime.strptime(raw, "%d/%m/%Y")
+        except ValueError:
+            return None
+
+    if parsed.tzinfo is None:
+        parsed = parsed.replace(tzinfo=timezone.utc)
+
+    return parsed
+
+
 def run_pipeline(source_key: str | None = None, limit: int | None = LIMIT):
     source_id, source = get_source_config(source_key)
 
@@ -160,6 +182,7 @@ def run_pipeline(source_key: str | None = None, limit: int | None = LIMIT):
                 {"erro": "Texto vazio"},
                 texto_preview="",
                 collection_name=source["mongo_collection"],
+                data_limit_submissao=None,
             )
             if status != "disabled":
                 print(f"💾 MongoDB: {status}")
@@ -168,12 +191,16 @@ def run_pipeline(source_key: str | None = None, limit: int | None = LIMIT):
             continue
 
         resultado = retry_analyze_text(texto, link)
+        data_limit_submissao = parse_data_limit_submissao(
+            resultado.get("data_limit_submissao")
+        )
 
         status = save(
             link,
             resultado,
             texto_preview=texto,
             collection_name=source["mongo_collection"],
+            data_limit_submissao=data_limit_submissao,
         )
 
         if status != "disabled":
