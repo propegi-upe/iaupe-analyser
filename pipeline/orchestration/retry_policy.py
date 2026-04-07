@@ -27,6 +27,7 @@ def retry_analyze_text(texto: str, link: str) -> dict:
     - 503: aguarda progressivamente e tenta novamente
     """
     for tentativa in range(1, MAX_RETRIES_GEMINI + 1):
+        # tentativa principal de analise
         resultado = analyze_text(texto, link)
 
         if not resultado.get("erro"):
@@ -35,11 +36,13 @@ def retry_analyze_text(texto: str, link: str) -> dict:
         raw = (resultado.get("raw") or "").lower()
 
         if "429" in raw:
+            # respeita o tempo sugerido pela API quando houver rate limit
             if tentativa < MAX_RETRIES_GEMINI and sleep_retry_429(raw):
                 continue
             return resultado
 
         if "503" in raw:
+            # indisponibilidade temporaria: aplica backoff progressivo
             if tentativa < MAX_RETRIES_GEMINI:
                 espera = 30 * tentativa
                 print(
@@ -51,4 +54,5 @@ def retry_analyze_text(texto: str, link: str) -> dict:
 
         return resultado
 
+    # fallback defensivo caso o loop termine de forma inesperada
     return {"erro": "Falha inesperada no retry do Gemini", "raw": ""}

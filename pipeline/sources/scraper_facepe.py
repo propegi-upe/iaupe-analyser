@@ -11,6 +11,7 @@ def collect_links(url_lista: str = BASE_URL) -> list[str]:
     """
     Coleta links diretos de PDFs da listagem de editais da FACEPE.
     """
+    # baixa pagina de listagem de editais abertos
     resp = requests.get(
         url_lista,
         headers={"User-Agent": "Mozilla/5.0"},
@@ -23,6 +24,7 @@ def collect_links(url_lista: str = BASE_URL) -> list[str]:
     links: list[str] = []
     vistos: set[str] = set()
 
+    # no layout atual, links de download aparecem em botoes "avia-button"
     botoes = soup.find_all("a", class_="avia-button")
 
     for anchor in botoes:
@@ -34,6 +36,7 @@ def collect_links(url_lista: str = BASE_URL) -> list[str]:
         if not span:
             continue
 
+        # garante que estamos pegando o botao de download do documento
         if span.get_text(strip=True).lower() != "download":
             continue
 

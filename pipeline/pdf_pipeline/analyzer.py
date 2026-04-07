@@ -32,11 +32,13 @@ SEGMENTOS = [
 
 
 def get_api_key() -> str | None:
+    """Busca API key do Gemini no .env (com fallback para nome antigo)."""
     load_dotenv(override=True)
     return (os.getenv("GEMINI_API_KEY") or os.getenv("GAMINI_API_KEY") or "").strip() or None
 
 
 def call_gemini(client: genai.Client, model: str, prompt: str) -> str:
+    """Executa chamada ao modelo Gemini e retorna texto bruto da resposta."""
     try:
         resp = client.models.generate_content(
             model=model,
@@ -49,6 +51,11 @@ def call_gemini(client: genai.Client, model: str, prompt: str) -> str:
 
 
 def analyze_text(text: str, pdf_url: str):
+    """
+    Analisa o texto de um edital e retorna JSON estruturado.
+
+    Em caso de erro, retorna dicionario com chave "erro".
+    """
     api_key = get_api_key()
     if not api_key:
         return {"erro": "Defina GEMINI_API_KEY no .env ou no ambiente"}
@@ -105,6 +112,7 @@ Edital:
 """.strip()
 
     try:
+        # chamada principal ao modelo configurado
         content = call_gemini(client, MODEL, prompt)
     except Exception as e:
         msg = str(e)
@@ -114,6 +122,7 @@ Edital:
                 "raw": msg,
             }
         if "models/" in msg and "not found" in msg.lower():
+            # fallback de modelo para manter compatibilidade
             try:
                 content = call_gemini(client, "gemini-flash-latest", prompt)
             except Exception as e2:
@@ -122,8 +131,10 @@ Edital:
             return {"erro": "Falha ao chamar Gemini", "raw": msg}
 
     try:
+        # tenta parse direto do JSON retornado
         data = json.loads(content)
     except Exception:
+        # fallback: extrai bloco JSON do texto se vier ruido junto
         m = re.search(r"\{.*\}", content, re.DOTALL)
         if m:
             try:
@@ -133,6 +144,7 @@ Edital:
         else:
             return {"erro": "JSON inválido", "raw": content}
 
+    # garante schema minimo esperado pelo restante do pipeline
     data.setdefault("url_pdf", pdf_url)
     data.setdefault("publico_alvo", "")
     data.setdefault("descricao", "")
@@ -144,6 +156,7 @@ Edital:
     data.setdefault("cronograma", [])
     data.setdefault("data_limit_submissao", "")
 
+    # normaliza e filtra somente categorias permitidas
     data["areas_interesse"] = list(dict.fromkeys(
         item for item in data.get("areas_interesse", [])
         if item in AREAS_INTERESSE
@@ -163,6 +176,7 @@ Edital:
         if str(item).strip()
     ))
 
+    # mantem data como string; conversao para datetime ocorre na orquestracao
     data["data_limit_submissao"] = str(data.get("data_limit_submissao") or "").strip()
 
     return data

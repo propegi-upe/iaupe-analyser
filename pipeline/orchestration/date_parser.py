@@ -2,6 +2,12 @@ from datetime import datetime, timezone
 
 
 def parse_data_limit_submissao(raw_value: str | None) -> datetime | None:
+    """
+    Converte a data limite de submissao para datetime em UTC.
+
+    Aceita prioritariamente YYYY-MM-DD e, em fallback, DD/MM/YYYY.
+    Retorna None quando nao houver valor valido.
+    """
     raw = (raw_value or "").strip()
     if not raw:
         return None

@@ -5,6 +5,7 @@ from dataclasses import dataclass
 # tudo que for enviar deve virar um objeto Email validado pelo visto.
 @dataclass(frozen=True)
 class Email:
+    """Entidade de email com validacao minima para envio seguro."""
     to: str
     subject: str
     text: str | None = None
@@ -12,6 +13,7 @@ class Email:
 
     @staticmethod
     def create(data: dict) -> "Email":
+        """Fabrica de Email a partir de dict com validacao de campos obrigatorios."""
         # factory que transforma um dict em Email e valida as regras minimas.
         # regras:
         # - to e obrigatorio

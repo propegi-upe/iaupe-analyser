@@ -2,6 +2,7 @@ import os
 
 from sources import scraper_capes, scraper_cnpq, scraper_facepe, scraper_finep
 
+# catalogo central de fontes suportadas pela pipeline
 SOURCE_REGISTRY = {
     scraper_facepe.SOURCE_KEY: {
         "label": scraper_facepe.SOURCE_LABEL,
@@ -33,6 +34,11 @@ DEFAULT_SOURCE = (os.getenv("PIPELINE_SOURCE") or "facepe").strip().lower()
 
 
 def get_source_config(source_key: str | None) -> tuple[str, dict]:
+    """
+    Resolve a configuracao da fonte selecionada.
+
+    Retorna (source_key_normalizada, configuracao_da_fonte).
+    """
     selected_key = (source_key or DEFAULT_SOURCE).strip().lower()
     source = SOURCE_REGISTRY.get(selected_key)
     if source is None:

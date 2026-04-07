@@ -3,7 +3,7 @@ import requests
 from io import BytesIO
 
 
-def extract_text_from_pdf_url(url_pdf: str, max_pages=None) -> str:
+def extract_text_from_pdf_url(url_pdf: str, max_pages: int | None = None) -> str:
     """
     Baixa um PDF via URL e extrai texto das primeiras páginas.
 
@@ -20,6 +20,7 @@ def extract_text_from_pdf_url(url_pdf: str, max_pages=None) -> str:
         Texto extraído (string). Retorna "" em caso de falha no download.
     """
 
+    # baixa o PDF remoto para memoria
     resp = requests.get(url_pdf, headers={"User-Agent": "Mozilla/5.0"})
     if resp.status_code != 200:
         print(f"Erro ao baixar {url_pdf}")
@@ -28,6 +29,7 @@ def extract_text_from_pdf_url(url_pdf: str, max_pages=None) -> str:
     texto = ""
 
     with pdfplumber.open(BytesIO(resp.content)) as pdf:
+        # concatena texto pagina a pagina, respeitando max_pages quando informado
         for i, pagina in enumerate(pdf.pages):
             if max_pages is not None and i >= max_pages:
                 break

@@ -9,6 +9,7 @@ MONGO_COLLECTION = "editais_cnpq"
 
 
 def collect_links(url_lista: str = BASE_URL) -> list[str]:
+    """Coleta links de chamadas publicas a partir da pagina do CNPq."""
     try:
         resp = requests.get(
             url_lista,
@@ -25,10 +26,10 @@ def collect_links(url_lista: str = BASE_URL) -> list[str]:
     links: list[str] = []
     vistos: set[str] = set()
 
-    # estrutura do site
+    # seletor principal da estrutura atual do site
     anchors = soup.select("div.links-normas.pull-left a.btn[href]")
 
-    # preciso fazer um fallback defensivo caso o HTML mude levemente
+    # fallback defensivo caso o HTML mude levemente
     if not anchors:
         anchors = soup.select("a.btn[href]")
 
@@ -40,7 +41,7 @@ def collect_links(url_lista: str = BASE_URL) -> list[str]:
         full_href = urljoin(url_lista, href)
         host = (urlparse(full_href).netloc or "").lower()
 
-        # evita pegar links de share/social
+        # evita links que nao sao paginas de resultado/chamada
         if "resultado.cnpq.br" not in host and "efomento.cnpq.br" not in host:
             continue
 

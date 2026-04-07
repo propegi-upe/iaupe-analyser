@@ -2,10 +2,16 @@ import os
 
 
 def parse_limit(raw_value: str | None) -> int | None:
+    """
+    Converte o limite recebido por CLI/env para inteiro ou None.
+
+    Valores como all/0/none/"" significam "sem limite".
+    """
     raw_limit = (raw_value or "all").strip().lower()
     return None if raw_limit in ("all", "0", "none", "") else int(raw_limit)
 
 
+# configuracoes centralizadas de execucao da pipeline
 LIMIT = parse_limit(os.getenv("PIPELINE_LIMIT"))
 
 SLEEP_ALREADY_EXISTS = int((os.getenv("SLEEP_ALREADY_EXISTS") or "5").strip())

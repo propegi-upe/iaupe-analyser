@@ -125,6 +125,12 @@ def collect_pdf_links_from_program_page(page_url: str, soup: BeautifulSoup) -> l
 
 
 def collect_links(url_lista: str = BASE_URL) -> list[str]:
+    """
+    Coleta links de PDFs de editais da CAPES.
+
+    Se receber a pagina indice, navega para subpaginas de "Editais Abertos".
+    Se receber pagina de programa, extrai PDFs diretamente dela.
+    """
     # funcao principal do scraper (entrypoint do pipeline)
     # retorna uma lista de urls de pdf para o pipeline processar
     headers = {"User-Agent": "Mozilla/5.0"}

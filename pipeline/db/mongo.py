@@ -17,6 +17,7 @@ mongo_disable_reason: Optional[str] = None
 
 
 def disable_mongo(reason: str) -> None:
+    """Desabilita persistencia no Mongo apos falha critica de conexao."""
     global mongo_disabled, mongo_disable_reason
 
     if mongo_disabled:
@@ -28,6 +29,7 @@ def disable_mongo(reason: str) -> None:
 
 
 def mongo_is_requested() -> bool:
+    """Define se o Mongo deve ser usado com base em env vars."""
     raw_value = (os.getenv("MONGODB_ENABLED") or "auto").strip().lower()
     if raw_value in {"0", "false", "no", "off", "disabled"}:
         return False
@@ -37,6 +39,7 @@ def mongo_is_requested() -> bool:
 
 
 def resolve_collection_name(collection_name: Optional[str]) -> str:
+    """Resolve nome da collection com fallback para configuracao global."""
     resolved = (collection_name or os.getenv("MONGODB_COLLECTION") or "editais").strip()
     return resolved or "editais"
 
@@ -68,6 +71,7 @@ def coll(collection_name: Optional[str] = None) -> Collection:
     )
 
     try:
+        # cria cliente apenas uma vez e reaproveita nas chamadas seguintes
         if client_cache is None:
             client_cache = MongoClient(
                 uri,
@@ -78,6 +82,7 @@ def coll(collection_name: Optional[str] = None) -> Collection:
                 retryWrites=True,
             )
 
+        # cache da collection por nome para reduzir overhead
         collection = client_cache[db_name][coll_name]
         collection.create_index([("url_pdf", ASCENDING)], unique=True)
         collection_cache[coll_name] = collection
@@ -92,6 +97,7 @@ def coll(collection_name: Optional[str] = None) -> Collection:
 
 
 def already_exists(url_pdf: str, collection_name: Optional[str] = None) -> bool:
+    """Verifica se um edital ja foi salvo com status ok."""
     try:
         doc = coll(collection_name).find_one({"url_pdf": url_pdf}, {"_id": 1, "status": 1})
     except (RuntimeError, PyMongoError) as exc:
@@ -108,6 +114,11 @@ def save(
     collection_name: Optional[str] = None,
     data_limit_submissao: Optional[datetime] = None,
 ) -> str:
+    """
+    Persiste (insert/update) o resultado da analise de um edital.
+
+    Retorna: inserted | updated | disabled
+    """
     now = datetime.now(timezone.utc)
 
     doc_set = {
@@ -122,11 +133,13 @@ def save(
         doc_set["texto_preview"] = texto_preview[:2000]
 
     try:
+        # insert preferencial para manter created_at apenas na primeira gravacao
         collection = coll(collection_name)
         collection.insert_one({**doc_set, "created_at": now})
         return "inserted"
 
     except DuplicateKeyError:
+        # se ja existe url_pdf, atualiza campos mutaveis
         try:
             collection = coll(collection_name)
             collection.update_one({"url_pdf": url_pdf}, {"$set": doc_set})

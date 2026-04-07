@@ -14,6 +14,7 @@ from .email import Email
 # - default_email_from (opcional)
 
 class GmailSmtpEmailService:
+    """Implementacao de envio via SMTP com STARTTLS."""
     def __init__(self) -> None:
         # carrega variaveis do .env para nao hardcodear credenciais
         load_dotenv(override=True)
@@ -35,6 +36,7 @@ class GmailSmtpEmailService:
             raise ValueError("Defina SMTP_PASS no .env")
 
     def send(self, email: Email) -> None:
+        """Envia email de texto ou HTML para um destinatario."""
         # escolhe corpo do email:
         # - se houver html, ele tem prioridade
         # - caso contrario usa text

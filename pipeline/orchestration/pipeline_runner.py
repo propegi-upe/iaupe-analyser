@@ -10,6 +10,10 @@ from .source_registry import get_source_config
 
 
 def run_pipeline(source_key: str | None = None, limit: int | None = LIMIT) -> None:
+    """
+    Orquestra o fluxo completo da pipeline para uma fonte:
+    coletar links, extrair texto, analisar com IA e persistir no MongoDB.
+    """
     source_id, source = get_source_config(source_key)
 
     links = source["collect_links"](source["base_url"])
@@ -26,6 +30,7 @@ def run_pipeline(source_key: str | None = None, limit: int | None = LIMIT) -> No
     print(f"{len(links)} PDFs para processar.\n")
 
     for i, link in enumerate(links, start=1):
+        # evita retrabalho para documentos ja processados com sucesso
         if already_exists(link, collection_name=source["mongo_collection"]):
             print(f"[{i}/{len(links)}] ✅ Já salvo no MongoDB (status=ok): {link}")
             if i < len(links):
@@ -36,6 +41,7 @@ def run_pipeline(source_key: str | None = None, limit: int | None = LIMIT) -> No
         texto = extract_text_from_pdf_url(link)
 
         if not texto:
+            # persiste erro controlado quando nao foi possivel extrair texto
             print("Texto vazio.\n")
             status = save(
                 link,
@@ -50,6 +56,7 @@ def run_pipeline(source_key: str | None = None, limit: int | None = LIMIT) -> No
                 time.sleep(SLEEP_EMPTY_TEXT)
             continue
 
+        # analisa com politica de retry para erros temporarios da IA
         resultado = retry_analyze_text(texto, link)
         data_limit_submissao = parse_data_limit_submissao(
             resultado.get("data_limit_submissao")
@@ -69,5 +76,6 @@ def run_pipeline(source_key: str | None = None, limit: int | None = LIMIT) -> No
         print(json.dumps(resultado, ensure_ascii=False, indent=2))
         print("\n" + "-" * 60 + "\n")
 
+        # controla ritmo para evitar sobrecarga em APIs externas
         if i < len(links):
             time.sleep(SLEEP_NEW_PROCESS)

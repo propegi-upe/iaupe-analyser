@@ -9,6 +9,13 @@ MONGO_COLLECTION = "editais_finep"
 
 
 def collect_links(url_lista: str = BASE_URL) -> list[str]:
+    """
+    Coleta links de PDFs de chamadas abertas da FINEP.
+
+    Fluxo:
+    1) coleta paginas de eventos na listagem
+    2) entra em cada evento e extrai links PDF da tabela
+    """
     resp = requests.get(
         url_lista,
         headers={"User-Agent": "Mozilla/5.0"},
@@ -21,7 +28,7 @@ def collect_links(url_lista: str = BASE_URL) -> list[str]:
     links: list[str] = []
     vistos: set[str] = set()
 
-    # coleta os meus links dos eventos na listagem, mas somente a primeira pagina
+    # coleta links de paginas de eventos na listagem atual
     eventos: list[str] = []
     vistos_eventos: set[str] = set()
 
@@ -39,7 +46,7 @@ def collect_links(url_lista: str = BASE_URL) -> list[str]:
             vistos_eventos.add(url_evento)
             eventos.append(url_evento)
 
-    # entra em cada evento e coleta PDFs da tabela de documentos
+    # entra em cada evento e coleta documentos PDF
     for url_evento in eventos:
         try:
             resp_evento = requests.get(
