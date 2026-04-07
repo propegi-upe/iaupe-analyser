@@ -11,44 +11,45 @@ from pathlib import Path
 from dotenv import load_dotenv
 
 # garante que a raiz do projeto esteja no pythonpath para importar "pipeline"
-PROJECT_ROOT = Path(__file__).resolve().parents[1]
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(PROJECT_ROOT))
 
 from pipeline.emails.gmail_smtp_email_service import GmailSmtpEmailService
 from pipeline.emails.send_email_use_case import SendEmailUseCase
 
-DEFAULT_STEPS = [3, 2, 1]
+DEFAULT_STEPS = [30, 15, 7]
 
 
 def build_parser() -> argparse.ArgumentParser:
+    """Monta parser para simulacao de notificacao por marcos de dias."""
     parser = argparse.ArgumentParser(
-        description="Simula notificacoes de prazo no marco exato (ex: 3,2,1 dias)"
+        description="Sandbox: notificacao por marcos (30/15/7) usando Mailtrap"
     )
     parser.add_argument(
         "--start-date",
         default="",
-        help="Data inicial da simulacao (YYYY-MM-DD). Ex: 2026-04-04",
+        help="Data inicial da simulacao (YYYY-MM-DD)",
     )
     parser.add_argument(
         "--deadline",
         default="",
-        help="Data limite de submissao (YYYY-MM-DD). Ex: 2026-04-07",
+        help="Data limite de submissao (YYYY-MM-DD)",
     )
     parser.add_argument(
         "--days",
         nargs="+",
         type=int,
         default=DEFAULT_STEPS,
-        help="Marcos da simulacao. Ex: 3 2 1",
+        help="Marcos da notificacao. Ex: 30 15 7",
     )
     parser.add_argument(
         "--to",
         default=(os.getenv("TEST_EMAIL_TO") or "to@example.com").strip(),
-        help="Destinatario para o envio",
+        help="Destinatario para envio",
     )
     parser.add_argument(
         "--url-pdf",
-        default="https://exemplo.local/edital-teste.pdf",
+        default="https://exemplo.local/edital-sandbox.pdf",
         help="URL fake do edital para identificar o teste",
     )
     parser.add_argument(
@@ -60,12 +61,13 @@ def build_parser() -> argparse.ArgumentParser:
         "--sleep-seconds",
         type=float,
         default=1.5,
-        help="Intervalo entre envios para evitar limite de taxa do SMTP",
+        help="Intervalo entre envios para evitar limite de taxa SMTP",
     )
     return parser
 
 
 def parse_iso_date(raw: str, field_name: str) -> date:
+    """Converte string YYYY-MM-DD para date com mensagem de erro clara."""
     try:
         return datetime.fromisoformat(raw.strip()).date()
     except ValueError as exc:
@@ -73,6 +75,7 @@ def parse_iso_date(raw: str, field_name: str) -> date:
 
 
 def resolve_dates(start_raw: str, deadline_raw: str) -> tuple[date, date]:
+    """Resolve datas da simulacao com fallback deterministico para teste rapido."""
     start = parse_iso_date(start_raw, "--start-date") if start_raw.strip() else None
     deadline = parse_iso_date(deadline_raw, "--deadline") if deadline_raw.strip() else None
 
@@ -80,24 +83,21 @@ def resolve_dates(start_raw: str, deadline_raw: str) -> tuple[date, date]:
         return start, deadline
 
     if start and not deadline:
-        # padrao para o exemplo pedido: se comeca no dia 4 e quer 3,2,1
-        # o prazo fica 3 dias apos a data inicial
-        return start, start + timedelta(days=3)
+        return start, start + timedelta(days=30)
 
     if deadline and not start:
-        # se so informou o prazo, inicia 3 dias antes
-        return deadline - timedelta(days=3), deadline
+        return deadline - timedelta(days=30), deadline
 
-    # sem parametros, gera um caso totalmente deterministico para teste rapido
-    default_start = date(2026, 4, 4)
-    default_deadline = date(2026, 4, 7)
+    default_start = date(2026, 4, 1)
+    default_deadline = date(2026, 5, 1)
     return default_start, default_deadline
 
 
 def build_body(simulation_date: date, deadline: date, days_left: int, pdf_url: str) -> str:
+    """Monta corpo padrao de email de teste para o sandbox."""
     return "\n".join(
         [
-            "notificacao de teste de prazo (simulacao)",
+            "notificacao de teste de prazo (sandbox github actions)",
             "",
             f"data simulada de execucao: {simulation_date.isoformat()}",
             f"prazo final do edital: {deadline.isoformat()}",
@@ -108,6 +108,7 @@ def build_body(simulation_date: date, deadline: date, days_left: int, pdf_url: s
 
 
 def is_mailtrap_rate_limit(exc: smtplib.SMTPDataError) -> bool:
+    """Detecta erro de limite de taxa retornado pelo Mailtrap."""
     message = str(exc).lower()
     return exc.smtp_code == 550 and "too many emails per second" in message
 
@@ -118,6 +119,7 @@ def send_with_retry(
     sleep_seconds: float,
     retry_backoff_seconds: list[float],
 ) -> None:
+    """Tenta reenvio apenas quando detectar rate limit SMTP do Mailtrap."""
     attempts = [max(sleep_seconds, 0.0)] + retry_backoff_seconds
 
     for attempt_idx, wait_seconds in enumerate(attempts, start=1):
@@ -136,6 +138,7 @@ def send_with_retry(
 
 
 def main() -> None:
+    """Simula notificacoes por marcos de dias e opcionalmente envia por SMTP."""
     load_dotenv(override=True)
     args = build_parser().parse_args()
 
@@ -150,7 +153,6 @@ def main() -> None:
     use_case = SendEmailUseCase(GmailSmtpEmailService()) if args.send else None
     retry_backoff_seconds = [5.0, 10.0, 20.0]
 
-    # simula dias consecutivos ate o dia anterior ao prazo
     simulation_date = start_date
     notifications = 0
 
@@ -159,7 +161,7 @@ def main() -> None:
 
         if days_left in days_targets:
             subject = (
-                f"[teste-iaupe] marco exato: faltam {days_left} dia(s) "
+                f"[sandbox-iaupe] marco exato: faltam {days_left} dia(s) "
                 f"| prazo {deadline.isoformat()}"
             )
             body = build_body(simulation_date, deadline, days_left, args.url_pdf)
