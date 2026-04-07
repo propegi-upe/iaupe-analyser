@@ -185,6 +185,12 @@ Exemplo atual de notificacao em ambiente de teste:
 - `sandbox/notification_actions/notify_mailtrap_sandbox.py`
 - `sandbox/notification_actions/workflow_notify_mailtrap_sandbox.yml`
 
+Cronograma de notificacao no sandbox:
+
+- O GitHub Actions agenda a execucao automatica via cron.
+- O script Python aplica a regra de negocio dos marcos (30/15/7) e decide quando enviar.
+- Configuracao atual do cron no workflow: `0 12 * * *` (diario, 12:00 UTC).
+
 ## Boas Praticas
 
 - Nao versionar `.env`.

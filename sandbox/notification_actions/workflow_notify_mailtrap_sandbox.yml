@@ -19,6 +19,8 @@ on:
         description: "Marcos separados por espaco"
         required: false
         default: "30 15 7"
+  schedule:
+    - cron: "0 12 * * *"
 
 permissions:
   contents: read
@@ -47,11 +49,21 @@ jobs:
           SMTP_USER: ${{ secrets.SMTP_USER }}
           SMTP_PASS: ${{ secrets.SMTP_PASS }}
           DEFAULT_EMAIL_FROM: ${{ secrets.DEFAULT_EMAIL_FROM }}
-          TEST_EMAIL_TO: ${{ github.event.inputs.to }}
+          TEST_EMAIL_TO: ${{ github.event.inputs.to || secrets.TEST_EMAIL_TO }}
         run: |
+          START_DATE="${{ github.event.inputs.start_date }}"
+          DEADLINE="${{ github.event.inputs.deadline }}"
+          DAYS="${{ github.event.inputs.days }}"
+          TO="${{ github.event.inputs.to }}"
+
+          START_DATE="${START_DATE:-2026-04-01}"
+          DEADLINE="${DEADLINE:-2026-05-01}"
+          DAYS="${DAYS:-30 15 7}"
+          TO="${TO:-${TEST_EMAIL_TO:-to@example.com}}"
+
           python sandbox/notification_actions/notify_mailtrap_sandbox.py \
-            --start-date "${{ github.event.inputs.start_date }}" \
-            --deadline "${{ github.event.inputs.deadline }}" \
-            --days ${{ github.event.inputs.days }} \
-            --to "${{ github.event.inputs.to }}" \
+            --start-date "$START_DATE" \
+            --deadline "$DEADLINE" \
+            --days $DAYS \
+            --to "$TO" \
             --send
