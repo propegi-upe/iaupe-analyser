@@ -9,6 +9,8 @@ from pathlib import Path
 import certifi
 from dotenv import load_dotenv
 from pymongo import MongoClient
+from pymongo.collection import Collection
+from pymongo.errors import DuplicateKeyError
 
 # garante que a raiz do projeto esteja no pythonpath para importar "pipeline"
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
@@ -39,6 +41,7 @@ SOURCE_REGISTRY = {
 
 DEFAULT_SOURCE = (os.getenv("PIPELINE_SOURCE") or "facepe").strip().lower()
 DEFAULT_DAYS = [30, 15, 7]
+DEFAULT_DEDUPE_COLLECTION = "deadline_notifications_sandbox"
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -72,6 +75,11 @@ def build_parser() -> argparse.ArgumentParser:
         "--send",
         action="store_true",
         help="Envia email; sem essa flag roda em dry-run",
+    )
+    parser.add_argument(
+        "--dedupe-collection",
+        default=(os.getenv("NOTIFY_DEDUPE_COLLECTION") or DEFAULT_DEDUPE_COLLECTION).strip(),
+        help="Collection Mongo para anti-duplicidade (sandbox)",
     )
     return parser
 
@@ -110,6 +118,80 @@ def format_notification_lines(matches: list[dict], source_label: str, today: dat
     return "\n".join(lines)
 
 
+def ensure_dedupe_indexes(coll: Collection) -> None:
+    # impede reenvio para o mesmo edital/marco/destinatario/fonte
+    coll.create_index(
+        [
+            ("source", 1),
+            ("url_pdf", 1),
+            ("days_left", 1),
+            ("to", 1),
+        ],
+        unique=True,
+        name="uq_deadline_notification_sandbox",
+    )
+
+
+def reserve_notifications_to_send(
+    dedupe_coll: Collection,
+    source_key: str,
+    source_label: str,
+    to_email: str,
+    matches: list[dict],
+    today: date,
+) -> tuple[list[dict], list[object]]:
+    pending: list[dict] = []
+    inserted_ids: list[object] = []
+    now = datetime.now(timezone.utc)
+
+    for item in matches:
+        doc = {
+            "source": source_key,
+            "source_label": source_label,
+            "url_pdf": item["url_pdf"],
+            "days_left": item["days_left"],
+            "deadline": item["deadline"],
+            "to": to_email,
+            "reference_date": today.isoformat(),
+            "status": "reserved",
+            "created_at": now,
+            "updated_at": now,
+        }
+
+        try:
+            result = dedupe_coll.insert_one(doc)
+            inserted_ids.append(result.inserted_id)
+            pending.append(item)
+        except DuplicateKeyError:
+            # ja enviado (ou reservado) anteriormente: nao reenviar
+            continue
+
+    return pending, inserted_ids
+
+
+def mark_notifications_sent(dedupe_coll: Collection, inserted_ids: list[object]) -> None:
+    if not inserted_ids:
+        return
+
+    dedupe_coll.update_many(
+        {"_id": {"$in": inserted_ids}},
+        {
+            "$set": {
+                "status": "sent",
+                "sent_at": datetime.now(timezone.utc),
+                "updated_at": datetime.now(timezone.utc),
+            }
+        },
+    )
+
+
+def release_notification_reservations(dedupe_coll: Collection, inserted_ids: list[object]) -> None:
+    if not inserted_ids:
+        return
+
+    dedupe_coll.delete_many({"_id": {"$in": inserted_ids}})
+
+
 def main() -> None:
     load_dotenv(override=True)
     args = build_parser().parse_args()
@@ -129,6 +211,8 @@ def main() -> None:
 
     client = MongoClient(uri, tlsCAFile=certifi.where())
     coll = client[db_name][coll_name]
+    dedupe_coll = client[db_name][args.dedupe_collection]
+    ensure_dedupe_indexes(dedupe_coll)
 
     cursor = coll.find(
         {
@@ -188,14 +272,42 @@ def main() -> None:
         print(body)
         return
 
-    use_case = SendEmailUseCase(GmailSmtpEmailService())
-    use_case.execute(
-        {
-            "to": args.to,
-            "subject": subject,
-            "text": body,
-        }
+    pending_matches, inserted_ids = reserve_notifications_to_send(
+        dedupe_coll=dedupe_coll,
+        source_key=args.source,
+        source_label=source_label,
+        to_email=args.to,
+        matches=matches,
+        today=today,
     )
+
+    skipped_as_duplicate = len(matches) - len(pending_matches)
+    if skipped_as_duplicate > 0:
+        print(
+            f"anti-duplicidade (sandbox): {skipped_as_duplicate} item(ns) ja notificado(s), nao reenviado(s)"
+        )
+
+    if not pending_matches:
+        print("todos os itens encontrados ja haviam sido notificados anteriormente")
+        return
+
+    body = format_notification_lines(pending_matches, source_label, today)
+
+    use_case = SendEmailUseCase(GmailSmtpEmailService())
+    try:
+        use_case.execute(
+            {
+                "to": args.to,
+                "subject": subject,
+                "text": body,
+            }
+        )
+        mark_notifications_sent(dedupe_coll, inserted_ids)
+    except Exception:
+        # libera reserva para permitir novo envio em tentativa futura
+        release_notification_reservations(dedupe_coll, inserted_ids)
+        raise
+
     print(f"email enviado para: {args.to}")
 
 

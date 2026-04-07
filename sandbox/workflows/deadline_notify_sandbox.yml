@@ -1,0 +1,52 @@
+name: Sandbox - Notificar prazos 30_15_7
+
+on:
+  schedule:
+    - cron: "15 3 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        source: [facepe, cnpq, finep, capes]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      # Mantido como etapa separada para validar o fluxo completo no sandbox:
+      # 1) atualizar Mongo com os editais
+      # 2) notificar prazos 30/15/7
+      - name: Atualizar base no Mongo (sandbox)
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
+          MONGODB_DB: ${{ secrets.MONGODB_DB }}
+        run: python pipeline/main.py --source ${{ matrix.source }} --limit all
+
+      - name: Notificar marcos 30/15/7 (sandbox)
+        env:
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
+          MONGODB_DB: ${{ secrets.MONGODB_DB }}
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          DEFAULT_EMAIL_FROM: ${{ secrets.DEFAULT_EMAIL_FROM }}
+          TEST_EMAIL_TO: ${{ secrets.NOTIFY_TO }}
+          NOTIFY_DEDUPE_COLLECTION: deadline_notifications_sandbox
+        run: python sandbox/notify_deadlines_exact.py --source ${{ matrix.source }} --days 30 15 7 --to ${{ secrets.NOTIFY_TO }} --send
