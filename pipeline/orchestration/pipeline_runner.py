@@ -14,68 +14,79 @@ def run_pipeline(source_key: str | None = None, limit: int | None = LIMIT) -> No
     Orquestra o fluxo completo da pipeline para uma fonte:
     coletar links, extrair texto, analisar com IA e persistir no MongoDB.
     """
-    source_id, source = get_source_config(source_key)
+    try:
+        source_id, source = get_source_config(source_key)
 
-    links = source["collect_links"](source["base_url"])
-    if not links:
-        print(f"Nenhum PDF encontrado para a fonte {source['label']}.")
-        return
+        links = source["collect_links"](source["base_url"])
+        if not links:
+            print(f"Nenhum PDF encontrado para a fonte {source['label']}.")
+            return
 
-    links = links if limit is None else links[:limit]
+        links = links if limit is None else links[:limit]
 
-    print(
-        f"Fonte: {source['label']} ({source_id}) | "
-        f"Collection Mongo: {source['mongo_collection']}"
-    )
-    print(f"{len(links)} PDFs para processar.\n")
-
-    for i, link in enumerate(links, start=1):
-        # evita retrabalho para documentos ja processados com sucesso
-        if already_exists(link, collection_name=source["mongo_collection"]):
-            print(f"[{i}/{len(links)}] ✅ Já salvo no MongoDB (status=ok): {link}")
-            if i < len(links):
-                time.sleep(SLEEP_ALREADY_EXISTS)
-            continue
-
-        print(f"[{i}/{len(links)}] 📄 {link}")
-        texto = extract_text_from_pdf_url(link)
-
-        if not texto:
-            # persiste erro controlado quando nao foi possivel extrair texto
-            print("Texto vazio.\n")
-            status = save(
-                link,
-                {"erro": "Texto vazio"},
-                texto_preview="",
-                collection_name=source["mongo_collection"],
-                data_limit_submissao=None,
-            )
-            if status != "disabled":
-                print(f"💾 MongoDB: {status}")
-            if i < len(links):
-                time.sleep(SLEEP_EMPTY_TEXT)
-            continue
-
-        # analisa com politica de retry para erros temporarios da IA
-        resultado = retry_analyze_text(texto, link)
-        data_limit_submissao = parse_data_limit_submissao(
-            resultado.get("data_limit_submissao")
+        print(
+            f"Fonte: {source['label']} ({source_id}) | "
+            f"Collection Mongo: {source['mongo_collection']}"
         )
+        print(f"{len(links)} PDFs para processar.\n")
 
-        status = save(
-            link,
-            resultado,
-            texto_preview=texto,
-            collection_name=source["mongo_collection"],
-            data_limit_submissao=data_limit_submissao,
-        )
+        for i, link in enumerate(links, start=1):
+            try:
+                # evita retrabalho para documentos ja processados com sucesso
+                if already_exists(link, collection_name=source["mongo_collection"]):
+                    print(f"[{i}/{len(links)}] ✅ Já salvo no MongoDB (status=ok): {link}")
+                    if i < len(links):
+                        time.sleep(SLEEP_ALREADY_EXISTS)
+                    continue
 
-        if status != "disabled":
-            print(f"💾 MongoDB: {status}")
+                print(f"[{i}/{len(links)}] 📄 {link}")
+                texto = extract_text_from_pdf_url(link)
 
-        print(json.dumps(resultado, ensure_ascii=False, indent=2))
-        print("\n" + "-" * 60 + "\n")
+                if not texto:
+                    # persiste erro controlado quando nao foi possivel extrair texto
+                    print("Texto vazio.\n")
+                    status = save(
+                        link,
+                        {"erro": "Texto vazio"},
+                        texto_preview="",
+                        collection_name=source["mongo_collection"],
+                        data_limit_submissao=None,
+                    )
+                    if status != "disabled":
+                        print(f"💾 MongoDB: {status}")
+                    if i < len(links):
+                        time.sleep(SLEEP_EMPTY_TEXT)
+                    continue
 
-        # controla ritmo para evitar sobrecarga em APIs externas
-        if i < len(links):
-            time.sleep(SLEEP_NEW_PROCESS)
+                # analisa com politica de retry para erros temporarios da IA
+                resultado = retry_analyze_text(texto, link)
+                data_limit_submissao = parse_data_limit_submissao(
+                    resultado.get("data_limit_submissao")
+                )
+
+                status = save(
+                    link,
+                    resultado,
+                    texto_preview=texto,
+                    collection_name=source["mongo_collection"],
+                    data_limit_submissao=data_limit_submissao,
+                )
+
+                if status != "disabled":
+                    print(f"💾 MongoDB: {status}")
+
+                print(json.dumps(resultado, ensure_ascii=False, indent=2))
+                print("\n" + "-" * 60 + "\n")
+
+                # controla ritmo para evitar sobrecarga em APIs externas
+                if i < len(links):
+                    time.sleep(SLEEP_NEW_PROCESS)
+
+            except Exception as exc:
+                print(f"[{i}/{len(links)}] ❌ Erro ao processar link {link}: {exc}")
+                if i < len(links):
+                    time.sleep(SLEEP_EMPTY_TEXT)
+                continue
+
+    except Exception as exc:
+        print(f"❌ Falha geral na orquestracao da pipeline: {exc}")

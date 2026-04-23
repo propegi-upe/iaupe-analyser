@@ -40,3 +40,6 @@ if __name__ == "__main__":
     except ValueError as exc:
         # erros de validacao de parametros/fonte
         print(exc)
+    except Exception as exc:
+        # erros inesperados da execucao da pipeline
+        print(f"Erro inesperado na execucao da pipeline: {exc}")
