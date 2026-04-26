@@ -4,20 +4,18 @@ from .email import Email
 from .emails_service import EmailsService
 
 
-# caso de uso: orquestra o envio.
-# o use case:
-# 1) cria/valida a entidade Email
-# 2) delega o envio para um EmailsService
+# Este caso de uso concentra a regra de aplicacao do envio.
+# Ele nao sabe nada sobre SMTP; apenas valida o payload e delega ao servico injetado.
 class SendEmailUseCase:
     """Caso de uso de envio de email desacoplado da implementacao SMTP."""
     def __init__(self, emails_service: EmailsService) -> None:
-        # injecao de dependencia pelo contrato (protocol)
+        # Injecao de dependencia permite trocar o mecanismo de envio sem mexer no fluxo.
         self.emails_service = emails_service
 
     def execute(self, data: dict) -> None:
         """Valida payload de email e delega o envio ao servico injetado."""
-        # valida e cria o email a partir dos dados recebidos
+        # Primeiro, garante que o payload recebido e um email valido.
         email = Email.create(data)
 
-        # envia usando a implementacao injetada
+        # Depois, envia usando a implementacao concreta configurada na aplicacao.
         self.emails_service.send(email)

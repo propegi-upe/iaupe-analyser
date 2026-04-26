@@ -2,6 +2,7 @@ import json
 import time
 
 from db.mongo import already_exists, save
+from emails.saved_record_email_notifier import SavedRecordEmailNotifier
 from pdf_pipeline.extractor import extract_text_from_pdf_url
 from .date_parser import parse_data_limit_submissao
 from .retry_policy import retry_analyze_text
@@ -16,6 +17,7 @@ def run_pipeline(source_key: str | None = None, limit: int | None = LIMIT) -> No
     """
     try:
         source_id, source = get_source_config(source_key)
+        notifier = SavedRecordEmailNotifier()
 
         links = source["collect_links"](source["base_url"])
         if not links:
@@ -74,6 +76,21 @@ def run_pipeline(source_key: str | None = None, limit: int | None = LIMIT) -> No
 
                 if status != "disabled":
                     print(f"💾 MongoDB: {status}")
+
+                if status in {"inserted", "updated"}:
+                    try:
+                        notifier.notify_saved_record(
+                            source_label=source["label"],
+                            source_id=source_id,
+                            collection_name=source["mongo_collection"],
+                            save_status=status,
+                            pdf_url=link,
+                            saved_json=resultado,
+                        )
+                        if notifier.is_enabled():
+                            print("📧 Email HTML enviado para destinatario de teste.")
+                    except Exception as email_exc:
+                        print(f"Falha ao enviar email de notificacao: {email_exc}")
 
                 print(json.dumps(resultado, ensure_ascii=False, indent=2))
                 print("\n" + "-" * 60 + "\n")

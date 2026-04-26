@@ -6,28 +6,25 @@ from dotenv import load_dotenv
 
 from .email import Email
 
-
-# usa tls + login e envia a mensagem.
-# configuracao vem do .env:
-# - smtp_host, smtp_port
-# - smtp_user, smtp_pass
-# - default_email_from (opcional)
+# Implementacao concreta de envio.
+# Apesar do nome mencionar Gmail, ela funciona com qualquer servidor SMTP configurado no .env.
 
 class GmailSmtpEmailService:
     """Implementacao de envio via SMTP com STARTTLS."""
+
     def __init__(self) -> None:
-        # carrega variaveis do .env para nao hardcodear credenciais
+        # Carrega as configuracoes do ambiente para evitar credenciais no codigo.
         load_dotenv(override=True)
 
-        # servidor smtp (gmail por padrao)
+        # Host/porta do servidor SMTP.
         self.host = (os.getenv("SMTP_HOST") or "smtp.gmail.com").strip()
         self.port = int((os.getenv("SMTP_PORT") or "587").strip())
 
-        # credenciais
+        # Credenciais de autenticacao.
         self.user = (os.getenv("SMTP_USER") or "").strip()
         self.password = (os.getenv("SMTP_PASS") or "").strip()
 
-        # remetente padrao
+        # Remetente padrao usado no header From.
         self.default_from = (os.getenv("DEFAULT_EMAIL_FROM") or self.user).strip()
 
         if not self.user:
@@ -37,9 +34,7 @@ class GmailSmtpEmailService:
 
     def send(self, email: Email) -> None:
         """Envia email de texto ou HTML para um destinatario."""
-        # escolhe corpo do email:
-        # - se houver html, ele tem prioridade
-        # - caso contrario usa text
+        # Se houver HTML, a notificacao vai formatada; caso contrario, cai para texto puro.
         body_text = (email.text or "").strip()
         body_html = (email.html or "").strip()
         body = body_html if body_html else body_text
@@ -48,8 +43,7 @@ class GmailSmtpEmailService:
         if not body:
             raise ValueError("Informe text ou html para envio")
 
-        # monta uma mensagem mime simples com headers + corpo.
-        # obs: isso e suficiente para o objetivo do projeto (envio basico).
+        # Monta a mensagem SMTP com headers minimos e o corpo final.
         message = "\r\n".join([
             f"From: {self.default_from}",
             f"To: {email.to}",
@@ -60,11 +54,8 @@ class GmailSmtpEmailService:
             body,
         ])
 
-        # fluxo smtp:
-        # 1) conecta
-        # 2) starttls (criptografa)
-        # 3) login
-        # 4) sendmail
+        # Fluxo do envio:
+        # conecta, sobe TLS, autentica e despacha a mensagem.
         with smtplib.SMTP(self.host, self.port, timeout=30) as smtp:
             smtp.ehlo()
             smtp.starttls()
