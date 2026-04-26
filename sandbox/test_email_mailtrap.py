@@ -6,7 +6,7 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(PROJECT_ROOT))
 
-from pipeline.emails.gmail_smtp_email_service import GmailSmtpEmailService
+from pipeline.emails.smtp_email_service import SmtpEmailService
 from pipeline.emails.send_email_use_case import SendEmailUseCase
 
 
@@ -16,7 +16,7 @@ from pipeline.emails.send_email_use_case import SendEmailUseCase
 def main() -> None:
     load_dotenv(override=True)
 
-    use_case = SendEmailUseCase(GmailSmtpEmailService())
+    use_case = SendEmailUseCase(SmtpEmailService())
 
     use_case.execute(
         {

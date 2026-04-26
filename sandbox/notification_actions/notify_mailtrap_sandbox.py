@@ -14,7 +14,7 @@ from dotenv import load_dotenv
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(PROJECT_ROOT))
 
-from pipeline.emails.gmail_smtp_email_service import GmailSmtpEmailService
+from pipeline.emails.smtp_email_service import SmtpEmailService
 from pipeline.emails.send_email_use_case import SendEmailUseCase
 
 DEFAULT_STEPS = [30, 15, 7]
@@ -150,7 +150,7 @@ def main() -> None:
     print(f"marcos alvo: {sorted(days_targets)}")
     print(f"modo envio: {'send' if args.send else 'dry-run'}")
 
-    use_case = SendEmailUseCase(GmailSmtpEmailService()) if args.send else None
+    use_case = SendEmailUseCase(SmtpEmailService()) if args.send else None
     retry_backoff_seconds = [5.0, 10.0, 20.0]
 
     simulation_date = start_date

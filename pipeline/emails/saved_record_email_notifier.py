@@ -6,7 +6,7 @@ from html import escape
 
 from dotenv import load_dotenv
 
-from .gmail_smtp_email_service import GmailSmtpEmailService
+from .smtp_email_service import SmtpEmailService
 from .send_email_use_case import SendEmailUseCase
 
 
@@ -41,7 +41,7 @@ class SavedRecordEmailNotifier:
 
         # O caso de uso e criado sob demanda, apenas quando realmente vamos enviar.
         if self._use_case is None:
-            self._use_case = SendEmailUseCase(GmailSmtpEmailService())
+            self._use_case = SendEmailUseCase(SmtpEmailService())
 
         # O assunto resume o evento principal: registro salvo e origem do dado.
         subject = (

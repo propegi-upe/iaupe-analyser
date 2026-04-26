@@ -2,15 +2,17 @@ from __future__ import annotations
 
 import os
 import smtplib
+
 from dotenv import load_dotenv
 
 from .email import Email
 
 # Implementacao concreta de envio.
-# Apesar do nome mencionar Gmail, ela funciona com qualquer servidor SMTP configurado no .env.
+# Esta classe deixa explicito que o mecanismo usado e SMTP.
 
-class GmailSmtpEmailService:
-    """Implementacao de envio via SMTP com STARTTLS."""
+
+class SmtpEmailService:
+    """Implementacao concreta de envio de email via SMTP com STARTTLS."""
 
     def __init__(self) -> None:
         # Carrega as configuracoes do ambiente para evitar credenciais no codigo.
