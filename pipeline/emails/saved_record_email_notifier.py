@@ -67,7 +67,7 @@ class SavedRecordEmailNotifier:
             }
         )
 
-    def _build_saved_record_html(
+    def build_saved_record_html(
         self,
         *,
         source_label: str,
@@ -130,7 +130,7 @@ class SavedRecordEmailNotifier:
             "</html>"
         )
 
-    def _render_list(self, items: list | None) -> str:
+    def render_list(self, items: list | None) -> str:
         values = [escape(str(item).strip()) for item in (items or []) if str(item).strip()]
         if not values:
             return "<p style='color:#6b7280;'>Nao informado.</p>"
@@ -141,7 +141,7 @@ class SavedRecordEmailNotifier:
         )
         return f"<ul style='margin:0; padding-left:20px;'>{rows}</ul>"
 
-    def _render_badges(self, items: list | None) -> str:
+    def render_badges(self, items: list | None) -> str:
         values = [escape(str(item).strip()) for item in (items or []) if str(item).strip()]
         if not values:
             return "<p style='color:#6b7280;'>Nao informado.</p>"
