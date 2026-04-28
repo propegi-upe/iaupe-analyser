@@ -44,7 +44,7 @@ def build_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument(
         "--to",
-        default=(os.getenv("TEST_EMAIL_TO") or "to@example.com").strip(),
+        default=(os.getenv("RECIPIENT_EMAIL") or "to@example.com").strip(),
         help="Destinatario para envio",
     )
     parser.add_argument(

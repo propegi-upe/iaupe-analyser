@@ -49,7 +49,7 @@ jobs:
           SMTP_USER: ${{ secrets.SMTP_USER }}
           SMTP_PASS: ${{ secrets.SMTP_PASS }}
           DEFAULT_EMAIL_FROM: ${{ secrets.DEFAULT_EMAIL_FROM }}
-          TEST_EMAIL_TO: ${{ github.event.inputs.to || secrets.TEST_EMAIL_TO }}
+          RECIPIENT_EMAIL: ${{ github.event.inputs.to || secrets.RECIPIENT_EMAIL }}
         run: |
           START_DATE="${{ github.event.inputs.start_date }}"
           DEADLINE="${{ github.event.inputs.deadline }}"
@@ -59,7 +59,7 @@ jobs:
           START_DATE="${START_DATE:-2026-04-01}"
           DEADLINE="${DEADLINE:-2026-05-01}"
           DAYS="${DAYS:-30 15 7}"
-          TO="${TO:-${TEST_EMAIL_TO:-to@example.com}}"
+          TO="${TO:-${RECIPIENT_EMAIL:-to@example.com}}"
 
           python sandbox/notification_actions/notify_mailtrap_sandbox.py \
             --start-date "$START_DATE" \

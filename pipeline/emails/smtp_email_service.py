@@ -27,7 +27,7 @@ class SmtpEmailService:
         self.password = (os.getenv("SMTP_PASS") or "").strip()
 
         # Remetente padrao usado no header From.
-        self.default_from = (os.getenv("DEFAULT_EMAIL_FROM") or self.user).strip()
+        self.default_from = (os.getenv("SENDER_EMAIL") or self.user).strip()
 
         if not self.user:
             raise ValueError("Defina SMTP_USER no .env")

@@ -17,7 +17,7 @@ class SavedRecordEmailNotifier:
     def __init__(self, test_recipient: str | None = None) -> None:
         # O destinatario de teste vem do .env para nao ficar fixo no codigo.
         load_dotenv(override=True)
-        self.test_recipient = (test_recipient or os.getenv("TEST_EMAIL_TO") or "").strip()
+        self.test_recipient = (test_recipient or os.getenv("RECIPIENT_EMAIL") or "").strip()
         self._use_case: SendEmailUseCase | None = None
 
     def is_enabled(self) -> bool:
@@ -77,55 +77,55 @@ class SavedRecordEmailNotifier:
         pdf_url: str,
         saved_json: dict,
     ) -> str:
-        # Monta um email legivel para humanos, sem despejar o JSON bruto no corpo.
         safe_url = escape(pdf_url)
         publico_alvo = escape(str(saved_json.get("publico_alvo") or "N/A"))
         descricao = escape(str(saved_json.get("descricao") or "N/A"))
         data_limite = escape(str(saved_json.get("data_limit_submissao") or "N/A"))
-        criterios_publico = self._render_list(saved_json.get("criterios_publico_alvo"))
-        criterios_proponente = self._render_list(saved_json.get("criterios_proponente"))
-        observacoes = self._render_list(saved_json.get("observacoes"))
-        cronograma = self._render_list(saved_json.get("cronograma"))
-        areas_interesse = self._render_badges(saved_json.get("areas_interesse"))
-        segmentos = self._render_badges(saved_json.get("segmentos"))
+        criterios_publico = self.render_list(saved_json.get("criterios_publico_alvo"))
+        criterios_proponente = self.render_list(saved_json.get("criterios_proponente"))
+        observacoes = self.render_list(saved_json.get("observacoes"))
+        cronograma = self.render_list(saved_json.get("cronograma"))
+        areas_interesse = self.render_badges(saved_json.get("areas_interesse"))
+        segmentos = self.render_badges(saved_json.get("segmentos"))
 
         return (
-            "<html>"
-            "<body style='margin:0; padding:24px; background:#f4f7fb; font-family:Arial, sans-serif; color:#1f2937;'>"
-            "<div style='max-width:820px; margin:0 auto; background:#ffffff; border:1px solid #e5e7eb; border-radius:12px; overflow:hidden;'>"
-            "<div style='background:#0f172a; color:#ffffff; padding:20px 24px;'>"
-            "<h1 style='margin:0; font-size:24px;'>Registro salvo no MongoDB</h1>"
-            f"<p style='margin:8px 0 0; font-size:14px; opacity:0.9;'>{escape(source_label)} ({escape(source_id)})</p>"
-            "</div>"
-            "<div style='padding:24px;'>"
-            "<table style='width:100%; border-collapse:collapse; margin-bottom:24px;'>"
-            "<tr><td style='padding:8px 0; width:180px;'><b>Collection</b></td>"
-            f"<td style='padding:8px 0;'>{escape(collection_name)}</td></tr>"
-            "<tr><td style='padding:8px 0;'><b>Status do save</b></td>"
-            f"<td style='padding:8px 0;'>{escape(save_status)}</td></tr>"
-            "<tr><td style='padding:8px 0;'><b>Data limite</b></td>"
-            f"<td style='padding:8px 0;'>{data_limite}</td></tr>"
-            "<tr><td style='padding:8px 0;'><b>URL do PDF</b></td>"
-            f"<td style='padding:8px 0;'><a href='{safe_url}' style='color:#2563eb; text-decoration:none;'>Abrir edital</a></td></tr>"
+            "<html lang='pt-BR'>"
+            "<head>"
+            "<meta charset='UTF-8'>"
+            "<meta name='viewport' content='width=device-width, initial-scale=1.0'>"
+            "<title>Preview - Novo Edital Identificado</title>"
+            "<link href='https://fonts.googleapis.com/css?family=Montserrat:400,600,700&display=swap' rel='stylesheet'>"
+            "</head>"
+            "<body style=\"margin:0; padding:0; background-color:#dce8f5; font-family:'Montserrat', Arial, sans-serif; color:#1a1a2e;\">"
+            "<table width='100%' cellpadding='0' cellspacing='0' border='0' style='background:#dce8f5; padding:32px 16px;'>"
+            "<tr><td align='center'>"
+            "<table width='620' cellpadding='0' cellspacing='0' border='0' style='max-width:620px; width:100%;'>"
+            "<tr><td style='background:#c0392b; height:5px; border-radius:8px 8px 0 0;'></td></tr>"
+            "<tr><td style='background:linear-gradient(135deg, #1a3a6b 0%, #2a5298 100%); padding:28px 36px 24px;'>"
+            "<table width='100%'><tr><td>"
+            "<p style='margin:0 0 2px; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:#a8c4e8; font-weight:600;'>Plataforma de Monitoramento de Editais</p>"
+            "<h1 style='margin:0; font-family:Montserrat,Arial,sans-serif; font-size:22px; font-weight:600; color:#ffffff;'>Novo Edital Identificado</h1>"
+            "</td><td align='right'><span style='display:inline-block; background:#c0392b; color:#fff; font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; padding:5px 14px; border-radius:3px;'>Novo</span></td></tr></table>"
+            "</td></tr>"
+            "<tr><td style='background:#2a5298; padding:14px 36px; border-bottom:2px solid #c0392b;'>"
+            "<table width='100%'><tr><td><span style='font-size:13px; color:#a8c4e8;'>Instituição: </span><span style='font-size:14px; font-weight:700; color:#fff;'>" + escape(source_label) + "</span></td><td align='right'><span style='font-family:Courier New,monospace; font-size:11px; color:#a8c4e8; background:#1a3a6b; padding:4px 10px; border-radius:3px;'>Ref: " + escape(source_id) + "</span></td></tr></table>"
+            "</td></tr>"
+            "<tr><td style='background:#ffffff; padding:0;'>"
+            "<table width='100%' style='border-bottom:1px solid #dce8f5;'><tr>"
+            "<td style='width:50%; padding:24px 36px 20px; border-right:1px solid #dce8f5;'><p style='margin:0 0 4px; font-size:10px; letter-spacing:2.5px; text-transform:uppercase; color:#7a90aa; font-weight:600;'>Prazo final de submissão</p><p style='margin:0; font-family:Montserrat,Arial,sans-serif; font-size:22px; font-weight:600; color:#c0392b;'>" + data_limite + "</p></td>"
+            "<td style='width:50%; padding:24px 36px 20px;'><p style='margin:0 0 4px; font-size:10px; letter-spacing:2.5px; text-transform:uppercase; color:#7a90aa; font-weight:600;'>Documento oficial</p><a href='" + safe_url + "' style='font-size:14px; font-weight:700; color:#2a5298; text-decoration:none;'>→ Acessar edital em PDF</a></td>"
+            "</tr></table>"
+            "<div style='padding:20px 36px; border-bottom:1px solid #eaf1fb;'><p style='margin:0 0 10px; font-size:10px; letter-spacing:2.5px; text-transform:uppercase; color:#2a5298; font-weight:700;'>Público-alvo</p><p style='margin:0; font-family:Montserrat,Arial,sans-serif; font-size:15px; line-height:1.75; color:#2d3748;'>" + publico_alvo + "</p></div>"
+            "<div style='padding:20px 36px; border-bottom:1px solid #eaf1fb;'><p style='margin:0 0 10px; font-size:10px; letter-spacing:2.5px; text-transform:uppercase; color:#2a5298; font-weight:700;'>Resumo do Edital</p><p style='margin:0; font-family:Montserrat,Arial,sans-serif; font-size:15px; line-height:1.75; color:#2d3748;'>" + descricao + "</p></div>"
+            "<div style='padding:0 36px; border-bottom:1px solid #eaf1fb;'><table width='100%'><tr valign='top'><td style='width:50%; padding:20px 16px 20px 0; border-right:1px solid #eaf1fb;'><p style='margin:0 0 10px; font-size:10px; letter-spacing:2.5px; text-transform:uppercase; color:#2a5298; font-weight:700;'>Áreas de interesse</p>" + areas_interesse + "</td><td style='width:50%; padding:20px 0 20px 16px;'><p style='margin:0 0 10px; font-size:10px; letter-spacing:2.5px; text-transform:uppercase; color:#2a5298; font-weight:700;'>Segmentos</p>" + segmentos + "</td></tr></table></div>"
+            "<div style='padding:20px 36px; border-bottom:1px solid #eaf1fb;'><p style='margin:0 0 10px; font-size:10px; letter-spacing:2.5px; text-transform:uppercase; color:#2a5298; font-weight:700;'>Quem pode submeter</p>" + criterios_proponente + "</div>"
+            "<div style='padding:20px 36px; border-bottom:1px solid #eaf1fb;'><p style='margin:0 0 10px; font-size:10px; letter-spacing:2.5px; text-transform:uppercase; color:#2a5298; font-weight:700;'>Cronograma</p>" + cronograma + "</div>"
+            "</td></tr>"
+            "<tr><td style='background:#eaf1fb; padding:28px 36px; text-align:center; border-top:2px solid #2a5298;'><a href='" + safe_url + "' style='display:inline-block; background:#2a5298; color:#fff; font-size:13px; font-weight:700; letter-spacing:1px; text-transform:uppercase; text-decoration:none; padding:13px 40px; border-radius:3px;'>Acessar Edital Completo</a></td></tr>"
+            "<tr><td style='background:#1a3a6b; border-radius:0 0 8px 8px; padding:20px 36px; text-align:center;'><p style='margin:0; font-size:11px; color:#7a9cc8; line-height:1.7;'>Este e-mail foi gerado automaticamente pela plataforma de monitoramento de editais.<br>Você está recebendo esta mensagem porque está cadastrado para receber alertas de oportunidades.</p></td></tr>"
             "</table>"
-            "<h2 style='font-size:18px; margin:0 0 8px;'>Publico-alvo</h2>"
-            f"<p style='margin:0 0 20px; line-height:1.6;'>{publico_alvo}</p>"
-            "<h2 style='font-size:18px; margin:0 0 8px;'>Descricao</h2>"
-            f"<p style='margin:0 0 20px; line-height:1.6;'>{descricao}</p>"
-            "<h2 style='font-size:18px; margin:0 0 8px;'>Areas de interesse</h2>"
-            f"<div style='margin:0 0 20px;'>{areas_interesse}</div>"
-            "<h2 style='font-size:18px; margin:0 0 8px;'>Segmentos</h2>"
-            f"<div style='margin:0 0 20px;'>{segmentos}</div>"
-            "<h2 style='font-size:18px; margin:0 0 8px;'>Criterios do publico-alvo</h2>"
-            f"{criterios_publico}"
-            "<h2 style='font-size:18px; margin:20px 0 8px;'>Criterios do proponente</h2>"
-            f"{criterios_proponente}"
-            "<h2 style='font-size:18px; margin:20px 0 8px;'>Observacoes</h2>"
-            f"{observacoes}"
-            "<h2 style='font-size:18px; margin:20px 0 8px;'>Cronograma</h2>"
-            f"{cronograma}"
-            "</div>"
-            "</div>"
+            "</td></tr>"
+            "</table>"
             "</body>"
             "</html>"
         )

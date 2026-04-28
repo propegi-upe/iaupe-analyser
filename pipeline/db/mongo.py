@@ -96,7 +96,7 @@ def coll(collection_name: Optional[str] = None) -> Collection:
     return collection_cache[coll_name]
 
 
-def     already_exists(url_pdf: str, collection_name: Optional[str] = None) -> bool:
+def already_exists(url_pdf: str, collection_name: Optional[str] = None) -> bool:
     """Verifica se um edital ja foi salvo com status ok."""
     try:
         doc = coll(collection_name).find_one({"url_pdf": url_pdf}, {"_id": 1, "status": 1})
