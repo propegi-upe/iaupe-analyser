@@ -212,7 +212,9 @@ pip install -r requirements.txt
 
 ## Configuração (.env)
 
-Exemplo:
+Veja [`pipeline/.env.example`](pipeline/.env.example) para o template completo
+de variáveis (copie para `.env` na raiz do projeto e preencha com valores
+reais). Exemplo resumido:
 
 ```env
 GEMINI_API_KEY=sua_chave_aqui
@@ -397,6 +399,10 @@ python .\pipeline\main.py --notify-editais --source all --apply --max-por-docent
 
 Conferência detalhada (par a par, sem enviar): `sandbox/test_new_edital_notification.py`.
 
+A carga inicial (e recargas) da base de preferências dos docentes, a partir da
+planilha institucional, está documentada em
+[`dados_docentes/README.md`](dados_docentes/README.md).
+
 ## Tratamento de Erros
 
 - Retry de IA para `429` (respeita o tempo sugerido na mensagem).
@@ -416,6 +422,20 @@ Conferência detalhada (par a par, sem enviar): `sandbox/test_new_edital_notific
    - `collect_links(url_lista: str) -> list[str]` — normalmente só `[url for url, _ in collect_calls(...)]`.
 3. Expor a API pública em `pipeline/sources/nova_fonte/__init__.py` (incluindo `collect_calls`).
 4. Registrar a fonte em `pipeline/orchestration/source_registry.py` com as chaves `collect_links` e `collect_calls`.
+
+## Testes automatizados
+
+Testes unitários (pytest) das partes puras da pipeline — matching de docentes,
+travas de volume de notificação e limpeza do import de docentes — ficam em
+`pipeline/tests/`:
+
+```powershell
+pip install -r requirements-dev.txt
+pytest pipeline/tests/ -v
+```
+
+Isso é diferente da pasta `sandbox/` abaixo, que guarda scripts manuais de
+integração (batem em Mongo/SMTP/Gemini de verdade), não testes automatizados.
 
 ## Sandbox (Área de Teste de Desenvolvimento)
 
