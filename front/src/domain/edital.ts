@@ -147,12 +147,12 @@ export interface EditaisPage {
   hasMore: boolean;
 }
 
-// Paginacao por cursor sobre uma lista ja ordenada (por prazo, ver
-// listEditais em editais-repository.ts). O cursor e o `id` do ultimo edital
-// recebido na pagina anterior; a proxima pagina comeca logo depois dele na
-// MESMA ordenacao - por isso a lista passada aqui precisa ja estar ordenada
-// do jeito que a UI espera ver (prazo mais proximo primeiro, com o id como
-// desempate estavel entre prazos iguais).
+// Paginacao por cursor sobre uma lista ja ordenada (por data de publicacao,
+// ver listEditais em editais-repository.ts). O cursor e o `id` do ultimo
+// edital recebido na pagina anterior; a proxima pagina comeca logo depois
+// dele na MESMA ordenacao - por isso a lista passada aqui precisa ja estar
+// ordenada do jeito que a UI espera ver (publicacao mais recente primeiro,
+// com o id como desempate estavel entre datas iguais).
 // Cursor desconhecido (item removido entre uma pagina e outra) equivale a
 // "fim da lista", em vez de reiniciar do zero - evita duplicar itens.
 export function paginateEditais(
