@@ -1,5 +1,7 @@
 import argparse
+import logging
 import os
+import sys
 from db.interessados import add_interessado, list_interessados, remove_interessado
 from orchestration.deadline_reminder_runner import run_deadline_reminders
 from orchestration.docente_notification_service import DEFAULT_MAX_EMAILS, DEFAULT_MAX_POR_DOCENTE
@@ -102,6 +104,14 @@ def build_parser() -> argparse.ArgumentParser:
 
 if __name__ == "__main__":
     # entrypoint da pipeline de producao
+    # sem isso, logger.info/warning/error configurados nos modulos abaixo
+    # (ex.: orchestration/docente_notification_service.py) nao aparecem no
+    # log do GitHub Actions - so o "lastResort" handler do Python mostra
+    # WARNING/ERROR por padrao.
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8")
+    logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s", stream=sys.stdout)
+
     parser = build_parser()
     args = parser.parse_args()
 

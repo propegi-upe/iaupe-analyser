@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import logging
 import os
 
 from db.match_notifications import mark_match_emails_sent
@@ -7,6 +8,8 @@ from emails.saved_record_email_notifier import SavedRecordEmailNotifier
 
 from .docente_match import DocenteMatch, match_docentes
 from .source_registry import SOURCE_REGISTRY
+
+logger = logging.getLogger(__name__)
 
 # Motor de notificacao por area/segmento: cruza, seleciona (aplicando as travas
 # de volume) e envia. Usado tanto pelo fluxo automatico (pipeline_runner.py,
@@ -107,7 +110,7 @@ def send_to_recipients(
             saved_json=resultado,
         )
     except Exception as exc:
-        print(f"Falha ao notificar docentes sobre {pdf_url}: {exc}")
+        logger.error("Falha ao notificar docentes sobre %s: %s", pdf_url, exc, exc_info=True)
         return []
 
     if delivered:

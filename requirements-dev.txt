@@ -1,0 +1,5 @@
+# Dependencias extras so para desenvolvimento/testes locais e CI de qualidade.
+# Nao instaladas nos workflows de producao (pipeline_runner_daily.yml,
+# deadline-reminders.yml, notify-editais-daily.yml), que usam so requirements.txt.
+-r requirements.txt
+pytest==9.1.1
