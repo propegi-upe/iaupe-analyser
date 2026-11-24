@@ -11,7 +11,14 @@
   display: flex; flex-direction: column; transition: box-shadow 0.18s, transform 0.18s, border-color 0.18s;
   cursor: pointer;
 }
-.card:focus-visible { outline: 2px solid var(--blue-bright); outline-offset: 2px; }
+.card:focus-within { outline: 2px solid var(--blue-bright); outline-offset: 2px; }
+/* Link do titulo esticado sobre o card inteiro: o card todo e clicavel e o
+   navegador o reconhece como link (abrir em nova guia, etc.). */
+.card-main-link { color: inherit; text-decoration: none; }
+.card-main-link::after { content: ""; position: absolute; inset: 0; border-radius: var(--radius); }
+.card-main-link:focus-visible { outline: none; }
+/* Elementos com acao propria ficam acima da camada do link esticado. */
+.card .star, .card .card-link { position: relative; z-index: 1; }
 .card::before {
   content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 5px;
   border-radius: var(--radius) 0 0 var(--radius);

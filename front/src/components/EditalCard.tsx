@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 import {
   Edital,
@@ -16,34 +16,18 @@ interface EditalCardProps {
 }
 
 // Cartao de edital: apresenta os dados e delega a marcacao de interesse (por
-// e-mail, sem autenticacao) ao container. O card inteiro navega pra pagina de
-// detalhamento (/editais/[id]) ao clicar - exceto a estrela e o link "Acessar
-// Edital", que tem sua propria acao e por isso interrompem a propagacao do
-// clique (senao os dois cliques disparariam juntos).
+// e-mail, sem autenticacao) ao container. O card inteiro leva a pagina de
+// detalhamento (/editais/[id]) por um <Link> de verdade no titulo, esticado por
+// CSS (`.card-main-link::after`) para cobrir o card todo. Assim o navegador o
+// trata como link: botao direito > "abrir em nova guia", Ctrl/Cmd+clique etc.
+// A estrela e o link "Acessar Edital" ficam acima dessa camada (z-index).
 export default function EditalCard({ edital, onToggle }: EditalCardProps) {
-  const router = useRouter();
   const days = daysUntil(edital.deadline);
   const urgency = deadlineUrgency(days);
   const daysLabel = days === null ? "-" : `${days}d`;
 
-  function goToDetail() {
-    router.push(`/editais/${edital.id}`);
-  }
-
   return (
-    <article
-      className="card"
-      data-interest={edital.interested}
-      role="link"
-      tabIndex={0}
-      onClick={goToDetail}
-      onKeyDown={(e) => {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-          goToDetail();
-        }
-      }}
-    >
+    <article className="card" data-interest={edital.interested}>
       <div className="card-head">
         <div>
           <span className="src-chip">
@@ -58,7 +42,6 @@ export default function EditalCard({ edital, onToggle }: EditalCardProps) {
           aria-pressed={edital.interested}
           aria-label={edital.interested ? "Remover dos interesses" : "Marcar como interesse"}
           onClick={(e) => {
-            e.stopPropagation();
             const btn = e.currentTarget;
             btn.classList.remove("pop");
             void btn.offsetWidth;
@@ -70,7 +53,11 @@ export default function EditalCard({ edital, onToggle }: EditalCardProps) {
         </button>
       </div>
 
-      <h3 className="title">{edital.titulo}</h3>
+      <h3 className="title">
+        <Link href={`/editais/${edital.id}`} className="card-main-link">
+          {edital.titulo}
+        </Link>
+      </h3>
       <p className="org">{edital.orgao}</p>
 
       <div className="meta-row">
@@ -96,7 +83,6 @@ export default function EditalCard({ edital, onToggle }: EditalCardProps) {
         href={edital.urlPdf}
         target="_blank"
         rel="noopener noreferrer"
-        onClick={(e) => e.stopPropagation()}
       >
         Acessar Edital
       </a>

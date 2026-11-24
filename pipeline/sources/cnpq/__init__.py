@@ -1,7 +1,6 @@
 from .constants import BASE_URL, SOURCE_KEY, SOURCE_LABEL
 from .models import CnpqCall
 from .parser import (
-    extract_anchor_candidates,
     extract_inscription_start_date,
     extract_pdf_links_from_detail,
     extract_permanent_link,
@@ -33,7 +32,6 @@ __all__ = [
     "extract_inscription_start_date",
     "extract_permanent_link",
     "parse_open_calls",
-    "extract_anchor_candidates",
     "extract_pdf_links_from_detail",
     "sort_open_call_urls",
     "collect_links",

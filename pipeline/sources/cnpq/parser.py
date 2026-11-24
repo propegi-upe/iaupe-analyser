@@ -3,9 +3,9 @@ from urllib.parse import urljoin
 
 from bs4 import BeautifulSoup
 
-from .constants import DATE_REGEX
+from .constants import INSCRIPTION_REGEX
 from .models import CnpqCall
-from .url_utils import expand_href_candidates, is_detail_page, is_pdf_url, normalize_url
+from .url_utils import is_pdf_url, normalize_url
 
 
 def parse_ptbr_date(value: str) -> datetime | None:
@@ -18,13 +18,11 @@ def parse_ptbr_date(value: str) -> datetime | None:
 
 def extract_inscription_start_date(item) -> datetime | None:
     """
-    A extração da data inicial de inscrição é feita a partir de um elemento com a classe "inscricao" dentro do card da chamada.
-    Extrai a data inicial de inscricao de um card de chamada do CNPq."""
-    inscricao = item.select_one(".inscricao")
-    if inscricao is None:
-        return None
+    Extrai a data inicial de inscricao de um card de chamada do CNPq.
 
-    match = DATE_REGEX.search(inscricao.get_text(" ", strip=True))
+    No portal gov.br o card traz o texto "Inscrições: dd/mm/aaaa a dd/mm/aaaa".
+    """
+    match = INSCRIPTION_REGEX.search(item.get_text(" ", strip=True))
     if not match:
         return None
 
@@ -32,29 +30,22 @@ def extract_inscription_start_date(item) -> datetime | None:
 
 
 def extract_permanent_link(item, page_url: str) -> str:
-    """Extrai o link permanente da chamada a partir do card do CNPq."""
-    permanent_input = item.select_one(".link-permanente input[value]")
-    if permanent_input is not None:
-        value = str(permanent_input.get("value") or "").strip()
-        if value:
-            return normalize_url(urljoin(page_url, value))
+    """Extrai o link da pagina de detalhe da chamada a partir do card do CNPq."""
+    anchor = item.select_one("h2.headline a.summary.url[href]")
+    if anchor is None:
+        return ""
 
-    for anchor in item.select("a[href]"):
-        href = str(anchor.get("href") or "").strip()
-        for candidate in expand_href_candidates(page_url, href):
-            if is_detail_page(candidate):
-                return candidate
-
-    return ""
+    href = str(anchor.get("href") or "").strip()
+    return normalize_url(urljoin(page_url, href)) if href else ""
 
 
 def parse_open_calls(html: str, page_url: str) -> list[CnpqCall]:
-    """Transforma a pagina de chamadas abertas em chamadas ordenaveis."""
+    """Transforma a pagina "Abertas para Submissao" em chamadas ordenaveis."""
     soup = BeautifulSoup(html, "lxml")
     calls: list[CnpqCall] = []
     seen: set[str] = set()
 
-    for position, item in enumerate(soup.select("ol.list-chamadas > li")):
+    for position, item in enumerate(soup.select("div.item")):
         detail_url = extract_permanent_link(item, page_url)
         if not detail_url or detail_url in seen:
             continue
@@ -71,35 +62,26 @@ def parse_open_calls(html: str, page_url: str) -> list[CnpqCall]:
     return calls
 
 
-def extract_anchor_candidates(html: str, page_url: str) -> list[str]:
-    """Coleta URLs de PDFs ou paginas de detalhe em anchors da pagina."""
-    soup = BeautifulSoup(html, "lxml")
-    anchors = soup.select("div.links-normas.pull-left a.btn[href]")
-    if not anchors:
-        anchors = soup.select("a[href]")
-
-    candidates: list[str] = []
-    seen: set[str] = set()
-    for anchor in anchors:
-        href = str(anchor.get("href") or "").split("#", 1)[0].strip()
-        if not href:
-            continue
-
-        for candidate in expand_href_candidates(page_url, href):
-            if candidate not in seen:
-                seen.add(candidate)
-                candidates.append(candidate)
-
-    return candidates
-
-
 def extract_pdf_links_from_detail(html: str, detail_url: str) -> list[str]:
-    """Extrai PDFs de uma pagina de detalhe do CNPq."""
+    """
+    Extrai o PDF principal ("Chamada") de uma pagina de detalhe do CNPq.
+
+    A pagina lista tambem Anexos, FAQ e planilhas, que nao interessam: so o link
+    cujo texto e "Chamada", dentro do corpo da pagina, e o edital em si. Links
+    fora do corpo (rodape, carta de servicos) tambem sao ignorados.
+    """
     soup = BeautifulSoup(html, "lxml")
+    body = soup.select_one("#parent-fieldname-text")
+    if body is None:
+        return []
+
     pdf_links: list[str] = []
     seen: set[str] = set()
 
-    for anchor in soup.select("a[href]"):
+    for anchor in body.select("a[href]"):
+        if anchor.get_text(" ", strip=True).lower() != "chamada":
+            continue
+
         href = str(anchor.get("href") or "").split("#", 1)[0].strip()
         if not href:
             continue
